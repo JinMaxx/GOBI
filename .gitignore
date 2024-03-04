@@ -1,0 +1,6 @@
+/.venv/
+/.idea/
+
+/ncbi_tools/
+/ncbi_data/
+/fasta/
