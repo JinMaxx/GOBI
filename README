@@ -1,0 +1,24 @@
+Current Plan
+
+Get genomic regions around genes of interest and compare them with other organisms.
+
+1. How to get genes of interest from NCBI?
+    TODO check API reference.
+    should I use the datasets tool? could be low effort.
+
+2. How to get the area around of those genes?
+    should i locally align those genes with BLAST or Smith Waterman?
+    i tend to use smith waterman over BLAST+ as it is more straight forward to use.
+    Should I then use an arbitrary number of BP before or after or the whole genome?
+    Maybe use a number of genes around them?
+    In NCBI i can download a region as Fasta or just the area around them.
+
+3. How I get other genes in those areas?
+    are those annotated in gff3? if yes would be perfect. Just need to parse them.
+    also how do I organise them? should i build a class with biopython components for that?
+
+
+3. How to visualize?
+    If i compare the genomic region around them by locally aligning these genes to other organism.
+    How do I properly visualize this programmatically without doing it by hand?
+    Does a tool like this exist?

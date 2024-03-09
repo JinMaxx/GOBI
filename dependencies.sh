@@ -9,6 +9,7 @@ pip install biopython
 mkdir ./fasta
 mkdir ./ncbi_data
 mkdir ./ncbi_tools
+mkdir ./alignments
 
 
 cd ./ncbi_tools || exit 1
@@ -16,3 +17,13 @@ curl -o datasets 'https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/v2/linu
 curl -o dataformat 'https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/v2/linux-amd64/dataformat'
 chmod +x datasets dataformat
 cd ..
+
+# AliView
+wget https://www.ormbunkar.se/aliview/downloads/linux/linux-version-1.28/aliview.tgz
+tar -czvf aliview.tgz ./aliview/
+
+# Mafft (Arch Repository)
+# pacman -S mafft
+
+
+exit 0
