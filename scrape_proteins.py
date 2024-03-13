@@ -40,7 +40,7 @@ params = {
 # using a prepared url does not work.
 # So instead using dirty fix by putting it in front of the first param.
 
-directory = "./protein"
+directory = "./proteins"
 files_list = os.listdir(directory)
 
 

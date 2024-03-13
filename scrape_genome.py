@@ -1,16 +1,17 @@
 #!/usr/bin/python3
 
-import subprocess
-import tempfile
 import json
+import tempfile
+import subprocess
 
 datasets = "./ncbi_tools/datasets"
 ncbi_data_dir = "./ncbi_data"
 output_file_name = f"{ncbi_data_dir}/genome_summery.json"
 download_log_file = f"{ncbi_data_dir}/ncbi_download.log"
+# include = "genome,gff3"
 
 
-def display_summery(accession_id: str):
+def display_summery(taxonomy_id):
 
     tmp = tempfile.NamedTemporaryFile()
 
@@ -18,8 +19,9 @@ def display_summery(accession_id: str):
         subprocess.run([
             datasets,
             "summary",
-            "gene",
-            "accession", str(accession_id),
+            "genome",
+            "taxon", str(taxonomy_id),
+            "--reference"  # only downloading the reference genome
         ], stdout=tmp_file)
 
     with open(tmp.name) as tmp_file:
@@ -28,18 +30,21 @@ def display_summery(accession_id: str):
             output_file.write(pretty_json)
 
 
-def download_gene(taxonomy_id: int, accession_id: str) -> str:
+def download_genome(taxonomy_id: int) -> str:
 
-    dirname = f"{ncbi_data_dir}/gene/{taxonomy_id}/{accession_id}"
+    dirname = f"{ncbi_data_dir}/genome/{taxonomy_id}"
     zip_filename = f"{dirname}.zip"
 
-    print("downloading gene ", accession_id)
+    print("downloading genomes ", taxonomy_id)
     subprocess.run([
         datasets,
         "download",
-        "gene",
-        "accession", accession_id,
+        "genome",
+        "taxon", str(taxonomy_id),
+        "--reference",  # only downloading the reference genome
+        "--dehydrated",
         "--filename", zip_filename,
+        # "--include", include
     ])
 
     print("unzipping ", zip_filename)
@@ -49,20 +54,25 @@ def download_gene(taxonomy_id: int, accession_id: str) -> str:
         "-d", dirname
     ])
 
+    print("rehydrating ", dirname)
+    subprocess.run([
+        datasets,
+        "rehydrate",
+        "--directory", f"{dirname}/"
+    ])
+
     return dirname
 
 
 def main():
     # getting all genomes
-    genes_to_taxonomy_id_dict = {
-        7227: ["NM_079617.3"]
-    }
-    # NM_079617.3 Timeout in Drosophilia M. (for testing)
+    taxonomy_ids = [7227]
+    # 50557 True Insects (~ 1.5 TB)
+    # 7227 Drosophilia M. (for testing)
 
-    for taxonomy_id, accession_ids in genes_to_taxonomy_id_dict.items():
-        for accession_id in accession_ids:
-            display_summery(accession_id)
-            download_gene(taxonomy_id, accession_id)
+    for taxonomy_id in taxonomy_ids:
+        display_summery(taxonomy_id)
+        download_genome(taxonomy_id)
 
 
 if __name__ == '__main__':

@@ -10,7 +10,11 @@ mkdir ./fasta
 mkdir ./ncbi_data
 mkdir ./ncbi_tools
 mkdir ./alignments
+mkdir ./blast_db
+mkdir ./proteins
 
+
+# git clone https://github.com/kpodkalicki/BLAST-API-Implementation.git
 
 cd ./ncbi_tools || exit 1
 curl -o datasets 'https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/v2/linux-amd64/datasets'
