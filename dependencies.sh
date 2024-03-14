@@ -12,6 +12,7 @@ mkdir ./ncbi_tools
 mkdir ./alignments
 mkdir ./blast_db
 mkdir ./proteins
+mkdir ./proteins_filtered
 
 
 # git clone https://github.com/kpodkalicki/BLAST-API-Implementation.git
