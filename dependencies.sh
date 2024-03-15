@@ -9,10 +9,10 @@ pip install biopython
 mkdir ./fasta
 mkdir ./ncbi_data
 mkdir ./ncbi_tools
-mkdir ./alignments
 mkdir ./blast_db
 mkdir ./proteins
 mkdir ./proteins_filtered
+mkdir ./proteins_aligned
 
 
 # git clone https://github.com/kpodkalicki/BLAST-API-Implementation.git

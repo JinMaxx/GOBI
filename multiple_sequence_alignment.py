@@ -3,14 +3,17 @@
 import os
 import subprocess
 
+# doas overwrite files!
+
 mafft = "mafft-linsi"
 aliview = "./aliview/aliview"
 
-_input_directory = "./fasta"
-_output_directory = "./alignments"
+_input_directory = "./proteins_filtered"  # or ./proteins
+_output_directory = "./proteins_aligned"
 
 
-def generate_alignments(input_directory, output_directory):
+def generate_alignments(input_directory: str = _input_directory,
+                        output_directory: str = _output_directory):
 
     output_directory_files = os.listdir(output_directory)
 
@@ -25,9 +28,9 @@ def generate_alignments(input_directory, output_directory):
                 subprocess.run([mafft, input_file], stdout=output_file)
 
 
-def display_alignments(output_directory):
-    for output_file in os.listdir(output_directory):
-        output_file = f"{output_directory}/{output_file}"
+def display_alignments(alignments_directory: str = _output_directory):
+    for output_file in os.listdir(alignments_directory):
+        output_file = f"{alignments_directory}/{output_file}"
         subprocess.run(["bash", aliview, output_file])
 
 

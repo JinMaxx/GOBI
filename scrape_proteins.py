@@ -5,8 +5,13 @@ import requests
 import time
 import Bio.SeqIO.FastaIO as FastaIO
 
+
+# target species
+_taxonomy_ids = [50557]
+#              true insects
+
 # genes of interest
-gene_names = ["timeless", "period", "clock", "cycle", "cwo", "vrille", "pdp1e", "shaggy", "cry1", "cry2", "timeout"]
+_gene_names = ["timeless", "period", "clock", "cycle", "cwo", "vrille", "pdp1e", "shaggy", "cry1", "cry2", "timeout"]
 
 # Gene name | Synonyms
 # timeless  | tim, tim1, tim-1, timeless1
@@ -23,9 +28,8 @@ gene_names = ["timeless", "period", "clock", "cycle", "cwo", "vrille", "pdp1e", 
 
 #   DBT: Doubletime https://www.uniprot.org/uniprotkb/O76324/entry
 
-# target species
-taxonomy_ids = [50557]
-#              true insects
+
+# No need to change the following variables
 
 # Uniprot API
 # for reference: https://www.uniprot.org/help/api_queries
@@ -40,22 +44,28 @@ params = {
 # using a prepared url does not work.
 # So instead using dirty fix by putting it in front of the first param.
 
-directory = "./proteins"
-files_list = os.listdir(directory)
+_download_directory = "./proteins"
+_do_overwrite = True
 
 
-def main():
+def download_proteins(taxonomy_ids: list[int] = _taxonomy_ids,
+                      gene_names: list[str] = _gene_names,
+                      directory: str = _download_directory) -> None:
+
+    files_list = os.listdir(directory)
 
     query = ""
-    for taxonomy_id in taxonomy_ids:
-        query = " AND ".join(f"(taxonomy_id: {taxonomy_id})")
+    if taxonomy_ids:  # check if list is empty
+        query = " AND ".join([f"(taxonomy_id: {taxonomy_id})" for taxonomy_id in taxonomy_ids])
 
     for gene_name in gene_names:
 
         filename = f"{gene_name.lower()}.fasta"
 
-        if filename not in files_list:
+        if _do_overwrite or filename not in files_list:
             params['query'] = f"{query} AND (gene:{gene_name})"
+            print(f"search query: {params['query']}")
+
             with requests.get(url, params=params) as response:  # stream=True
                 print(response.url)  # for testing if url is correctly encoded.
                 print(response.status_code)
@@ -75,4 +85,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    download_proteins(_taxonomy_ids, _gene_names)
