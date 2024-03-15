@@ -13,6 +13,7 @@ _taxonomy_ids = [50557]
 # genes of interest
 _gene_names = ["timeless", "period", "clock", "cycle", "cwo", "vrille", "pdp1e", "shaggy", "cry1", "cry2", "timeout"]
 
+# TODO: update synonyms
 # Gene name | Synonyms
 # timeless  | tim, tim1, tim-1, timeless1
 # period    | per

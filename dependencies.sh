@@ -7,7 +7,7 @@ pip install requests
 pip install biopython
 
 mkdir ./fasta
-mkdir ./ncbi_data
+mkdir ./genomes
 mkdir ./ncbi_tools
 mkdir ./blast_db
 mkdir ./proteins
@@ -15,11 +15,11 @@ mkdir ./proteins_filtered
 mkdir ./proteins_aligned
 
 
-# git clone https://github.com/kpodkalicki/BLAST-API-Implementation.git
+# after here only linux:
 
 cd ./ncbi_tools || exit 1
-curl -o datasets 'https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/v2/linux-amd64/datasets'
-curl -o dataformat 'https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/v2/linux-amd64/dataformat'
+curl -o datasets 'https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-amd64/datasets'
+curl -o dataformat 'https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-amd64/dataformat'
 chmod +x datasets dataformat
 cd ..
 

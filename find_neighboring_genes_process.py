@@ -150,20 +150,20 @@ def build_blast_db(taxonomy_id):
 
     # Download species genomes
     scrape_genome.display_summery(taxonomy_id)
-    genomes_directory = scrape_genome.download_genome(taxonomy_id)
+    genomes_directory = scrape_genome.download_genome(taxonomy_id, include=["genome", "gff3"])
 
-    genomes_directory = os.path.join(genomes_directory, "ncbi_dataset", "data")
+    genomes_directory = f"{genomes_directory}/ncbi_dataset/data"
     print(genomes_directory)
 
     # example:
-    # |   genomes_directory  |   os.path.join  |     data      |    fasta_file
-    # ./ncbi_data/genome/7227/ncbi_dataset/data/GCF_000001215.4/GCF_000001215.4_Release_6_plus_ISO1_MT_genomic.fna
+    # |   genomes_directory   |   after join    |     data      |    fasta_file
+    # ./ncbi_data/genomes/7227/ncbi_dataset/data/GCF_000001215.4/GCF_000001215.4_Release_6_plus_ISO1_MT_genomic.fna
     for data in os.scandir(genomes_directory):  # taxonomy_id could relate to many species aka datasets
         if data.is_dir():
             for fasta_file in os.scandir(genomes_directory):  # iterating trough fasta file(s) in .../data/*
                 if fasta_file.is_file() and fasta_file.name.endswith(".fna"):
 
-                    print(f"building blastdb from {fasta_file}")
+                    print(f"building blastdb from {fasta_file}")    # TODO something here does not work!
                     # build db
                     subprocess.run([
                         "makeblastdb",
@@ -184,6 +184,7 @@ def get_genes(taxonomy_id: int, accession_ids: list):
         scrape_genes.display_summery(accession_id)
         gene_directory = scrape_genes.download_gene(taxonomy_id, accession_id)
 
+
         # TODO
         #   parse exons
         #   blast exons against each db except its own
@@ -196,9 +197,8 @@ if __name__ == '__main__':
     for taxonomy_id in genes_to_taxonomy_id_dict.keys():
         build_blast_db(taxonomy_id)
 
-    for taxonomy_id, accession_ids in genes_to_taxonomy_id_dict.items():
-        get_genes(taxonomy_id, accession_ids)
-
+    # for taxonomy_id, accession_ids in genes_to_taxonomy_id_dict.items():
+    #     get_genes(taxonomy_id, accession_ids)
 
 
 

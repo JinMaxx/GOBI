@@ -4,20 +4,24 @@ import json
 import tempfile
 import subprocess
 
-datasets = "./ncbi_tools/datasets"
-ncbi_data_dir = "./ncbi_data"
-output_file_name = f"{ncbi_data_dir}/genome_summery.json"
-download_log_file = f"{ncbi_data_dir}/ncbi_download.log"
-# include = "genome,gff3"
+# this script won't work if there is already the target genome downloaded.
+
+_include = ["genome", "gff3"]
+
+# no need to change those
+_genomes_dir = "./genomes"
+_datasets = "./ncbi_tools/datasets"
 
 
-def display_summery(taxonomy_id):
+def display_summery(taxonomy_id: int,
+                    genomes_dir: str = _genomes_dir):
 
+    summery_file = f"{genomes_dir}/genome_summery.json"
     tmp = tempfile.NamedTemporaryFile()
 
     with open(tmp.name, 'w') as tmp_file:
         subprocess.run([
-            datasets,
+            _datasets,
             "summary",
             "genome",
             "taxon", str(taxonomy_id),
@@ -26,25 +30,27 @@ def display_summery(taxonomy_id):
 
     with open(tmp.name) as tmp_file:
         pretty_json = json.dumps(json.load(tmp_file), indent=2)
-        with open(output_file_name, "w") as output_file:
+        with open(summery_file, "w") as output_file:
             output_file.write(pretty_json)
 
 
-def download_genome(taxonomy_id: int) -> str:
+def download_genome(taxonomy_id: int,
+                    include: list[str] = _include,
+                    genomes_dir: str = _genomes_dir) -> str:
 
-    dirname = f"{ncbi_data_dir}/genome/{taxonomy_id}"
+    dirname = f"{genomes_dir}/{taxonomy_id}"
     zip_filename = f"{dirname}.zip"
 
-    print("downloading genomes ", taxonomy_id)
+    print(f"downloading genomes {taxonomy_id} to {dirname}")
     subprocess.run([
-        datasets,
+        _datasets,
         "download",
         "genome",
         "taxon", str(taxonomy_id),
         "--reference",  # only downloading the reference genome
         "--dehydrated",
         "--filename", zip_filename,
-        # "--include", include
+        "--include", ",".join(include)
     ])
 
     print("unzipping ", zip_filename)
@@ -56,7 +62,7 @@ def download_genome(taxonomy_id: int) -> str:
 
     print("rehydrating ", dirname)
     subprocess.run([
-        datasets,
+        _datasets,
         "rehydrate",
         "--directory", f"{dirname}/"
     ])
@@ -72,7 +78,7 @@ def main():
 
     for taxonomy_id in taxonomy_ids:
         display_summery(taxonomy_id)
-        download_genome(taxonomy_id)
+        download_genome(taxonomy_id, include=_include)
 
 
 if __name__ == '__main__':

@@ -2,10 +2,10 @@
 /.idea/
 
 /ncbi_tools/
-/ncbi_data/
 /fasta/
 /blast_db/
 /aliview/
 /proteins/
 /proteins_filtered/
 /proteins_aligned/
+/genomes/
