@@ -7,7 +7,7 @@ import Bio.SeqIO.FastaIO as FastaIO
 
 # will overwrite files in filtered_proteins
 
-_filter_keywords = ["isoform", "kaput", "fragment"]  # can also use id like "tr|A0A034V0Z2|A0A034V0Z2_BACDO"
+_filter_keywords = ["kaput", "fragment"]  # can also use id like "tr|A0A034V0Z2|A0A034V0Z2_BACDO"
 
 
 # No need to change those

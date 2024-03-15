@@ -63,7 +63,7 @@ def download_proteins(taxonomy_ids: list[int] = _taxonomy_ids,
         filename = f"{gene_name.lower()}.fasta"
 
         if _do_overwrite or filename not in files_list:
-            params['query'] = f"{query} AND (gene:{gene_name})"
+            params['query'] = f"(gene:{gene_name})" if query is not "" else f"{query} AND (gene:{gene_name})"
             print(f"search query: {params['query']}")
 
             with requests.get(url, params=params) as response:  # stream=True

@@ -5,6 +5,7 @@ import filter_proteins
 import multiple_sequence_alignment
 
 # this script combines several scripts as a pipeline for easier handling
+# downloads proteins from uniprot, remove sequences by keywords, align them with mafft, display with them with AliView
 
 # target species
 taxonomy_ids = [50557]  # can also be empty to include all species
@@ -27,7 +28,7 @@ gene_names = ["timeless", "period", "clock", "cycle", "cwo", "vrille", "pdp1e", 
 # timeout   | CG14381; CG14382; CG7855; CG8148; Dmel\CG7855; dtim2; tim; Tim-2; tim2; TIM2
 
 
-filter_keywords = ["isoform", "kaput", "fragment"]  # can also use id like "tr|A0A034V0Z2|A0A034V0Z2_BACDO"
+filter_keywords = ["kaput", "fragment"]  # can also use id like "tr|A0A034V0Z2|A0A034V0Z2_BACDO"
 
 
 # no need to change those
