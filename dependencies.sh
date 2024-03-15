@@ -8,6 +8,7 @@ pip install biopython
 
 mkdir ./fasta
 mkdir ./genomes
+mkdir ./genes
 mkdir ./ncbi_tools
 mkdir ./blast_db
 mkdir ./proteins

@@ -194,11 +194,11 @@ def get_genes(taxonomy_id: int, accession_ids: list):
 
 
 if __name__ == '__main__':
-    for taxonomy_id in genes_to_taxonomy_id_dict.keys():
-        build_blast_db(taxonomy_id)
+    #for taxonomy_id in genes_to_taxonomy_id_dict.keys():
+    #    build_blast_db(taxonomy_id)
 
-    # for taxonomy_id, accession_ids in genes_to_taxonomy_id_dict.items():
-    #     get_genes(taxonomy_id, accession_ids)
+    for taxonomy_id, accession_ids in genes_to_taxonomy_id_dict.items():
+        get_genes(taxonomy_id, accession_ids)
 
 
 

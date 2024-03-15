@@ -3,39 +3,44 @@
 import subprocess
 import tempfile
 import json
+import os
 
-datasets = "./ncbi_tools/datasets"
-ncbi_data_dir = "./ncbi_data"
-output_file_name = f"{ncbi_data_dir}/genome_summery.json"
-download_log_file = f"{ncbi_data_dir}/ncbi_download.log"
+_genes_dir = "./genes"
+
+# no need to change that
+_datasets = "./ncbi_tools/datasets"
 
 
-def display_summery(accession_id: str):
+def display_summery(accession_id: str,
+                    genes_dir: str = _genes_dir):
 
     tmp = tempfile.NamedTemporaryFile()
-
     with open(tmp.name, 'w') as tmp_file:
         subprocess.run([
-            datasets,
+            _datasets,
             "summary",
             "gene",
             "accession", str(accession_id),
         ], stdout=tmp_file)
 
+    summery_file = f"{genes_dir}/gene_summery.json"
     with open(tmp.name) as tmp_file:
         pretty_json = json.dumps(json.load(tmp_file), indent=2)
-        with open(output_file_name, "w") as output_file:
+        with open(summery_file, "w") as output_file:
             output_file.write(pretty_json)
 
 
-def download_gene(taxonomy_id: int, accession_id: str) -> str:
+def download_gene(taxonomy_id: int,
+                  accession_id: str,
+                  genes_dir: str = _genes_dir) -> str:
 
-    dirname = f"{ncbi_data_dir}/gene/{taxonomy_id}/{accession_id}"
+    dirname = f"{genes_dir}/{taxonomy_id}/{accession_id}"
+    os.makedirs(os.path.dirname(dirname), exist_ok=True)
     zip_filename = f"{dirname}.zip"
 
     print("downloading gene ", accession_id)
     subprocess.run([
-        datasets,
+        _datasets,
         "download",
         "gene",
         "accession", accession_id,
@@ -52,8 +57,7 @@ def download_gene(taxonomy_id: int, accession_id: str) -> str:
     return dirname
 
 
-def main():
-    # getting all genomes
+if __name__ == '__main__':
     genes_to_taxonomy_id_dict = {
         7227: ["NM_079617.3"]
     }
@@ -62,8 +66,4 @@ def main():
     for taxonomy_id, accession_ids in genes_to_taxonomy_id_dict.items():
         for accession_id in accession_ids:
             display_summery(accession_id)
-            download_gene(taxonomy_id, accession_id)
-
-
-if __name__ == '__main__':
-    main()
+            print(download_gene(taxonomy_id, accession_id))

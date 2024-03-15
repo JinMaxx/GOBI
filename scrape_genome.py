@@ -16,9 +16,7 @@ _datasets = "./ncbi_tools/datasets"
 def display_summery(taxonomy_id: int,
                     genomes_dir: str = _genomes_dir):
 
-    summery_file = f"{genomes_dir}/genome_summery.json"
     tmp = tempfile.NamedTemporaryFile()
-
     with open(tmp.name, 'w') as tmp_file:
         subprocess.run([
             _datasets,
@@ -28,6 +26,7 @@ def display_summery(taxonomy_id: int,
             "--reference"  # only downloading the reference genome
         ], stdout=tmp_file)
 
+    summery_file = f"{genomes_dir}/genome_summery.json"
     with open(tmp.name) as tmp_file:
         pretty_json = json.dumps(json.load(tmp_file), indent=2)
         with open(summery_file, "w") as output_file:
