@@ -25,7 +25,7 @@ mkdir ./blast_db
 mkdir ./proteins
 mkdir ./proteins_filtered
 mkdir ./proteins_aligned
-
+# mkdir -p ./fasta ./ncbi_data ./ncbi_tools ./blast_db ./proteins ./proteins_filtered ./proteins_aligned
 
 # after here only linux:
 cd ./ncbi_tools || exit 1
@@ -33,6 +33,7 @@ curl -o datasets 'https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/
 curl -o dataformat 'https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-amd64/dataformat'
 chmod +x datasets dataformat
 cd ..
+#https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/v2/
 
 
 # AliView
