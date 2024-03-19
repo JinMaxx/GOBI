@@ -11,8 +11,14 @@ _genes_dir = "./genes"
 _datasets = "./ncbi_tools/datasets"
 
 
-def display_summery(accession_id: str,
+def display_summery(gene_id: int = None,
+                    accession_id: str = None,
                     genes_dir: str = _genes_dir):
+
+    if gene_id is None and accession_id is None:
+        raise ValueError("gene_id or accession_id must be specified.")
+
+    _id, _keyword = (str(gene_id), "id") if gene_id is not None else (accession_id, "accession")
 
     tmp = tempfile.NamedTemporaryFile()
     with open(tmp.name, 'w') as tmp_file:
@@ -20,7 +26,7 @@ def display_summery(accession_id: str,
             _datasets,
             "summary",
             "gene",
-            "accession", str(accession_id),
+            _keyword, _id,
         ], stdout=tmp_file)
 
     summery_file = f"{genes_dir}/gene_summery.json"
@@ -31,20 +37,26 @@ def display_summery(accession_id: str,
 
 
 def download_gene(taxonomy_id: int,
-                  accession_id: str,
+                  gene_id: int = None,
+                  accession_id: str = None,
                   genes_dir: str = _genes_dir) -> str:
 
-    dirname = f"{genes_dir}/{taxonomy_id}/{accession_id}"
+    if gene_id is None and accession_id is None:
+        raise ValueError("gene_id or accession_id must be specified.")
+
+    _id, _keyword = (str(gene_id), "id") if gene_id is not None else (accession_id, "accession")
+
+    dirname = f"{genes_dir}/{taxonomy_id}/{_id}"
     os.makedirs(os.path.dirname(dirname), exist_ok=True)
     zip_filename = f"{dirname}.zip"
 
-    print("downloading gene ", accession_id)
+    print("downloading gene ", _id)
     subprocess.run([
         _datasets,
         "download",
         "gene",
-        "accession", accession_id,
-        "--filename", zip_filename,
+        _keyword, _id,
+        "--filename", zip_filename
     ])
 
     print("unzipping ", zip_filename)
@@ -65,5 +77,5 @@ if __name__ == '__main__':
 
     for taxonomy_id, accession_ids in genes_to_taxonomy_id_dict.items():
         for accession_id in accession_ids:
-            display_summery(accession_id)
-            print(download_gene(taxonomy_id, accession_id))
+            display_summery(accession_id=accession_id)
+            print(download_gene(taxonomy_id, accession_id=accession_id))

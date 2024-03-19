@@ -1,106 +1,5 @@
 #!/usr/bin/python3
 
-# API Reference https://ncbi.github.io/blast-cloud/dev/api.html
-
-# Payload
-# QUERY: NM_001260153.1
-# db: nucleotide
-# QUERY_FROM:
-# QUERY_TO:
-# QUERYFILE: (binary)
-# GENETIC_CODE: 1
-# JOB_TITLE: test
-# ADV_VIEW: true
-# SUBJECTS:
-# stype: nucleotide
-# SUBJECTS_FROM:
-# SUBJECTS_TO:
-# SUBJECTFILE: (binary)
-# DBTYPE: gc
-# DATABASE: refseq_representative_genomes
-# EQ_MENU: Drosophila melangaster (taxid:7227)
-# NUM_ORG: 1
-# EQ_TEXT:
-# BLAST_PROGRAMS: megaBlast
-# PHI_PATTERN:
-# MAX_NUM_SEQ: 100
-# SHORT_QUERY_ADJUST: on
-# EXPECT: 0.05
-# WORD_SIZE: 28
-# HSP_RANGE_MAX: 0
-# MATRIX_NAME: PAM30
-# MATCH_SCORES: 1,-2
-# GAPCOSTS: 0 0
-# COMPOSITION_BASED_STATISTICS: 0
-# FILTER: L
-# REPEATS: repeat_9606
-# FILTER: m
-# TEMPLATE_LENGTH: 0
-# TEMPLATE_TYPE: 0
-# PSSM: (binary)
-# I_THRESH:
-# DI_THRESH:
-# PSI_PSEUDOCOUNT:
-# SHOW_OVERVIEW: true
-# SHOW_LINKOUT: true
-# GET_SEQUENCE: true
-# FORMAT_OBJECT: Alignment
-# FORMAT_TYPE: HTML
-# ALIGNMENT_VIEW: Pairwise
-# MASK_CHAR: 2
-# MASK_COLOR: 1
-# DESCRIPTIONS: 100
-# ALIGNMENTS: 100
-# LINE_LENGTH: 60
-# NEW_VIEW: false
-# NCBI_GI: false
-# SHOW_CDS_FEATURE: false
-# NUM_OVERVIEW: 100
-# FORMAT_EQ_TEXT:
-# FORMAT_ORGANISM:
-# EXPECT_LOW:
-# EXPECT_HIGH:
-# PERC_IDENT_LOW:
-# PERC_IDENT_HIGH:
-# QUERY_INDEX:
-# FORMAT_NUM_ORG: 1
-# CONFIG_DESCR: ClustMemNbr,ClustComn,Ds,Sc,Ms,Ts,Cov,Eval,Idnt,AccLen,Acc
-# CLIENT: web
-# SERVICE: plain
-# CMD: request
-# PAGE: MegaBlast
-# PROGRAM: blastn
-# MEGABLAST: on
-# RUN_PSIBLAST:
-# WWW_BLAST_TYPE:
-# TWO_HITS:
-# DEFAULT_PROG: megaBlast
-# DB_DISPLAY_NAME: refseq_representative_genomes
-# ORG_DBS: orgDbsOnly_primer1_dbvers5
-# SHOW_ORGANISMS: on
-# DBTAXID:
-# SAVED_PSSM:
-# SELECTED_PROG_TYPE: megaBlast
-# SAVED_SEARCH: true
-# BLAST_SPEC:
-# MIXED_DATABASE:
-# QUERY_BELIEVE_DEFLINE:
-# DB_DIR_PREFIX:
-# CHECKSUM:
-# USER_DATABASE:
-# USER_WORD_SIZE:
-# USER_MATCH_SCORES:
-# USER_FORMAT_DEFAULTS:
-# NO_COMMON:
-# NUM_DIFFS: 1
-# NUM_OPTS_DIFFS: 0
-# UNIQ_DEFAULTS_NAME: A_SearchDefaults_1rjgQi_26qi_ducLcACGHCi5_GTMVb_8Rqcp
-# PAGE_TYPE: BlastSearch
-# USER_DEFAULT_PROG_TYPE: megaBlast
-# USER_DEFAULT_MATCH_SCORES: 0
-
-
-
 #  blastn [-h] [-help] [-import_search_strategy filename]
 #     [-export_search_strategy filename] [-task task_name] [-db database_name]
 #     [-dbsize num_letters] [-gilist filename] [-seqidlist filename]
@@ -135,62 +34,71 @@ import scrape_genome
 
 import os
 import subprocess
+from pathlib import Path
 
 
+# better to use taxonomy id that are specific for species
 genes_to_taxonomy_id_dict = {
-    7227: ["NM_079617.3"]
+    7227: [41615]
 }
 # 50557 True Insects (~ 1.5 TB)
 # 7227 Drosophilia M. (for testing)
 # Accession Number:  [two-letter alphabetical prefix][six digits][.][version number]
+# using gene_id instead as they are easier for handling. NCBI prefers those.
+
 
 blastdb_directory_prefix = "./blastdb"  # os.path.abspath("./blastdb")
 
-def build_blast_db(taxonomy_id):
 
-    # Download species genomes
-    scrape_genome.display_summery(taxonomy_id)
-    genomes_directory = scrape_genome.download_genome(taxonomy_id, include=["genome", "gff3"])
+def download_genome(taxonomy_id) -> str:
+    scrape_genome.display_summery(taxonomy_id)  # Download species genomes
+    return scrape_genome.download_genome(taxonomy_id, include=["genome", "gff3"])
 
-    genomes_directory = f"{genomes_directory}/ncbi_dataset/data"
-    print(genomes_directory)
+
+def build_blast_db(genomes_directory: str):
+
+    data_directory = f"{genomes_directory}/ncbi_dataset/data"
 
     # example:
     # |   genomes_directory   |   after join    |     data      |    fasta_file
     # ./ncbi_data/genomes/7227/ncbi_dataset/data/GCF_000001215.4/GCF_000001215.4_Release_6_plus_ISO1_MT_genomic.fna
-    for data in os.scandir(genomes_directory):  # taxonomy_id could relate to many species aka datasets
+    for data in os.scandir(data_directory):  # taxonomy_id could relate to many species aka datasets
         if data.is_dir():
-            for fasta_file in os.scandir(genomes_directory):  # iterating trough fasta file(s) in .../data/*
+            for fasta_file in os.scandir(data):  # iterating trough fasta file(s) in .../data/*
                 if fasta_file.is_file() and fasta_file.name.endswith(".fna"):
-
-                    print(f"building blastdb from {fasta_file}")    # TODO something here does not work!
-                    # build db
+                    print(f"building blastdb from {fasta_file}")
+                    output_filename = f"{blastdb_directory_prefix}/{taxonomy_id}/{Path(fasta_file.path).stem}.db"
                     subprocess.run([
                         "makeblastdb",
                         "-input_file", fasta_file,
                         "-input_type", "fasta"
-                        "-taxid", taxonomy_id,
+                                       "-taxid", taxonomy_id,
                         "-title", taxonomy_id,
                         "-dbtype" "nt"
                         "-metadata_output_prefix", blastdb_directory_prefix,
-                        "-out", f"{blastdb_directory_prefix}/{taxonomy_id}.db"
+                        "-out", output_filename
                     ])
+                    yield output_filename
 
 
-def get_genes(taxonomy_id: int, accession_ids: list):
+def get_genes(taxonomy_id: int, gene_ids: list):
 
     # Download all genes
-    for accession_id in accession_ids:
-        scrape_genes.display_summery(accession_id)
-        gene_directory = scrape_genes.download_gene(taxonomy_id, accession_id)
+    for gene_id in gene_ids:
+        scrape_genes.display_summery(gene_id=gene_id)
+        gene_directory = scrape_genes.download_gene(taxonomy_id, gene_id=gene_id)
 
+        # >NM_079617.3 timeout [organism=Drosophila melanogaster] [GeneID=41615]
+        # parse from fasta
+
+        # here I have to download
 
         # TODO
         #   parse exons
-        #   blast exons against each db except its own
-        #   if {blastdb_directory_prefix}/{taxonomy_id}.db == file: continue
-        #   create table like: start, end, taxonomy, exon, gene
-        #   also safe alignments
+        #    for this I will create a tuple (sequence, GFF_Record)
+        #    with SeqIO i could parse the fasta file of the genome
+        #    with start/end I could extract the sequence
+        #    also I could use gff3 to get the location of the gene (type: "gene")
 
 
 if __name__ == '__main__':
@@ -200,6 +108,11 @@ if __name__ == '__main__':
     for taxonomy_id, accession_ids in genes_to_taxonomy_id_dict.items():
         get_genes(taxonomy_id, accession_ids)
 
+    # TODO:
+    #   blast exons against each db except its own
+    #   if {blastdb_directory_prefix}/{taxonomy_id}.db == file: continue
+    #   create table like: start, end, taxonomy, exon, gene
+    #   also safe alignments
 
 
 #    genomes_directory = os.fsencode(f"{genomes_directory}/ncbi_dataset/data")

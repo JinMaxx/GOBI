@@ -1,11 +1,22 @@
 #!/bin/bash
 
-pip install --upgrade pip
 
-pip install doit
-pip install requests
-pip install biopython
+# creating virtual environment
+venv="./venv"
+mkdir $venv
+python -m venv $venv
+pip="${venv}/bin/python ${venv}/bin/pip"
 
+
+# installing python modules
+$pip install --upgrade pip
+$pip install doit
+$pip install requests
+$pip install biopython
+# $pip install bcbio-gff
+
+
+# creating directories
 mkdir ./fasta
 mkdir ./genomes
 mkdir ./genes
@@ -17,16 +28,17 @@ mkdir ./proteins_aligned
 
 
 # after here only linux:
-
 cd ./ncbi_tools || exit 1
 curl -o datasets 'https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-amd64/datasets'
 curl -o dataformat 'https://ftp.ncbi.nlm.nih.gov/pub/datasets/command-line/LATEST/linux-amd64/dataformat'
 chmod +x datasets dataformat
 cd ..
 
+
 # AliView
 wget https://www.ormbunkar.se/aliview/downloads/linux/linux-version-1.28/aliview.tgz
 tar -czvf aliview.tgz ./aliview/
+
 
 # Mafft (Arch Repository)
 # pacman -S mafft
