@@ -125,7 +125,6 @@ if __name__ == '__main__':
         print(record)
 
 
-
 # GFF3 files are nine-column, tab-delimited, plain text files.
 # based on specifications:  https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md
 
@@ -262,7 +261,7 @@ if __name__ == '__main__':
 #    phase – Feature qualifier with key “phase”
 
 
-# seqid source
+# sample
 # NT_033777.3	RefSeq	region	1	32079331	.	+	.	ID=NT_033777.3:1..32079331;Dbxref=taxon:7227;Name=3R;chromosome=3R;gbkey=Src;genome=chromosome;genotype=y[1]%3B Gr22b[1] Gr22d[1] cn[1] CG33964[R4.2] bw[1] sp[1]%3B LysC[1] MstProx[1] GstD5[1] Rh6[1];mol_type=genomic DNA
 # NT_033777.3	RefSeq	mobile_genetic_element	97163	98229	.	-	.	ID=id-NT_033777.3:97163..98229;Dbxref=FLYBASE:FBti0215171;gbkey=mobile_element;mobile_element_type=transposon:1360{}6392
 # NT_033777.3	RefSeq	mobile_genetic_element	379801	384688	.	+	.	ID=id-NT_033777.3:379801..384688;Dbxref=FLYBASE:FBti0215319;gbkey=mobile_element;mobile_element_type=transposon:invader2{}6541
