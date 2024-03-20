@@ -18,7 +18,7 @@ def display_summery(gene_id: int = None,
     if gene_id is None and accession_id is None:
         raise ValueError("gene_id or accession_id must be specified.")
 
-    _id, _keyword = (str(gene_id), "id") if gene_id is not None else (accession_id, "accession")
+    _id, _keyword = (str(gene_id), "gene-id") if gene_id is not None else (accession_id, "accession")
 
     tmp = tempfile.NamedTemporaryFile()
     with open(tmp.name, 'w') as tmp_file:
@@ -44,7 +44,7 @@ def download_gene(taxonomy_id: int,
     if gene_id is None and accession_id is None:
         raise ValueError("gene_id or accession_id must be specified.")
 
-    _id, _keyword = (str(gene_id), "id") if gene_id is not None else (accession_id, "accession")
+    _id, _keyword = (str(gene_id), "gene-id") if gene_id is not None else (accession_id, "accession")
 
     dirname = f"{genes_dir}/{taxonomy_id}/{_id}"
     os.makedirs(os.path.dirname(dirname), exist_ok=True)

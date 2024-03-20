@@ -60,3 +60,6 @@ if __name__ == '__main__':
     if True:  # displays alignments (requires AliView to be installed, see dependencies.sh)
         print(f"#### displaying aligned proteins ### \n{aligned_proteins_dir}")     # will open a lot of windows!
         multiple_sequence_alignment.display_alignments(alignments_directory=aligned_proteins_dir)
+
+
+# TODO:do this but with blasted genome trascribed translated and compare those proteins.

@@ -5,7 +5,7 @@
 venv="./venv"
 mkdir $venv
 python -m venv $venv
-pip="${venv}/bin/python ${venv}/bin/pip"
+pip="${venv}/bin/python ${venv}/bin/pip"  # or "pip"
 
 
 # installing python modules

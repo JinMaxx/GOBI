@@ -88,6 +88,7 @@ def get_genes(taxonomy_id: int, gene_ids: list):
         scrape_genes.display_summery(gene_id=gene_id)
         gene_directory = scrape_genes.download_gene(taxonomy_id, gene_id=gene_id)
 
+
         # >NM_079617.3 timeout [organism=Drosophila melanogaster] [GeneID=41615]
         # parse from fasta
 
@@ -102,8 +103,10 @@ def get_genes(taxonomy_id: int, gene_ids: list):
 
 
 if __name__ == '__main__':
+
     #for taxonomy_id in genes_to_taxonomy_id_dict.keys():
-    #    build_blast_db(taxonomy_id)
+    #    gene_directory = download_genome(taxonomy_id)
+    #    build_blast_db(gene_directory)
 
     for taxonomy_id, accession_ids in genes_to_taxonomy_id_dict.items():
         get_genes(taxonomy_id, accession_ids)

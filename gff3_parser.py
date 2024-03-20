@@ -4,7 +4,7 @@
 import pprint
 from BCBio import GFF
 from collections.abc import Generator
-from typing import Callable
+from typing import Callable, Self
 
 
 class GFF_Record:
@@ -19,7 +19,6 @@ class GFF_Record:
                  strand: chr = None,
                  phase: str = None,
                  attributes: dict[str, str] = None):
-
         self.seqid = seqid
         self.source = source
         self.type = type
@@ -31,7 +30,7 @@ class GFF_Record:
         self.attributes = attributes
 
     @staticmethod
-    def _parse_line(line: str) -> 'GFF_Record':
+    def parse_line(line: str) -> 'GFF_Record':
         line_split = line.strip().split(sep='\t')
 
         return GFF_Record(
@@ -43,57 +42,16 @@ class GFF_Record:
             score=float(line_split[5]) if line_split[5] != "." else None,
             strand=line_split[6] if line_split[6] != "." else None,
             phase=line_split[7] if line_split[7] != "." else None,
-            attributes=GFF_Record.parse_attributes(line_split[8]) if line_split[8] != "." else None,
+            attributes=GFF_Record._parse_attributes(line_split[8]) if line_split[8] != "." else None,
         )
 
     @staticmethod
-    def parse_attributes(attributes: str) -> dict[str: str]:
+    def _parse_attributes(attributes: str) -> dict[str: str]:
         attributes_dict = dict()
         for attribute in attributes.split(';'):
             key, value = attribute.split('=')
             attributes_dict[key.lower()] = value
         return attributes_dict
-
-    @staticmethod
-    def parse_gff3_iterator(file_path: str) -> Generator['GFF_Record']:
-        # writing my own parser
-        with open(file_path) as in_handle:
-            for line in in_handle:
-                if line.startswith('#'): continue
-                else: yield GFF_Record._parse_line(line)
-
-    @staticmethod
-    def filter(generator: Generator['GFF_Record'],
-               seqid: str = None,
-               source: str = None,
-               type: str = None,
-               start: int = None,
-               end: int = None,
-               strand: chr = None) -> Generator['GFF_Record']:
-        for record in generator:
-            if seqid is not None and seqid not in record.seqid: continue
-            elif source is not None and record.source != source: continue
-            elif type is not None and record.type != type: continue
-            elif start is not None:
-                if record.strand is "+":
-                    if record.start < start: continue
-                elif record.strand is "-":
-                    if record.start > start: continue
-            elif end is not None:
-                if record.strand is "+":
-                    if record.end > end: continue
-                elif record.strand is "-":
-                    if record.end < end: continue
-            elif strand is not None and record.strand != strand: continue
-            else: yield record
-
-    @staticmethod
-    def filter_attribute(generator: Generator['GFF_Record'],
-                         attribute_key: str,
-                         predicate: Callable[[str], bool]) -> Generator['GFF_Record']:
-        for record in generator:
-            if predicate(record.attributes[attribute_key]): yield record
-            else: continue
 
     def __repr__(self):
         return self.__str__()
@@ -101,15 +59,82 @@ class GFF_Record:
     def __str__(self):
         return f"""
             seqid: {self.seqid}
-            source {self.source}
-            type {self.type}
-            start {self.start}
-            end {self.end}
-            score {self.score}
+            source: {self.source}
+            type: {self.type}
+            start: {self.start}
+            end: {self.end}
+            score: {self.score}
             strand: {self.strand}
             phase: {self.phase}
             attributes: {self.attributes}
             """
+
+
+class GFF3Parser:
+    @staticmethod
+    def parse_file(gff_file: str):
+        return GFF3Parser(GFF3Parser._parse_gff3_iterator(gff_file))
+
+    def __init__(self, generator: Generator[GFF_Record]):
+        self.generator = generator
+
+    @staticmethod
+    def _parse_gff3_iterator(file_path: str) -> Generator[GFF_Record]:
+        # writing my own parser
+        with open(file_path) as in_handle:
+            for line in in_handle:
+                if line.startswith('#'):
+                    continue
+                else:
+                    yield GFF_Record.parse_line(line)
+
+    def filter(self,
+               seqid: str = None,
+               source: str = None,
+               type: [str] = None,
+               start: int = None,
+               end: int = None,
+               strand: chr = None
+               ) -> Self:
+        return GFF3Parser(self._filter(seqid, source, type, start, end, strand))
+
+    def _filter(self,
+                seqid: str = None,
+                source: str = None,
+                type: [str] = None,
+                start: int = None,
+                end: int = None,
+                strand: chr = None) -> Generator[GFF_Record]:
+        for record in self.generator:
+            if seqid is not None and seqid not in record.seqid: continue
+            elif source is not None and record.source != source: continue
+            elif type is not None and record.type not in type: continue
+            elif start is not None:
+                if record.strand == "+":
+                    if record.start < start: continue
+                elif record.strand == "-":
+                    if record.start > start: continue
+            elif end is not None:
+                if record.strand == "+":
+                    if record.end > end: continue
+                elif record.strand == "-":
+                    if record.end < end: continue
+            elif strand is not None and record.strand != strand: continue
+            else: yield record
+
+    def filter_attributes(self,
+                          attribute_key: str,
+                          predicate: Callable[[str], bool]) -> Self:
+        return GFF3Parser(self._filter_attributes(attribute_key, predicate))
+
+    def _filter_attributes(self,
+                           attribute_key: str,
+                           predicate: Callable[[str], bool]) -> Generator[GFF_Record]:
+        for record in self.generator:
+            if (record.attributes.get(attribute_key.lower()) is not None
+                    and predicate(record.attributes[attribute_key.lower()])):
+                yield record
+            else: continue
 
 
 def examine_gff3(file_path: str):
@@ -121,9 +146,17 @@ def examine_gff3(file_path: str):
 if __name__ == '__main__':
     examine_gff3("./genomes/7227/ncbi_dataset/data/GCF_000001215.4/genomic.gff")
 
-    for record in GFF_Record.parse_gff3_iterator("./genomes/7227/ncbi_dataset/data/GCF_000001215.4/genomic.gff"):
+    for record in (GFF3Parser.parse_file("./genomes/7227/ncbi_dataset/data/GCF_000001215.4/genomic.gff")
+                   .filter(type=["gene", "exon"])
+                   .generator):
         print(record)
 
+    print("###################")
+
+    for record in (GFF3Parser.parse_file("./genomes/7227/ncbi_dataset/data/GCF_000001215.4/genomic.gff")
+                   .filter_attributes(attribute_key="parent", predicate=(lambda parent: "gene-Dmel_CG41624" == parent))
+                   .generator):
+        print(record)
 
 # GFF3 files are nine-column, tab-delimited, plain text files.
 # based on specifications:  https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md
@@ -276,4 +309,3 @@ if __name__ == '__main__':
 # NT_033777.3	RefSeq	exon	835376	835491	.	+	.	ID=exon-NM_001316563.1-2;Parent=rna-NM_001316563.1;Dbxref=FLYBASE:FBtr0392909,GeneID:26067052,GenBank:NM_001316563.1,FLYBASE:FBgn0267431;Note=Myo81F-RB%3B Dmel\Myo81F-RB%3B CG45784-RB%3B Dmel\CG45784-RB;gbkey=mRNA;gene=Myo81F;locus_tag=Dmel_CG45784;orig_protein_id=gnl|FlyBase|CG45784-PB|gb|ALI30523;orig_transcript_id=gnl|FlyBase|CG45784-RB;product=myosin 81F;transcript_id=NM_001316563.1
 # NT_033777.3	RefSeq	exon	869486	869548	.	+	.	ID=exon-NM_001316563.1-3;Parent=rna-NM_001316563.1;Dbxref=FLYBASE:FBtr0392909,GeneID:26067052,GenBank:NM_001316563.1,FLYBASE:FBgn0267431;Note=Myo81F-RB%3B Dmel\Myo81F-RB%3B CG45784-RB%3B Dmel\CG45784-RB;gbkey=mRNA;gene=Myo81F;locus_tag=Dmel_CG45784;orig_protein_id=gnl|FlyBase|CG45784-PB|gb|ALI30523;orig_transcript_id=gnl|FlyBase|CG45784-RB;product=myosin 81F;transcript_id=NM_001316563.1
 # NT_033777.3	RefSeq	exon	895786	895893	.	+	.	ID=exon-NM_001316563.1-4;Parent=rna-NM_001316563.1;Dbxref=FLYBASE:FBtr0392909,GeneID:26067052,GenBank:NM_001316563.1,FLYBASE:FBgn0267431;Note=Myo81F-RB%3B Dmel\Myo81F-RB%3B CG45784-RB%3B Dmel\CG45784-RB;gbkey=mRNA;gene=Myo81F;locus_tag=Dmel_CG45784;orig_protein_id=gnl|FlyBase|CG45784-PB|gb|ALI30523;orig_transcript_id=gnl|FlyBase|CG45784-RB;product=myosin 81F;transcript_id=NM_001316563.1
-
