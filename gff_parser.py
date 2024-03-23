@@ -150,42 +150,6 @@ class GFFParser:
 
         return self.filter_attributes(attribute_key, parsed_val_predicate)
 
-        # function above is more clear than a nested lambda
-        # parsed_val_predicate = lambda attribute_value: (  # outer lambda
-        #     (lambda parsed_value_dict:  # inner lambda: predicate(attribute_parsed_value_dict[key])
-        #      parsed_value_dict.get(attribute_parsed_value_key.lower()) is not None
-        #      and predicate(parsed_value_dict[attribute_parsed_value_key.lower()]))
-        #     (GFF3Parser.__parse_attribute_value_dict(attribute_value)))  # passed from outer lambda
-
-    # def filter_attributes_dict(self,
-    #                            attribute_key: str,
-    #                            attribute_parsed_value_key: str,
-    #                            predicate: Callable[[str], bool]) -> Self:
-    #     return GFF3Parser(self.__filter_attributes_dict(attribute_key, attribute_parsed_value_key, predicate))
-
-    # def __filter_attributes_dict(self,
-    #                              attribute_key: str,
-    #                              attribute_parsed_value_key: str,
-    #                              predicate: Callable[[str], bool]) -> Generator[GFF_Record]:
-    #     for record in self.generator:
-    #         if record.attributes.get(attribute_key.lower()) is not None:
-    #             parsed_value_dict = GFF3Parser.__parse_attribute_value_dict(record.attributes[attribute_key.lower()])
-    #             if (parsed_value_dict.get(attribute_parsed_value_key.lower()) is not None
-    #                     and predicate(parsed_value_dict[attribute_parsed_value_key.lower()])):
-    #                 yield record
-    #         continue  # rewrite this as a predicate
-
-    # @staticmethod
-    # def __parse_attribute_value_dict(attribute_value: str) -> dict[str, str]:
-    #     # Dbxref=FLYBASE:FBtr0392909,GeneID:26067052,GenBank:NM_001316563.1,FLYBASE:FBgn0267431
-    #     # -> {FLYBASE: FBtr0392909, GeneID: 26067052, GenBank: NM_001316563.1, FLYBASE: FBgn0267431}
-    #     attribute_value_dict: [str, str] = dict()
-    #     for attribute in attribute_value.split(','):
-    #         key, value = attribute.split(':')
-    #         attribute_value_dict[key.lower()] = value
-    #     # if attribute_value_dict.get("GeneID") == str(41615): print(attribute_value_dict)  # TEST
-    #     return attribute_value_dict
-
 
 def examine_gff3(file_path: str):
     examiner = GFF.GFFExaminer()
@@ -207,6 +171,7 @@ if __name__ == '__main__':
                    .filter_attributes(attribute_key="parent", predicate=(lambda parent: "gene-Dmel_CG41624" == parent))
                    .generator):
         print(record)
+
 
 # GFF3 files are nine-column, tab-delimited, plain text files.
 # based on specifications:  https://github.com/The-Sequence-Ontology/Specifications/blob/master/gff3.md
