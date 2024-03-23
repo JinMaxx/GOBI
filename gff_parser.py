@@ -70,10 +70,10 @@ class GFF_Record:
             """
 
 
-class GFF3Parser:
+class GFFParser:
     @staticmethod
     def parse_file(gff_file: str):
-        return GFF3Parser(GFF3Parser._parse_gff3_iterator(gff_file))
+        return GFFParser(GFFParser._parse_gff3_iterator(gff_file))
 
     def __init__(self, generator: Generator[GFF_Record]):
         self.generator = generator
@@ -96,9 +96,9 @@ class GFF3Parser:
                end: int = None,
                strand: chr = None
                ) -> Self:
-        return GFF3Parser(self._filter(seqid, source, type, start, end, strand))
+        return GFFParser(self.__filter(seqid, source, type, start, end, strand))
 
-    def _filter(self,
+    def __filter(self,
                 seqid: str = None,
                 source: str = None,
                 type: [str] = None,
@@ -125,9 +125,9 @@ class GFF3Parser:
     def filter_attributes(self,
                           attribute_key: str,
                           predicate: Callable[[str], bool]) -> Self:
-        return GFF3Parser(self._filter_attributes(attribute_key, predicate))
+        return GFFParser(self.__filter_attributes(attribute_key, predicate))
 
-    def _filter_attributes(self,
+    def __filter_attributes(self,
                            attribute_key: str,
                            predicate: Callable[[str], bool]) -> Generator[GFF_Record]:
         for record in self.generator:
@@ -135,6 +135,56 @@ class GFF3Parser:
                     and predicate(record.attributes[attribute_key.lower()])):
                 yield record
             else: continue
+
+    def filter_attributes_dict(self,
+                               attribute_key: str,
+                               attribute_parsed_value_key: str,
+                               predicate: Callable[[str], bool]) -> Self:
+        def parsed_val_predicate(attribute_value: str) -> bool:
+            parsed_value_dict: [str, str] = dict()
+            for attribute in attribute_value.split(','):
+                key, value = attribute.split(':')
+                parsed_value_dict[key.lower()] = value
+            return (parsed_value_dict.get(attribute_parsed_value_key.lower()) is not None
+                    and predicate(parsed_value_dict[attribute_parsed_value_key.lower()]))
+
+        return self.filter_attributes(attribute_key, parsed_val_predicate)
+
+        # function above is more clear than a nested lambda
+        # parsed_val_predicate = lambda attribute_value: (  # outer lambda
+        #     (lambda parsed_value_dict:  # inner lambda: predicate(attribute_parsed_value_dict[key])
+        #      parsed_value_dict.get(attribute_parsed_value_key.lower()) is not None
+        #      and predicate(parsed_value_dict[attribute_parsed_value_key.lower()]))
+        #     (GFF3Parser.__parse_attribute_value_dict(attribute_value)))  # passed from outer lambda
+
+    # def filter_attributes_dict(self,
+    #                            attribute_key: str,
+    #                            attribute_parsed_value_key: str,
+    #                            predicate: Callable[[str], bool]) -> Self:
+    #     return GFF3Parser(self.__filter_attributes_dict(attribute_key, attribute_parsed_value_key, predicate))
+
+    # def __filter_attributes_dict(self,
+    #                              attribute_key: str,
+    #                              attribute_parsed_value_key: str,
+    #                              predicate: Callable[[str], bool]) -> Generator[GFF_Record]:
+    #     for record in self.generator:
+    #         if record.attributes.get(attribute_key.lower()) is not None:
+    #             parsed_value_dict = GFF3Parser.__parse_attribute_value_dict(record.attributes[attribute_key.lower()])
+    #             if (parsed_value_dict.get(attribute_parsed_value_key.lower()) is not None
+    #                     and predicate(parsed_value_dict[attribute_parsed_value_key.lower()])):
+    #                 yield record
+    #         continue  # rewrite this as a predicate
+
+    # @staticmethod
+    # def __parse_attribute_value_dict(attribute_value: str) -> dict[str, str]:
+    #     # Dbxref=FLYBASE:FBtr0392909,GeneID:26067052,GenBank:NM_001316563.1,FLYBASE:FBgn0267431
+    #     # -> {FLYBASE: FBtr0392909, GeneID: 26067052, GenBank: NM_001316563.1, FLYBASE: FBgn0267431}
+    #     attribute_value_dict: [str, str] = dict()
+    #     for attribute in attribute_value.split(','):
+    #         key, value = attribute.split(':')
+    #         attribute_value_dict[key.lower()] = value
+    #     # if attribute_value_dict.get("GeneID") == str(41615): print(attribute_value_dict)  # TEST
+    #     return attribute_value_dict
 
 
 def examine_gff3(file_path: str):
@@ -146,14 +196,14 @@ def examine_gff3(file_path: str):
 if __name__ == '__main__':
     examine_gff3("./genomes/7227/ncbi_dataset/data/GCF_000001215.4/genomic.gff")
 
-    for record in (GFF3Parser.parse_file("./genomes/7227/ncbi_dataset/data/GCF_000001215.4/genomic.gff")
+    for record in (GFFParser.parse_file("./genomes/7227/ncbi_dataset/data/GCF_000001215.4/genomic.gff")
                    .filter(type=["gene", "exon"])
                    .generator):
         print(record)
 
     print("###################")
 
-    for record in (GFF3Parser.parse_file("./genomes/7227/ncbi_dataset/data/GCF_000001215.4/genomic.gff")
+    for record in (GFFParser.parse_file("./genomes/7227/ncbi_dataset/data/GCF_000001215.4/genomic.gff")
                    .filter_attributes(attribute_key="parent", predicate=(lambda parent: "gene-Dmel_CG41624" == parent))
                    .generator):
         print(record)

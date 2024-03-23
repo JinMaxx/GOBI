@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 
 import json
+import os
 import tempfile
 import subprocess
 
-# this script won't work if there is already the target genome downloaded.
 
 _include = ["genome", "gff3"]
 
@@ -39,6 +39,9 @@ def download_genome(taxonomy_id: int,
 
     dirname = f"{genomes_dir}/{taxonomy_id}"
     zip_filename = f"{dirname}.zip"
+
+    if os.path.isdir(dirname) and len(os.listdir(dirname)) > 0:
+        return dirname  # ignoring already downloaded genomes
 
     print(f"downloading genomes {taxonomy_id} to {dirname}")
     subprocess.run([

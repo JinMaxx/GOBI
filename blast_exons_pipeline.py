@@ -1,53 +1,30 @@
 #!/usr/bin/python3
+import tempfile
 
-#  blastn [-h] [-help] [-import_search_strategy filename]
-#     [-export_search_strategy filename] [-task task_name] [-db database_name]
-#     [-dbsize num_letters] [-gilist filename] [-seqidlist filename]
-#     [-negative_gilist filename] [-negative_seqidlist filename]
-#     [-taxids taxids] [-negative_taxids taxids] [-taxidlist filename]
-#     [-negative_taxidlist filename] [-no_taxid_expansion]
-#     [-entrez_query entrez_query] [-db_soft_mask filtering_algorithm]
-#     [-db_hard_mask filtering_algorithm] [-subject subject_input_file]
-#     [-subject_loc range] [-query input_file] [-out output_file]
-#     [-evalue evalue] [-word_size int_value] [-gapopen open_penalty]
-#     [-gapextend extend_penalty] [-perc_identity float_value]
-#     [-qcov_hsp_perc float_value] [-max_hsps int_value]
-#     [-xdrop_ungap float_value] [-xdrop_gap float_value]
-#     [-xdrop_gap_final float_value] [-searchsp int_value] [-penalty penalty]
-#     [-reward reward] [-no_greedy] [-min_raw_gapped_score int_value]
-#     [-template_type type] [-template_length int_value] [-dust DUST_options]
-#     [-filtering_db filtering_database]
-#     [-window_masker_taxid window_masker_taxid]
-#     [-window_masker_db window_masker_db] [-soft_masking soft_masking]
-#     [-ungapped] [-culling_limit int_value] [-best_hit_overhang float_value]
-#     [-best_hit_score_edge float_value] [-subject_besthit]
-#     [-window_size int_value] [-off_diagonal_range int_value]
-#     [-use_index boolean] [-index_name string] [-lcase_masking]
-#     [-query_loc range] [-strand strand] [-parse_deflines] [-outfmt format]
-#     [-show_gis] [-num_descriptions int_value] [-num_alignments int_value]
-#     [-line_length line_length] [-html] [-sorthits sort_hits]
-#     [-sorthsps sort_hsps] [-max_target_seqs num_sequences]
-#     [-num_threads int_value] [-mt_mode int_value] [-remote] [-version]
+from Bio import Align
 
-import scrape_genes
+
 import scrape_genome
+from sequence_record_parser import SequenceRecordsBundle, SequenceRecord
 
 import os
 import subprocess
 from pathlib import Path
+from fnmatch import fnmatch
 
 
 # better to use taxonomy id that are specific for species
-genes_to_taxonomy_id_dict = {
+taxonomy_to_gene_ids_dict = {
     7227: [41615]
 }
-# 50557 True Insects (~ 1.5 TB)
 # 7227 Drosophilia M. (for testing)
 # Accession Number:  [two-letter alphabetical prefix][six digits][.][version number]
 # using gene_id instead as they are easier for handling. NCBI prefers those.
 
 
-blastdb_directory_prefix = "./blastdb"  # os.path.abspath("./blastdb")
+blastdb_directory = "./blast_db"
+makeblastdb = "makeblastdb"
+blastn = "blastn"
 
 
 def download_genome(taxonomy_id) -> str:
@@ -55,90 +32,165 @@ def download_genome(taxonomy_id) -> str:
     return scrape_genome.download_genome(taxonomy_id, include=["genome", "gff3"])
 
 
-def build_blast_db(genomes_directory: str):
-
-    data_directory = f"{genomes_directory}/ncbi_dataset/data"
-
-    # example:
-    # |   genomes_directory   |   after join    |     data      |    fasta_file
-    # ./ncbi_data/genomes/7227/ncbi_dataset/data/GCF_000001215.4/GCF_000001215.4_Release_6_plus_ISO1_MT_genomic.fna
-    for data in os.scandir(data_directory):  # taxonomy_id could relate to many species aka datasets
-        if data.is_dir():
-            for fasta_file in os.scandir(data):  # iterating trough fasta file(s) in .../data/*
-                if fasta_file.is_file() and fasta_file.name.endswith(".fna"):
+def build_blast_db(data_directory: str):
+    for genome_directory in os.listdir(data_directory):  # taxonomy_id could relate to many species aka datasets
+        # ignoring also files like:
+        # .../data_directory/assembly_data_report.jsonl
+        # .../data_directory/dataset_catalog.json
+        genome_directory = f"{data_directory}/{genome_directory}"
+        # print(genome_directory)
+        if os.path.isdir(genome_directory):
+            for fasta_file in os.listdir(genome_directory):  # iterating trough fasta file(s) in .../genome_directory/*
+                fasta_file = f"{genome_directory}/{fasta_file}"
+                # print(fasta_file)
+                if os.path.isfile(fasta_file) and fnmatch(fasta_file, "*.fna") or fnmatch(fasta_file, "*.fasta"):
                     print(f"building blastdb from {fasta_file}")
-                    output_filename = f"{blastdb_directory_prefix}/{taxonomy_id}/{Path(fasta_file.path).stem}.db"
+                    genome_id = Path(fasta_file).stem
+                    output_filename = f"{blastdb_directory}/{genome_id}"
                     subprocess.run([
-                        "makeblastdb",
-                        "-input_file", fasta_file,
-                        "-input_type", "fasta"
-                                       "-taxid", taxonomy_id,
-                        "-title", taxonomy_id,
-                        "-dbtype" "nt"
-                        "-metadata_output_prefix", blastdb_directory_prefix,
-                        "-out", output_filename
+                        makeblastdb,
+                        "-in", fasta_file,
+                        "-input_type", "fasta",
+                        "-taxid", str(taxonomy_id),
+                        "-title", genome_id,
+                        "-dbtype", "nucl",
+                        "-metadata_output_prefix", blastdb_directory,
+                        "-out", output_filename,
                     ])
-                    yield output_filename
+                    print(f"created blast db: {output_filename}")
+                    yield genome_id
 
 
-def get_genes(taxonomy_id: int, gene_ids: list):
+def get_exons_from_genome(data_directory: str, gene_ids: list[int]):
 
-    # Download all genes
-    for gene_id in gene_ids:
-        scrape_genes.display_summery(gene_id=gene_id)
-        gene_directory = scrape_genes.download_gene(taxonomy_id, gene_id=gene_id)
+    # [(genome_id, gene_id, [GeneRecordsBundle])]
+    per_genome_gene_records_bundle: list[(str, int, SequenceRecordsBundle)] = list()
+
+    for genome_directory in os.scandir(data_directory):  # taxonomy_id could relate to many species aka datasets
+        if genome_directory.is_dir():
+            gff_file, genome_fasta_file = None, None
+            genome_directory = f"{data_directory}/{genome_directory.name}"
+
+            for file in os.listdir(genome_directory):
+                if fnmatch(file, "*.gff"):
+                    gff_file: str = f"{genome_directory}/{file}"
+                    # print(f"gff_file:          {gff_file}")
+                if fnmatch(file, "*.fna") or fnmatch(file, "*.fasta"):
+                    genome_fasta_file: str = f"{genome_directory}/{file}"
+                    # print(f"genome_fasta_file: {genome_fasta_file}")
+
+            if gff_file is None or genome_fasta_file is None:
+                raise ValueError(f"gff_file or fasta_file not found in {genome_directory}")
+
+            for gene_id in gene_ids:
+                per_genome_gene_records_bundle.append((
+                    os.path.basename(genome_directory),
+                    gene_id,
+                    SequenceRecordsBundle.of_genes(
+                        gff_file=gff_file,
+                        genome_fasta_file=genome_fasta_file,
+                        filter_types=["gene", "exon"],
+                        gene_id=gene_id)
+                ))
+
+    return per_genome_gene_records_bundle
 
 
-        # >NM_079617.3 timeout [organism=Drosophila melanogaster] [GeneID=41615]
-        # parse from fasta
+def global_alignment(reference_sequence: str, query_sequence: str):
+    # TODO
+    aligner = Align.PairwiseAligner()
+    aligner.mode = 'global'
+    aligner.match_score = 2
+    aligner.mismatch_score = -1
 
-        # here I have to download
+    for alignment in aligner.align(reference_sequence, query_sequence):
+        print("Score = %.1f:" % alignment.score)
+        print(alignment)
 
-        # TODO
-        #   parse exons
-        #    for this I will create a tuple (sequence, GFF_Record)
-        #    with SeqIO i could parse the fasta file of the genome
-        #    with start/end I could extract the sequence
-        #    also I could use gff3 to get the location of the gene (type: "gene")
+
+def local_alignment():
+    # TODO
+    pass
+
+
+def find_genomic_region():
+    # this function should find the approximate location of a gene with blast in another genome with BLAST
+    # then a slice of that location is taken and searched with exons.
+    # TODO
+    pass
+
+
+def blast_per_gene_records_bundle(per_genome_gene_records_bundle: list[(str, int, list[SequenceRecordsBundle])],
+                                  db_list: list[str]):
+    # Going to rewrite this function at it is not how I expected how it aligns exons.
+    genome_id: str
+    gene_id: int
+    gene_records_bundle_list: list[SequenceRecordsBundle]
+    for genome_id, gene_id, gene_records_bundle_list in per_genome_gene_records_bundle:
+
+        gene_records_bundle: SequenceRecordsBundle
+        for gene_records_bundle in gene_records_bundle_list:
+
+            gene_record: SequenceRecord
+            for gene_record in gene_records_bundle.sequence_records:
+
+                # instead of using stdin using tmp files in fasta format
+                query_input_file = tempfile.NamedTemporaryFile()
+                with open(query_input_file.name, 'w') as query_input_file_handler:
+                    query_input_file_handler.write(
+                        f">gene_id: {gene_id}, type: {gene_record.gff_record.type}, "
+                        f"reference_seqid: {gene_record.gff_record.seqid}, "
+                        f"start: {gene_record.gff_record.start}, end: {gene_record.gff_record.end}\n"
+                        f"{gene_record.sequence}"
+                    )
+
+                with open(query_input_file.name, 'r') as query_input_file_handler:
+                    print(query_input_file_handler.read())
+
+                for db in db_list:
+
+                    output_file = tempfile.NamedTemporaryFile()
+                    subprocess.run([
+                        blastn,
+                        '-task', 'megablast',
+                        '-query', query_input_file.name,
+                        '-strand', 'plus' if gene_record.gff_record.strand == '+' else 'minus',
+                        '-db', db,
+                        '-out', output_file.name,
+                        '-outfmt', '0',  # pairwise 0, BLAST_XML 5
+                        # '-window_size', '0'
+                        # '-word_size', str(len(gene_record.sequence))
+                        # '-taxids ', ','.join(taxids),
+                        # '-perc_identity', perc_identity,
+                    ])
+
+                    with open(output_file.name, 'r') as output_file_handler:
+                        print(output_file_handler.read())
+
+                    # TODO: using BLAST to find genes similar in other species.
+                    # using global alignment Needleman-Wunsch to search the exons in those regions
 
 
 if __name__ == '__main__':
 
-    #for taxonomy_id in genes_to_taxonomy_id_dict.keys():
-    #    gene_directory = download_genome(taxonomy_id)
-    #    build_blast_db(gene_directory)
+    for taxonomy_id, gene_id in taxonomy_to_gene_ids_dict.items():
+        genomes_directory = download_genome(taxonomy_id)
 
-    for taxonomy_id, accession_ids in genes_to_taxonomy_id_dict.items():
-        get_genes(taxonomy_id, accession_ids)
+        # example:
+        # |   genomes_directory   |    data dir    |     genome      |    fasta_file (or .gff)
+        # ./ncbi_data/genomes/7227/ncbi_dataset/data/GCF_000001215.4/GCF_000001215.4_Release_6_plus_ISO1_MT_genomic.fna
+        data_directory = f"{genomes_directory}/ncbi_dataset/data"
 
-    # TODO:
-    #   blast exons against each db except its own
-    #   if {blastdb_directory_prefix}/{taxonomy_id}.db == file: continue
-    #   create table like: start, end, taxonomy, exon, gene
-    #   also safe alignments
+        db_list = list()
+        for db in build_blast_db(data_directory):
+            db_list.append(f"{blastdb_directory}/{db}")
+
+        per_genome_gene_records_bundle = get_exons_from_genome(data_directory, gene_id)
+        #print(per_genome_gene_records_bundle)
+
+        blast_per_gene_records_bundle(per_genome_gene_records_bundle, db_list)
 
 
-#    genomes_directory = os.fsencode(f"{genomes_directory}/ncbi_dataset/data")
-
-# subprocess.run([
-#     blastn,
-#     '-query', query_file,
-#     # '-query_loc', query_location,
-#     '-strand', strand,
-#     '-db', db,
-#     # '-out', tmp.name,
-#     '-outfmt', outfmt,
-#     # '-taxids ', ','.join(taxids),
-#     # '-perc_identity', perc_identity,
-# ])
-
-# Download Genes of interest. Preferably as Exons.
-
-# Build Blast DB of those species.
-# TODO make in blast.
-
-# Blast Genes against each the db.
-
-# Write Result in a special format.
-# TODO this can be done in python. Parsing and such.
-# Need start and end of those genes.
+# TODO:
+#  Write Result in a special format.
+#   create table like: taxonomy, start, end, exon, gene, reference_sequence, aligned_sequence
