@@ -8,7 +8,7 @@ import Bio.SeqIO.FastaIO as FastaIO
 
 class SequenceRecord:
 
-    # (gff_records, sequence)
+    # (gff_record, sequence)
     def __init__(self, gff_record: GFF_Record, sequence: str):
         self.gff_record = gff_record
         self.sequence = sequence
@@ -35,7 +35,7 @@ class SequenceRecord:
 
 class SequenceRecordsBundle:
 
-    # ((headline, genome_sequence), [(gff_records, sequence)])
+    # ((headline, genome_sequence), [(gff_record, sequence)])
     def __init__(self,
                  headline: str,
                  genome_sequence: str,
