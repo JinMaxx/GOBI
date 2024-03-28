@@ -57,17 +57,15 @@ class GFF_Record:
         return self.__str__()
 
     def __str__(self):
-        return f"""
-            seqid: {self.seqid}
-            source: {self.source}
-            type: {self.type}
-            start: {self.start}
-            end: {self.end}
-            score: {self.score}
-            strand: {self.strand}
-            phase: {self.phase}
-            attributes: {self.attributes}
-            """
+        return (
+            f"seqid: {self.seqid}\n"
+            f"type: {self.type}, source: {self.source}\n"
+            f"location: {self.start} - {self.end}\n"
+            f"strand: {self.strand}, phase: {self.phase}\n"
+            f"attributes: {self.attributes}\n"
+            "" if self.score is None else f"score: {self.score}\n"
+
+        )
 
 
 class GFFParser:

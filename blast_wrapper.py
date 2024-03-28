@@ -199,9 +199,12 @@ class SimpleBlastReport:
             f"h{self.hit_strand}: {self.hit_sequence}\n"
             f"    {self.mid_line}\n"
             f"q{self.query_strand}: {self.query_sequence}\n"
-            f"genome_id: {self.genome_id}, seqid: {self.seqid}, location {self.hit_from} - {self.hit_to}\n"
+            f"genome_id: {self.genome_id}, seqid: {self.seqid}\n"
+            f"location:\n"
+            f" {self.hit_from:10.0f} - {self.hit_to:10.0f}\n"
+            f" {self.query_from:10.0f} - {self.query_to:10.0f}\n"
             f"identity: {self.identity}/{self.align_len}, gaps: {self.gaps}\n"
-            f"bit_score: {self.bit_score}, score: {self.score}, e-value: {self.evalue}\n"
+            f"bit_score: {self.bit_score}, score: {self.score}, e-value: {self.evalue}"
         )
 
 
@@ -266,17 +269,17 @@ def blast(query_fasta_file: str, strand: str = 'both', other_blast_db_directory:
     if strand == '-':
         strand = 'minus'
 
-    db_set: set[str]
+    db_dict: dict[str, str]
 
     if other_blast_db_directory is not None:
-        db_set = set()
+        db_dict = dict()
         for db_file in os.listdir(other_blast_db_directory):
             __genome_id = Path(db_file).stem
-            db_set.add(f"{other_blast_db_directory}/{__genome_id}")
+            db_dict[f"{other_blast_db_directory}/{__genome_id}"] = __genome_id
     else:
-        db_set = set(__genome_db_dict.keys())  # use default db
+        db_dict = __genome_db_dict  # use default db
 
-    for db in db_set:
+    for db in db_dict.keys():
         output_file = tempfile.NamedTemporaryFile()
         subprocess.run([
             __blastn,
@@ -291,7 +294,7 @@ def blast(query_fasta_file: str, strand: str = 'both', other_blast_db_directory:
 
         with open(output_file.name, 'r') as output_file_handler:
             # print(output_file_handler.read())
-            return SimpleBlastReport.parse_json(output_file_handler.read(), __genome_db_dict[db])
+            return SimpleBlastReport.parse_json(output_file_handler.read(), db_dict[db])
 
 
 if __name__ == '__main__':

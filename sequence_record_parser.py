@@ -27,10 +27,10 @@ class SequenceRecord:
         return self.__str__()
 
     def __str__(self):
-        return f"""
-            gff_record: {self.gff_record}
-            gene_sequence: {self.sequence}
-            """
+        return (
+            f"gff_record: {self.gff_record}"
+            f"gene_sequence: {self.sequence}"
+        )
 
 
 class SequenceRecordsBundle:
@@ -70,11 +70,10 @@ class SequenceRecordsBundle:
         return self.__str__()
 
     def __str__(self):
-        return f"""
-            headline: {self.headline}
-            genome_sequence: {self.genome_sequence}
-            gene_records: {self.sequence_records}
-            """
+        return (
+            f"headline: {self.headline}\n"
+            f"genome_sequence: {self.genome_sequence}\n"
+            f"gene_records: {self.sequence_records}\n")
 
     @staticmethod
     def __collect_to_seqid_record_dict(parser: GFFParser) -> dict[str, list[GFF_Record]]:
