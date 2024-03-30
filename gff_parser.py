@@ -1,13 +1,11 @@
 #!/usr/bin/python3
-
-
 import pprint
 from BCBio import GFF
 from collections.abc import Generator
 from typing import Callable, Self
 
 
-class GFF_Record:
+class GFFRecord:
 
     def __init__(self,
                  seqid: str = None,
@@ -30,10 +28,10 @@ class GFF_Record:
         self.attributes = attributes
 
     @staticmethod
-    def parse_line(line: str) -> 'GFF_Record':
+    def parse_line(line: str) -> 'GFFRecord':
         line_split = line.strip().split(sep='\t')
 
-        return GFF_Record(
+        return GFFRecord(
             seqid=line_split[0] if line_split[0] != "." else None,
             source=line_split[1] if line_split[1] != "." else None,
             type=line_split[2] if line_split[2] != "." else None,
@@ -42,7 +40,7 @@ class GFF_Record:
             score=float(line_split[5]) if line_split[5] != "." else None,
             strand=line_split[6] if line_split[6] != "." else None,
             phase=line_split[7] if line_split[7] != "." else None,
-            attributes=GFF_Record._parse_attributes(line_split[8]) if line_split[8] != "." else None,
+            attributes=GFFRecord._parse_attributes(line_split[8]) if line_split[8] != "." else None,
         )
 
     @staticmethod
@@ -69,22 +67,23 @@ class GFF_Record:
 
 
 class GFFParser:
-    @staticmethod
-    def parse_file(gff_file: str):
-        return GFFParser(GFFParser._parse_gff3_iterator(gff_file))
 
-    def __init__(self, generator: Generator[GFF_Record]):
+    def __init__(self, generator: Generator[GFFRecord]):
         self.generator = generator
 
     @staticmethod
-    def _parse_gff3_iterator(file_path: str) -> Generator[GFF_Record]:
+    def parse_file(gff_file: str):
+        return GFFParser(GFFParser.__parse_gff3_iterator(gff_file))
+
+    @staticmethod
+    def __parse_gff3_iterator(file_path: str) -> Generator[GFFRecord]:
         # writing my own parser
         with open(file_path) as in_handle:
             for line in in_handle:
                 if line.startswith('#'):
                     continue
                 else:
-                    yield GFF_Record.parse_line(line)
+                    yield GFFRecord.parse_line(line)
 
     def filter(self,
                seqid: str = None,
@@ -97,12 +96,12 @@ class GFFParser:
         return GFFParser(self.__filter(seqid, source, type, start, end, strand))
 
     def __filter(self,
-                seqid: str = None,
-                source: str = None,
-                type: [str] = None,
-                start: int = None,
-                end: int = None,
-                strand: chr = None) -> Generator[GFF_Record]:
+                 seqid: str = None,
+                 source: str = None,
+                 type: [str] = None,
+                 start: int = None,
+                 end: int = None,
+                 strand: chr = None) -> Generator[GFFRecord]:
         for record in self.generator:
             if seqid is not None and seqid not in record.seqid: continue
             elif source is not None and record.source != source: continue
@@ -126,8 +125,8 @@ class GFFParser:
         return GFFParser(self.__filter_attributes(attribute_key, predicate))
 
     def __filter_attributes(self,
-                           attribute_key: str,
-                           predicate: Callable[[str], bool]) -> Generator[GFF_Record]:
+                            attribute_key: str,
+                            predicate: Callable[[str], bool]) -> Generator[GFFRecord]:
         for record in self.generator:
             if (record.attributes.get(attribute_key.lower()) is not None
                     and predicate(record.attributes[attribute_key.lower()])):
@@ -158,17 +157,17 @@ def examine_gff3(file_path: str):
 if __name__ == '__main__':
     examine_gff3("./genomes/7227/ncbi_dataset/data/GCF_000001215.4/genomic.gff")
 
-    for record in (GFFParser.parse_file("./genomes/7227/ncbi_dataset/data/GCF_000001215.4/genomic.gff")
-                   .filter(type=["gene", "exon"])
-                   .generator):
-        print(record)
+    for _record in (GFFParser.parse_file("./genomes/7227/ncbi_dataset/data/GCF_000001215.4/genomic.gff")
+                    .filter(type=["gene", "exon"])
+                    .generator):
+        print(_record)
 
     print("###################")
 
-    for record in (GFFParser.parse_file("./genomes/7227/ncbi_dataset/data/GCF_000001215.4/genomic.gff")
-                   .filter_attributes(attribute_key="parent", predicate=(lambda parent: "gene-Dmel_CG41624" == parent))
-                   .generator):
-        print(record)
+    for _record in (GFFParser.parse_file("./genomes/7227/ncbi_dataset/data/GCF_000001215.4/genomic.gff")
+                    .filter_attributes(attribute_key="parent", predicate=(lambda parent: "gene-Dmel_CG41624" == parent))
+                    .generator):
+        print(_record)
 
 
 # GFF3 files are nine-column, tab-delimited, plain text files.
@@ -305,7 +304,6 @@ if __name__ == '__main__':
 #    score – Feature qualifier with key “score”
 #    strand – Feature strand attribute
 #    phase – Feature qualifier with key “phase”
-
 
 # sample
 # NT_033777.3	RefSeq	region	1	32079331	.	+	.	ID=NT_033777.3:1..32079331;Dbxref=taxon:7227;Name=3R;chromosome=3R;gbkey=Src;genome=chromosome;genotype=y[1]%3B Gr22b[1] Gr22d[1] cn[1] CG33964[R4.2] bw[1] sp[1]%3B LysC[1] MstProx[1] GstD5[1] Rh6[1];mol_type=genomic DNA

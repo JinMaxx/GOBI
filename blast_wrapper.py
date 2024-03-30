@@ -65,9 +65,6 @@ class HSPS(TypedDict):  # most important type to iterate
     hseq: str
     midline: str
 
-    # list[(seqid, start, end, aligned_sequence_1, aligned_sequence_2, alignment_sequence)]
-    # alignments
-
 
 class Hit(TypedDict):
     num: int
@@ -156,11 +153,11 @@ class SimpleBlastReport:
             gaps=hsps['gaps'],
             align_len=hsps['align_len'],
             identity=hsps['identity'],
-            query_from=int(hsps['query_from'])-1,
-            query_to=int(hsps['query_to'])-1,
+            query_from=int(hsps['query_from']),
+            query_to=int(hsps['query_to']),
             query_strand='+' if hsps['query_strand'].lower() == "plus" else '-',
-            hit_from=int(hsps['hit_from'])-1,
-            hit_to=int(hsps['hit_to'])-1,
+            hit_from=int(hsps['hit_from']),
+            hit_to=int(hsps['hit_to']),
             hit_strand='+' if hsps['hit_strand'].lower() == "plus" else '-',
             bit_score=hsps['bit_score'],
             score=hsps['score'],
@@ -245,21 +242,6 @@ def create_blast_db(genome_id: str, fasta_file: str, taxonomy_id: int = None, ot
 
         subprocess.run(params)
         print(f"created blast db: {output_filename}")
-
-
-# def create_temporary_blast_db(genome_id: str, fasta_file: str, temporary_folder: str):
-#     print(f"building temporary blast db: {genome_id}")
-#     output_filename = f"{temporary_folder}/{genome_id}"
-#     subprocess.run([
-#         __makeblastdb,
-#         "-in", fasta_file,
-#         "-input_type", "fasta",
-#         "-title", genome_id,
-#         "-dbtype", "nucl",
-#         "-metadata_output_prefix", temporary_folder,
-#         "-out", output_filename,
-#     ])
-#     print(f"created blast db: {output_filename}")
 
 
 def blast(query_fasta_file: str, strand: str = 'both', other_blast_db_directory: str = None) -> list[SimpleBlastReport]:

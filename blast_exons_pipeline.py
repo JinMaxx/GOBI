@@ -31,10 +31,10 @@ alignments_bundle_output_file = "./alignments_bundle_output_file"
 # Some global variables for easier handling.
 
 # genome_id -> seqid -> (headline, sequence)    saving already read sequence for given seqid per genome_id
-genome_id_seqid_seqence_dict: dict[str, dict[str, (str, str)]] = defaultdict(dict)
+__genome_id_seqid_seqence_dict: dict[str, dict[str, (str, str)]] = defaultdict(dict)
 
 # [(genome_id, gene_id, [GeneRecordsBundle])]
-per_genome_sequence_records_bundle: list[(str, int, SequenceRecordsBundle)] = list()
+__per_genome_sequence_records_bundle: list[(str, int, SequenceRecordsBundle)] = list()
 
 
 for taxonomy_id, gene_ids in taxonomy_to_gene_ids_dict.items():
@@ -48,8 +48,8 @@ for taxonomy_id, gene_ids in taxonomy_to_gene_ids_dict.items():
     print(f"genome data for {taxonomy_id} in {data_directory}")
 
     # Could have multiple genomes downloaded (if taxonomy id is not specific)
-    for genome_id in os.listdir(data_directory):
-        genome_directory = f"{data_directory}/{genome_id}"
+    for _genome_id in os.listdir(data_directory):
+        genome_directory = f"{data_directory}/{_genome_id}"
 
         # ignoring also files like:
         # .../<data_directory>/assembly_data_report.jsonl
@@ -69,10 +69,10 @@ for taxonomy_id, gene_ids in taxonomy_to_gene_ids_dict.items():
             if fasta_file is None:
                 raise ValueError(f"fasta file not found in {genome_directory}")
             else:
-                print(f"for {genome_id} found {fasta_file}")
+                print(f"for {_genome_id} found {fasta_file}")
 
                 # # # # # # # building blast db # # # # # # #
-                create_blast_db(genome_id, fasta_file, taxonomy_id)
+                create_blast_db(_genome_id, fasta_file, taxonomy_id)
 
             # # # # # # # parsing genome_sequence_records # # # # # # #
             if gff_file is None:
@@ -80,18 +80,19 @@ for taxonomy_id, gene_ids in taxonomy_to_gene_ids_dict.items():
                 sys.stderr.write("skipping parsing of gff file")
             else:
                 print(f"parsing {gff_file} with gene_ids: {gene_ids}")  # optional?
-                for gene_id in gene_ids:
-                    print(f"parsing for {gene_id}")
+                for _gene_id in gene_ids:
+                    print(f"parsing for {_gene_id}")
                     genome_sequence_records = (
-                        os.path.basename(genome_id),
-                        gene_id,
+                        os.path.basename(_genome_id),
+                        _gene_id,
                         SequenceRecordsBundle.of_genes(
+                            genome_id=os.path.basename(_genome_id),
                             gff_file=gff_file,
                             genome_fasta_file=fasta_file,
                             filter_types=["gene", "exon"],
-                            gene_id=gene_id)
+                            gene_id=_gene_id)
                     )
-                    per_genome_sequence_records_bundle.append(genome_sequence_records)
+                    __per_genome_sequence_records_bundle.append(genome_sequence_records)
 
 
 class Alignment:
@@ -104,11 +105,18 @@ class Alignment:
     #   region_from = align_from - region_width >= 0                           region_to = align_to + region_width <= n
 
     def __init__(self,
-                 align_from: int,
-                 align_to: int,
+                 hit_from: int, hit_to: int,
+                 query_from: int, query_to: int,
+                 hit_gaps: int, query_gaps: int,
+                 align_from: int, align_to: int,
                  simple_blast_report: SimpleBlastReport,
                  query_sequence_record: SequenceRecord):
-
+        self.hit_from = hit_from
+        self.hit_to = hit_to
+        self.query_from = query_from
+        self.query_to = query_to
+        self.hit_gaps = hit_gaps
+        self.query_gaps = query_gaps
         self.align_from = align_from
         self.align_to = align_to
         self.simple_blast_report = simple_blast_report
@@ -119,57 +127,40 @@ class Alignment:
     def from_simple_blast_report(query_sequence_record: SequenceRecord,
                                  simple_blast_report: SimpleBlastReport) -> 'Alignment':
 
-        print(query_sequence_record.sequence)
-        print(f"report:\n{simple_blast_report}")
-
         hit_from = simple_blast_report.hit_from
         hit_to = simple_blast_report.hit_to
         query_from = simple_blast_report.query_from
         query_to = simple_blast_report.query_to
 
-        # location flipped based on strand if - not +
+        # location flipped based on strand if - not + because we want to have the location on the reference genome
         if hit_from > hit_to: hit_from, hit_to = hit_to, hit_from
         if query_from > query_to: query_from, query_to = hit_to, hit_from
 
+        # they begin counting from 1 (but x_to is correct and only after flipping)
+        hit_from -= 1
+        query_from -= 1
+
+        # counting gaps on both strands
         hit_gaps = simple_blast_report.hit_sequence.count('-')
         query_gaps = simple_blast_report.query_sequence.count('-')
 
         # calculating alignment position on genome
         align_from = hit_from - query_from
-        print(f"align_from: {align_from}")
-        align_to = hit_to + (len(query_sequence_record.sequence) - query_to) - hit_gaps
-        print(f"align_to: {align_to}")
+        align_to = hit_to + (len(query_sequence_record.sequence) - query_to) + hit_gaps - query_gaps
 
-        # part1 = simple_blast_report.hit_from - align_from
-        # print(f"hit_from -  align_from  = {simple_blast_report.hit_from} \t- {align_from}\t= {part1} = part1")
-        # part2 = simple_blast_report.hit_to - simple_blast_report.hit_from
-        # print(f"hit_to   -  hit_from    = {simple_blast_report.hit_to} \t- {simple_blast_report.hit_from}\t= {part2} = part2")
-        # part3 = align_to - simple_blast_report.hit_to
-        # print(f"align_to -  hit_to      = {align_to} \t- {simple_blast_report.hit_to}\t= {part3} = part3")
-        # print(f"part1 + part2 + part3   = {part1} + {part2} + {part3} = {part1 + part2 + part3} == {len(query_sequence_record.sequence)} = query_sequence_len")
+        # print(f"align_from: {align_from}")
+        # print(f"align_to: {align_to}")
 
-        # (align_to - align_from) - query_sequence_len
-        # 76229 - 75225 = 1004         880 -        371 509 23
-        # 76084 - 75225 = 859          430 -          0 430 15
-        # 75755 - 75225 = 530          880 -        608 272 23
-        # 75237 - 75225 = 12           708 -       1021 -313 15
-        # 75237 - 75225 = 12           705 -        988 -283 15
-        # 75501 - 75225 = 276          138 -          0 138 2
-        # 75497 - 75225 = 272          136 -          0 136 2
+        # headline, sequence = get_genome_seq(simple_blast_report.genome_id, simple_blast_report.seqid)
+        # print(f"referencing {simple_blast_report.genome_id} {simple_blast_report.seqid}[{hit_from}:{hit_to}]: {sequence[hit_from:hit_to]}")
 
-        print(f"query_sequence_len = {len(query_sequence_record.sequence)}")
-        print(f"align_to - align_from = {align_to} - {align_from} = {align_to - align_from}")
-        print(f"align_len: {simple_blast_report.align_len}")
-        print(f"gaps: {simple_blast_report.gaps}")
+        # TODO: some chromosomes are split by multiples sequences with seqids.
+        #  need to think about whaht to do when using regions as they could span over multiple sequences...
 
-        # TODO: Mind the gaps!!
-        #  reference is smaller then hit_sequence!
-        #  input sequence is smaller then query_sequence!
-
-        # TODO!! some chromosomes are split by multiples sequences with seqids.
-        #  need to think about that too when using regions as they could span over multiple sequences
-
-        return Alignment(align_from=align_from,
+        return Alignment(hit_from=hit_from, hit_to=hit_to,
+                         query_from=query_from, query_to=query_to,
+                         hit_gaps=hit_gaps, query_gaps=query_gaps,
+                         align_from=align_from,
                          align_to=align_to,
                          simple_blast_report=simple_blast_report,
                          query_sequence_record=query_sequence_record)
@@ -209,6 +200,70 @@ class Alignment:
         sequence = sequence[region_from:region_to]
         return headline, sequence
 
+    def as_table_record(self, data_format: str) -> str:
+
+        data_format = data_format.lower()  # yeah... there might be a more elegant solution to this
+
+        # alignment
+        if "hit_from" in data_format: data_format = data_format.replace("hit_from", str(self.hit_from))
+        if "hit_to" in data_format: data_format = data_format.replace("hit_to", str(self.hit_to))
+        if "query_from" in data_format: data_format = data_format.replace("query_from", str(self.query_from))
+        if "query_to" in data_format: data_format = data_format.replace("query_to", str(self.query_to))
+        if "hit_gaps" in data_format: data_format = data_format.replace("hit_gaps", str(self.hit_gaps))
+        if "query_gaps" in data_format: data_format = data_format.replace("query_gaps", str(self.query_gaps))
+        if "align_from" in data_format: data_format = data_format.replace("align_from", str(self.align_from))
+        if "align_to" in data_format: data_format = data_format.replace("align_to", str(self.align_to))
+
+        # simple blast report
+        if "query_sequence" in data_format:
+            data_format = data_format.replace("query_sequence", str(self.simple_blast_report.query_sequence))
+        if "hit_sequence" in data_format:
+            data_format = data_format.replace("hit_sequence", str(self.simple_blast_report.hit_sequence))
+        if "mid_line" in data_format:
+            data_format = data_format.replace("mid_line", str(self.simple_blast_report.mid_line))
+        if "align_len" in data_format:
+            data_format = data_format.replace("align_len", str(self.simple_blast_report.align_len))
+        if "identity" in data_format:
+            data_format = data_format.replace("identity", str(self.simple_blast_report.identity))
+        if "query_strand" in data_format:
+            data_format = data_format.replace("query_strand", str(self.simple_blast_report.query_strand))
+        if "hit_strand" in data_format:
+            data_format = data_format.replace("hit_strand", str(self.simple_blast_report.hit_strand))
+        if "bit_score" in data_format:
+            data_format = data_format.replace("bit_score", str(self.simple_blast_report.bit_score))
+        if "evalue" in data_format:
+            data_format = data_format.replace("evalue", str(self.simple_blast_report.evalue))
+        if "hit_seqid" in data_format:
+            data_format = data_format.replace("hit_seqid", str(self.simple_blast_report.seqid))
+        if "hit_genome_id" in data_format:
+            data_format = data_format.replace("hit_genome_id", str(self.simple_blast_report.genome_id))
+
+        # sequence record
+        if "query_genome_id" in data_format:
+            data_format = data_format.replace("query_genome_id", str(self.sequence_record.genome_id))
+
+        # gff record
+        if "gff_seqid" in data_format:
+            data_format = data_format.replace("seqid", str(self.sequence_record.gff_record.seqid))
+        if "gff_source" in data_format:
+            data_format = data_format.replace("gff_source", str(self.sequence_record.gff_record.source))
+        if "gff_type" in data_format:
+            data_format = data_format.replace("gff_type", str(self.sequence_record.gff_record.type))
+        if "gff_start" in data_format:
+            data_format = data_format.replace("gff_start", str(self.sequence_record.gff_record.start))
+        if "gff_end" in data_format:
+            data_format = data_format.replace("gff_end", str(self.sequence_record.gff_record.end))
+        if "gff_score" in data_format:
+            data_format = data_format.replace("gff_score", str(self.sequence_record.gff_record.score))
+        if "gff_strand" in data_format:
+            data_format = data_format.replace("gff_strand", str(self.sequence_record.gff_record.strand))
+        if "gff_phase" in data_format:
+            data_format = data_format.replace("gff_phase", str(self.sequence_record.gff_record.phase))
+        if "gff_attributes" in data_format:  # TODO parse this special maybe?
+            data_format = data_format.replace("gff_attributes", str(self.sequence_record.gff_record.attributes))
+
+        return data_format
+
     def __repr__(self):
         return self.__str__()
 
@@ -217,6 +272,8 @@ class Alignment:
         gff_record_str = str(self.sequence_record.gff_record).replace('\n', '\n\t')
         return (
             f"alignment: {self.align_from}-{self.align_from}\n"
+            f"query: {self.query_from}-{self.query_to}, gaps: {self.query_gaps}"
+            f"refer: {self.hit_from}-{self.hit_to}, gaps: {self.hit_gaps}"
             "simple_blast_report:\n"
             f"\t{simple_blast_report_str}\n"
             "sequence_record.gff_record:\n"            
@@ -289,7 +346,7 @@ class AlignmentsBundle:  # remove overlaps and concatenate regions?
         output_string: str = str()
 
         alignments_dict: dict[str, list[Alignment]]
-        for genome_id, alignments_dict in alignments_bundle.genome_alignments_dict.items():
+        for genome_id, alignments_dict in self.genome_alignments_dict.items():
 
             output_string = (
                 f"{output_string}\n"
@@ -314,12 +371,27 @@ class AlignmentsBundle:  # remove overlaps and concatenate regions?
 
         return output_string
 
+    def write_table_to_file(self, file: str, format: str):
+
+        with open(file, 'a') as file_handler:
+
+            alignments_dict: dict[str, list[Alignment]]
+            for _, alignments_dict in self.genome_alignments_dict.items():
+
+                alignments: list[Alignment]
+                for _, alignments in alignments_dict.items():
+
+                    alignment: Alignment
+                    for alignment in alignments:
+
+                        file_handler.write(alignment.as_table_record(data_format=format))
+
 
 def get_genome_seq(genome_id: str,
                    seqid: str) -> (str, str):
     
-    if genome_id_seqid_seqence_dict[genome_id].get(seqid) is not None:
-        return genome_id_seqid_seqence_dict[genome_id][seqid]
+    if __genome_id_seqid_seqence_dict[genome_id].get(seqid) is not None:
+        return __genome_id_seqid_seqence_dict[genome_id][seqid]
     else:
         genome_directory = f"{data_directory}/{genome_id}"
         if os.path.isdir(genome_directory):
@@ -335,7 +407,7 @@ def get_genome_seq(genome_id: str,
                 with open(fasta_file, 'r') as file:
                     for headline, genome_sequence in FastaIO.SimpleFastaParser(file):
                         if seqid in headline:
-                            genome_id_seqid_seqence_dict[genome_id][seqid] = (headline, genome_sequence)
+                            __genome_id_seqid_seqence_dict[genome_id][seqid] = (headline, genome_sequence)
                             return headline, genome_sequence
     
                 raise EOFError(f"Genome Sequence for {seqid} not found in {fasta_file}")
@@ -355,7 +427,7 @@ def to_tmp_fasta(headline: str,  # without leading >
 
 def __sequence_record_to_tmp_fasta(sequence_record: SequenceRecord):
     return to_tmp_fasta(headline=(
-        f"gene_id: {gene_id}, type: {sequence_record.gff_record.type}, "
+        f"gene_id: {_gene_id}, type: {sequence_record.gff_record.type}, "
         f"reference_seqid: {sequence_record.gff_record.seqid}, "
         f"start: {sequence_record.gff_record.start}, end: {sequence_record.gff_record.end}"),
                         sequence=sequence_record.sequence)
@@ -389,87 +461,74 @@ def exon_alignment_to_regions(genome_id: str, region_width: int,
 
 if __name__ == '__main__':
 
-    alignments_bundle_output: AlignmentsBundle = AlignmentsBundle()
+    _alignments_bundle_output: AlignmentsBundle = AlignmentsBundle()  # this can be my memory killer...
 
-    genome_id: str
-    gene_id: int
-    sequence_records_bundle_list: list[SequenceRecordsBundle]
-    for genome_id, gene_id, sequence_records_bundle_list in per_genome_sequence_records_bundle:
-        # per_genome_gene_records_bundle: when there are many different reference genomes
+    _genome_id: str
+    _gene_id: int
+    _sequence_records_bundle_list: list[SequenceRecordsBundle]  # ↓ parsed before main
+    for _genome_id, _gene_id, _sequence_records_bundle_list in __per_genome_sequence_records_bundle:
+        #                                                       when there are many different reference genomes
 
-        sequence_records_bundle: SequenceRecordsBundle
-        for sequence_records_bundle in sequence_records_bundle_list:
+        _sequence_records_bundle: SequenceRecordsBundle
+        for _sequence_records_bundle in _sequence_records_bundle_list:
             # for 1 gene there is 1 sequence_record_bundle with many sequences for exons and one sequence for the gene
 
-            alignments_bundle: AlignmentsBundle = None  # ignore
-
-            sequence_record: SequenceRecord
-            for sequence_record in sequence_records_bundle.sequence_records:
-                # either gene or exon
-
-                if sequence_record.gff_record.type == "gene":
-                    # finding the region where the gene exists
-                    alignments_bundle = (AlignmentsBundle
-                                         .from_simple_blast_reports(sequence_record=sequence_record,
-                                                                    simple_blast_reports=gene_alignment(sequence_record)))
+            # Getting the AlignmentsBundle just for type == "gene"
+            _alignments_bundle: AlignmentsBundle = None  # ignore
+            _sequence_record: SequenceRecord
+            for _sequence_record in _sequence_records_bundle.sequence_records:
+                if _sequence_record.gff_record.type == "gene":
+                    _alignments_bundle = (AlignmentsBundle  # finding the region where the gene exists
+                                          .from_simple_blast_reports(sequence_record=_sequence_record,
+                                                                     simple_blast_reports=gene_alignment(_sequence_record)))
                     break
-            if alignments_bundle is None: raise ValueError("No gene annotation found in sequence_records")
-            alignments_bundle_output.append(alignments_bundle)
+            if _alignments_bundle is None: raise ValueError("No gene annotation found in sequence_records")
+            _alignments_bundle_output.append(_alignments_bundle)
 
-            # TESTING
-            # for aligma_dict in alignments_bundle.genome_alignments_dict.values():
-            #     for aligmas in aligma_dict.values():
-            #         for aligma in aligmas:
-            #             # hehe ligma balls
-            #             seq1 = get_genome_seq(aligma.simple_blast_report.genome_id, aligma.simple_blast_report.seqid)[1][aligma.align_from:aligma.align_to]
-            #             seq2 = f"{'-' * (aligma.simple_blast_report.hit_from - aligma.align_from)} {aligma.simple_blast_report.query_sequence}"
-            #             print(f"seq1: {seq1}")
-            #             print(f"seq2: {seq2}")
-            #             # align_from   hit_from      hit_to       align_to
-            # exit(0)
+            for _sequence_record in _sequence_records_bundle.sequence_records:
 
-            for sequence_record in sequence_records_bundle.sequence_records:
+                if _sequence_record.gff_record.type == "exon":
+                    _simple_blast_reports: list[SimpleBlastReport] = (
+                        exon_alignment_to_regions(genome_id=_genome_id,
+                                                  region_width=__region_width,
+                                                  sequence_record=_sequence_record,
+                                                  alignments_bundle=_alignments_bundle))
 
-                if sequence_record.gff_record.type == "exon":
-                    simple_blast_reports: list[SimpleBlastReport] = (
-                        exon_alignment_to_regions(genome_id=genome_id, 
-                                                  region_width=__region_width, 
-                                                  sequence_record=sequence_record, 
-                                                  alignments_bundle=alignments_bundle))
-                    simple_blast_report: SimpleBlastReport
-                    for simple_blast_report in simple_blast_reports:
+                    _simple_blast_report: SimpleBlastReport
+                    for _simple_blast_report in _simple_blast_reports:
                         # transforming regional blast hits to global 
-                        seqid = simple_blast_report.seqid
-                        # print(f"parsing: {seqid}")
+                        _seqid = _simple_blast_report.seqid
                         # parsing
-                        seqid = seqid.split(sep=" ", maxsplit=1)[0]  # just in case
-                        seqid, range = seqid.split(sep="|", maxsplit=1)
-                        regional_hit_from, regional_hit_to = range.split(sep=":", maxsplit=1)
+                        _seqid = _seqid.split(sep=" ", maxsplit=1)[0]  # just in case
+                        _seqid, _range = _seqid.split(sep="|", maxsplit=1)
+                        _regional_hit_from, _regional_hit_to = _range.split(sep=":", maxsplit=1)
                         # updating values
-                        simple_blast_report.seqid = seqid
-                        simple_blast_report.hit_from -= int(regional_hit_from)
-                        simple_blast_report.hit_to -= int(regional_hit_to)
-                    alignments_bundle_output.append(AlignmentsBundle
-                                                    .from_simple_blast_reports(sequence_record=sequence_record,
-                                                                               simple_blast_reports=simple_blast_reports))
+                        _simple_blast_report.seqid = _seqid
+                        _simple_blast_report.hit_from -= int(_regional_hit_from)
+                        _simple_blast_report.hit_to -= int(_regional_hit_to)  # needs check if valid?
 
-    with open(alignments_bundle_output_file, 'w') as output_file_handler:
-        output_file_handler.write(str(alignments_bundle_output))
+                    _alignments_bundle_output.append(AlignmentsBundle
+                                                     .from_simple_blast_reports(sequence_record=_sequence_record,
+                                                                                simple_blast_reports=_simple_blast_reports))
 
+    with open(f"{alignments_bundle_output_file}.txt", 'w') as _output_file_handler:
+        _output_file_handler.write(str(_alignments_bundle_output))
 
-# TODO:
-#  * make temporary directory for fasta_files
-#  * make temporary fasta_files: genome_id.fasta
-#   entries:
-#    >seqid|region_from-region_to
-#    <genomic_region_sequence>
-#  * make temporary directory for blast_db
-#  * create db
-#  * blast against that db
-#  * db_output should be parsed ->
+    _data_format = (
+        # "hit_from,hit_to,query_from,query_to,hit_gaps,query_gaps,align_from,align_to,"
+        # "query_sequence,hit_sequence,mid_line,align_len,identity,query_strand,hit_strand,"
+        # "bit_score,evalue,hit_seqid,hit_genome_id,query_genome_id"
+        # "gff_seqid,gff_source,gff_type,gff_start,gff_end,gff_score,gff_strand,gff_phase,gff_attributes"
 
+        "hit_from,hit_to,query_from,query_to,hit_gaps,query_gaps,align_from,align_to,"
+        "align_len,identity,query_strand,hit_strand,"
+        "bit_score,evalue,hit_seqid,hit_genome_id,query_genome_id,"
+        "gff_seqid,gff_source,gff_type,gff_start,gff_end,gff_score,gff_strand,gff_phase\n"
+    )
+    _output_table_file = f"{alignments_bundle_output_file}.csv"
+    with open(_output_table_file, 'w') as _output_file_handler:
+        _output_file_handler.write(_data_format)
+    _alignments_bundle_output.write_table_to_file(_output_table_file, _data_format)
 
 # TODO use this to find gene region.
-#  create table
 #  visualize in R (alpha or colour gradient of exon arrow should be score)
-#  create table like: taxonomy, start, end, exon, gene, reference_sequence, aligned_sequence

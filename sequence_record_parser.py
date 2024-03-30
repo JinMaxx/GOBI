@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from gff_parser import GFF_Record, GFFParser
+from gff_parser import GFFRecord, GFFParser
 from collections import defaultdict
 import Bio.SeqIO.FastaIO as FastaIO
 # from Bio.Seq import Seq
@@ -9,19 +9,20 @@ import Bio.SeqIO.FastaIO as FastaIO
 class SequenceRecord:
 
     # (gff_record, sequence)
-    def __init__(self, gff_record: GFF_Record, sequence: str):
+    def __init__(self, genome_id: str, gff_record: GFFRecord, sequence: str):
+        self.genome_id = genome_id
         self.gff_record = gff_record
         self.sequence = sequence
 
     @staticmethod
-    def from_genome_sequence(gff_record: GFF_Record, genome_sequence: str) -> 'SequenceRecord':
+    def from_genome_sequence(genome_id: str, gff_record: GFFRecord, genome_sequence: str) -> 'SequenceRecord':
         # counting starts from 1
         # get slice from genome sequence according to start/end in gff3 record
 
         gene_sequence = genome_sequence[gff_record.start-1:gff_record.end-1]
         # if gff_record.strand == "-": gene_sequence = str(Seq(gene_sequence).reverse_complement())
 
-        return SequenceRecord(gff_record=gff_record, sequence=gene_sequence)
+        return SequenceRecord(genome_id=genome_id, gff_record=gff_record, sequence=gene_sequence)
 
     def __repr__(self):
         return self.__str__()
@@ -29,7 +30,7 @@ class SequenceRecord:
     def __str__(self):
         return (
             f"gff_record: {self.gff_record}"
-            f"gene_sequence: {self.sequence}"
+            f"sequence: {self.sequence}"
         )
 
 
@@ -41,17 +42,18 @@ class SequenceRecordsBundle:
                  genome_sequence: str,
                  sequence_records: list[SequenceRecord]):
         self.headline = headline
-        self.genome_sequence = genome_sequence  # one genome sequence as reference
+        self.genome_sequence = genome_sequence  # one genome sequence from seqid as reference
         self.sequence_records = sequence_records
 
     @staticmethod
-    def of_genes(gff_file: str,
+    def of_genes(genome_id: str,  # TODO improve this bundle to hold genome_id and maybe seqid?
+                 gff_file: str,
                  genome_fasta_file: str,
                  filter_types: list[str],
                  gene_id: int) -> list['SequenceRecordsBundle']:
         parser = SequenceRecordsBundle.__create_gff_parser_for_gene_id(gff_file, filter_types, gene_id)
         seqid_record_dict = SequenceRecordsBundle.__collect_to_seqid_record_dict(parser)
-        return SequenceRecordsBundle.__parse_from_fasta(genome_fasta_file, seqid_record_dict)
+        return SequenceRecordsBundle.__parse_from_fasta(genome_id, genome_fasta_file, seqid_record_dict)
 
     @staticmethod
     def __create_gff_parser_for_gene_id(gff_file: str,
@@ -76,21 +78,21 @@ class SequenceRecordsBundle:
             f"gene_records: {self.sequence_records}\n")
 
     @staticmethod
-    def __collect_to_seqid_record_dict(parser: GFFParser) -> dict[str, list[GFF_Record]]:
-        seqid_record_dict: dict[str, list[GFF_Record]] = defaultdict(list)  # seqid -> list[records]
+    def __collect_to_seqid_record_dict(parser: GFFParser) -> dict[str, list[GFFRecord]]:
+        seqid_record_dict: dict[str, list[GFFRecord]] = defaultdict(list)  # seqid -> list[records]
         for record in parser.generator:
             seqid_record_dict[record.seqid].append(record)
         return seqid_record_dict
 
     @staticmethod
-    def __parse_from_fasta(genome_fasta_file: str,
-                           seqid_record_dict: dict[str, list[GFF_Record]]) -> list['SequenceRecordsBundle']:
+    def __parse_from_fasta(genome_id: str, genome_fasta_file: str,
+                           seqid_record_dict: dict[str, list[GFFRecord]]) -> list['SequenceRecordsBundle']:
         gene_records_full_output: [SequenceRecordsBundle] = list()
         with open(genome_fasta_file, 'r') as file:
             for headline, genome_sequence in FastaIO.SimpleFastaParser(file):
                 for seq_id in seqid_record_dict.keys():  # >NT_033777.3 Drosophila melanogaster chromosome 3R
                     if seq_id in headline:  # filter those that have one of the seqids from records in their headline
-                        gene_entries: list[SequenceRecord] = [SequenceRecord.from_genome_sequence(record, genome_sequence)
+                        gene_entries: list[SequenceRecord] = [SequenceRecord.from_genome_sequence(genome_id, record, genome_sequence)
                                                               for record in seqid_record_dict[seq_id]]
                         gene_records_full_output.append(SequenceRecordsBundle(headline, genome_sequence, gene_entries))
         return gene_records_full_output
@@ -98,14 +100,16 @@ class SequenceRecordsBundle:
 
 if __name__ == '__main__':
 
-    for sequence_records_bundle in SequenceRecordsBundle.of_genes(
+    for _sequence_records_bundle in SequenceRecordsBundle.of_genes(
+            genome_id="GCF_000001215.4",
             gff_file="./genomes/7227/ncbi_dataset/data/GCF_000001215.4/genomic.gff",
             genome_fasta_file="./genomes/7227/ncbi_dataset/data/GCF_000001215.4/GCF_000001215.4_Release_6_plus_ISO1_MT_genomic.fna",
             filter_types=["gene", "exon"],
             gene_id=41615):
-        for gene_record in sequence_records_bundle.sequence_records:
-            print(f"record: {gene_record.gff_record}")
-            print(f"sequence: {gene_record.sequence}")
+        for _gene_record in _sequence_records_bundle.sequence_records:
+            print(f"record: {_gene_record.gff_record}")
+            print(f"sequence: {_gene_record.sequence}")
+
 
 # seq_id is for the specific genomic region
 # ##sequence-region NT_033777.3 1 32079331
