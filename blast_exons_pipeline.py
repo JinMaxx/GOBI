@@ -1,24 +1,68 @@
 #!/usr/bin/python3
 
 import os
+import re
 import sys
+
 import scrape_genome
 
 from fnmatch import fnmatch
 from collections import defaultdict
 from tempfile import NamedTemporaryFile, TemporaryDirectory
+from ncbi_search_parser import read_from_dir_to_sequence_records
 from blast_wrapper import SimpleBlastReport, blast, create_blast_db
 from sequence_record_parser import SequenceRecordsBundle, SequenceRecord
 
 import Bio.SeqIO.FastaIO as FastaIO
 
+# for the resulting .csv
+_data_format = (
+    # This is a format containing all parameters
+
+    # "hit_from,hit_to,query_from,query_to,hit_gaps,query_gaps,align_from,align_to,"
+    # "query_sequence,hit_sequence,mid_line,align_len,identity,query_strand,hit_strand,"
+    # "bit_score,evalue,hit_seqid,hit_genome_id,query_genome_id,hit_taxonomy_id,query_taxonomy_id,full_query_sequence,"
+    # "gff_seqid,gff_source,gff_type,gff_start,gff_end,gff_score,gff_strand,gff_phase,gff_attributes,"
+    # gff_attribute:GeneID\n"
+
+    "hit_from,hit_to,query_from,query_to,hit_gaps,query_gaps,align_from,align_to,"
+    "align_len,identity,query_strand,hit_strand,"
+    "bit_score,evalue,hit_seqid,hit_genome_id,query_genome_id,hit_taxonomy_id,query_taxonomy_id,"
+    "gff_seqid,gff_source,gff_type,gff_start,gff_end,gff_score,gff_strand,gff_phase,"
+    "gff_attribute:GeneID\n"
+
+    # maybe find a way to also include query_taxid, hit_taxid
+)
 
 # better to use taxonomy id that are specific for species
-taxonomy_to_gene_ids_dict = {
-    7227: [41615]
-}
-# 7227 Drosophilia M. (for testing)
-# using gene_id as they are easier for handling. NCBI prefers those.
+
+#  shaggy
+
+# species to look against:
+taxonomies: list[int] = [
+    # datasets:
+    218467,  # Bark scorpion (Centruroides sculpturatus)
+    114398,  # Common house spider (Parasteatoda tepidariorum)
+    7091,    # Domestic silkworm (Bombyx mori)
+    7460,    # Honey bee (Apis mellifera)
+    13037,   # Monarch butterfly (Danaus plexippus)
+    7227,    # Fruit fly (Drosophila melanogaster)
+    13037,   # Monarch butterfly (Danaus plexippus)
+    7111,    # Cabbage looper (Trichoplusia ni)
+    13686,   # Red fire ant (Solenopsis invicta)
+    6945,    # Black-legged tick (Ixodes scapularis)
+    7070,    # Red flour beetle (Tribolium castaneum)
+    110193,  # (Nicrophorus vespilloides)
+
+    # interesting insectos to compare to:
+    7119,    # Chinese oak silkmoth (Antheraea pernyi)
+    189913,  # butterfly family Pieridae[white, yellow, sulphur] (Leptidea sinapis)
+
+    # other insects:
+    7165,    # African malaria mosquito (Anopheles gambiae)
+    79782,   # Bed bug (Cimex lectularius)
+]
+
 
 __region_width: int = 300  # maybe higher 10.000
 
@@ -26,7 +70,7 @@ blastdb_directory = "./blast_db"
 genomes_directory = "./genomes"
 makeblastdb = "makeblastdb"
 blastn = "blastn"
-alignments_bundle_output_file = "./alignments_bundle_output_file"
+alignments_bundle_output_file = "./alignments_bundle_output.csv"
 
 # Some global variables for easier handling.
 
@@ -36,13 +80,13 @@ __genome_id_seqid_seqence_dict: dict[str, dict[str, (str, str)]] = defaultdict(d
 # [(genome_id, gene_id, [GeneRecordsBundle])]
 __per_genome_sequence_records_bundle: list[(str, int, SequenceRecordsBundle)] = list()
 
-
-for taxonomy_id, gene_ids in taxonomy_to_gene_ids_dict.items():
-    print(f"processing taxonomy_id:[gene_ids]| {taxonomy_id}:{gene_ids}")
+# building blast_db
+for taxonomy_id in taxonomies:
+    print(f"processing taxonomy_id: {taxonomy_id}")
 
     # # # # # # # downloading genomes # # # # # # #
     scrape_genome.display_summery(taxonomy_id)  # Download species genomes (ignores if file already exist)
-    data_directory = scrape_genome.download_genome(taxonomy_id, include=['genome', 'gff3'])
+    data_directory = scrape_genome.download_genome(taxonomy_id, include=['genome'])
     #                   ./genomes/<taxonomy_id>
     data_directory = f"{data_directory}/ncbi_dataset/data"
     print(f"genome data for {taxonomy_id} in {data_directory}")
@@ -57,42 +101,16 @@ for taxonomy_id, gene_ids in taxonomy_to_gene_ids_dict.items():
         if os.path.isdir(genome_directory):
 
             fasta_file: str = None  # ignore
-            gff_file: str = None  # ignore
             for file in os.listdir(genome_directory):  # iterating trough fasta file(s) in .../genome_directory/*
                 file = f"{genome_directory}/{file}"
                 # print(file)
-                if os.path.isfile(file) and (fnmatch(file, "*.fna") or fnmatch(file, "*.fasta")):
-                    fasta_file = file
-                if os.path.isfile(file) and fnmatch(file, "*.gff"):
-                    gff_file = file
+                if os.path.isfile(file) and (fnmatch(file, "*.fna") or fnmatch(file, "*.fasta")): fasta_file = file
 
             if fasta_file is None:
                 raise ValueError(f"fasta file not found in {genome_directory}")
-            else:
+            else:  # # # # # # building blast db # # # # # #
                 print(f"for {_genome_id} found {fasta_file}")
-
-                # # # # # # # building blast db # # # # # # #
                 create_blast_db(_genome_id, fasta_file, taxonomy_id)
-
-            # # # # # # # parsing genome_sequence_records # # # # # # #
-            if gff_file is None:
-                sys.stderr.write(f"gff file not found in {genome_directory}")
-                sys.stderr.write("skipping parsing of gff file")
-            else:
-                print(f"parsing {gff_file} with gene_ids: {gene_ids}")  # optional?
-                for _gene_id in gene_ids:
-                    print(f"parsing for {_gene_id}")
-                    genome_sequence_records = (
-                        os.path.basename(_genome_id),
-                        _gene_id,
-                        SequenceRecordsBundle.of_genes(
-                            genome_id=os.path.basename(_genome_id),
-                            gff_file=gff_file,
-                            genome_fasta_file=fasta_file,
-                            filter_types=["gene", "exon"],
-                            gene_id=_gene_id)
-                    )
-                    __per_genome_sequence_records_bundle.append(genome_sequence_records)
 
 
 class Alignment:
@@ -103,6 +121,8 @@ class Alignment:
     #                                 0            query_from    query_to     sequence_len
     #   can be negative!   align_from = hit_from - query_from        align_to = hit_to + (sequence_len - query_to)
     #   region_from = align_from - region_width >= 0                           region_to = align_to + region_width <= n
+
+    __gff_attributes_pattern = re.compile(r"gff_attribute:\w+")
 
     def __init__(self,
                  hit_from: int, hit_to: int,
@@ -175,14 +195,15 @@ class Alignment:
 
         # checking for boundaries
         if region_from <= 0: region_from = 0
-        if region_to >= ref_genome_seq_len-1: region_to = ref_genome_seq_len-1  # TODO check if last index is correct
+        if region_to >= ref_genome_seq_len - 1: region_to = ref_genome_seq_len - 1  # TODO check if last index is correct
 
         return region_from, region_to
 
     def as_region_fasta_entry(self, region_width: int) -> (str, str):
         headline: str
         sequence: str
-        headline, sequence = get_genome_seq(genome_id=self.simple_blast_report.genome_id, seqid=self.simple_blast_report.seqid)
+        headline, sequence = get_genome_seq(genome_id=self.simple_blast_report.genome_id,
+                                            seqid=self.simple_blast_report.seqid)
         region_from, region_to = self.__get_region(region_width, len(sequence))
         # print(f"headline: {headline}")
         # print(f"seqid: {self.simple_blast_report.seqid}")
@@ -237,10 +258,16 @@ class Alignment:
             data_format = data_format.replace("hit_seqid", str(self.simple_blast_report.seqid))
         if "hit_genome_id" in data_format:
             data_format = data_format.replace("hit_genome_id", str(self.simple_blast_report.genome_id))
+        if "hit_taxonomy_id" in data_format:
+            data_format = data_format.replace("hit_taxonomy_id", str(self.simple_blast_report.taxonomy_id))
 
         # sequence record
         if "query_genome_id" in data_format:
-            data_format = data_format.replace("query_genome_id", str(self.sequence_record.genome_id))
+            data_format = data_format.replace("query_genome_id", str(self.sequence_record.get_genome_id()))
+        if "query_taxonomy_id" in data_format:
+            data_format = data_format.replace("query_taxonomy_id", str(self.sequence_record.get_taxonomy_id()))
+        if "full_query_sequence" in data_format:
+            data_format = data_format.replace("full_query_sequence", str(self.sequence_record.sequence))
 
         # gff record
         if "gff_seqid" in data_format:
@@ -259,8 +286,12 @@ class Alignment:
             data_format = data_format.replace("gff_strand", str(self.sequence_record.gff_record.strand))
         if "gff_phase" in data_format:
             data_format = data_format.replace("gff_phase", str(self.sequence_record.gff_record.phase))
-        if "gff_attributes" in data_format:  # TODO parse this special maybe?
-            data_format = data_format.replace("gff_attributes", str(self.sequence_record.gff_record.attributes))
+
+        for match in Alignment.__gff_attributes_pattern.finditer(data_format):
+            attribute = match.group(0).split(':', maxsplit=1)[1]
+            attribute_value = self.sequence_record.gff_record.get_attribute(attribute)
+            if attribute_value is None: sys.stderr.write(f"No value found for attribute {attribute}")
+            data_format = data_format[:match.start(0)] + str(attribute_value) + data_format[match.end(0):]
 
         return data_format
 
@@ -276,7 +307,7 @@ class Alignment:
             f"refer: {self.hit_from}-{self.hit_to}, gaps: {self.hit_gaps}"
             "simple_blast_report:\n"
             f"\t{simple_blast_report_str}\n"
-            "sequence_record.gff_record:\n"            
+            "sequence_record.gff_record:\n"
             f"\t{gff_record_str}"
         )
 
@@ -296,8 +327,10 @@ class AlignmentsBundle:  # remove overlaps and concatenate regions?
         for simple_blast_report in simple_blast_reports:
 
             # because i cant defaultdict(defaultdict(list))
-            if alignment_bundle.genome_alignments_dict[simple_blast_report.genome_id].get(simple_blast_report.seqid) is None:
-                alignment_bundle.genome_alignments_dict[simple_blast_report.genome_id][simple_blast_report.seqid] = list()
+            if alignment_bundle.genome_alignments_dict[simple_blast_report.genome_id].get(
+                    simple_blast_report.seqid) is None:
+                alignment_bundle.genome_alignments_dict[simple_blast_report.genome_id][
+                    simple_blast_report.seqid] = list()
 
             (alignment_bundle.genome_alignments_dict[simple_blast_report.genome_id][simple_blast_report.seqid].
              append(Alignment.from_simple_blast_report(query_sequence_record=sequence_record,
@@ -325,14 +358,14 @@ class AlignmentsBundle:  # remove overlaps and concatenate regions?
                     to_tmp_fasta(headline, sequence, tmp_fasta_file)
 
         return genomes_regions_tmp_fasta_files
-    
+
     def append(self, alignments_bundle: 'AlignmentsBundle'):
         alignments_dict: dict[str, list[Alignment]]
         for genome_id, alignments_dict in alignments_bundle.genome_alignments_dict.items():
 
             alignments: list[Alignment]
             for seqid, alignments in alignments_dict.items():
-                
+
                 if self.genome_alignments_dict[genome_id].get(seqid) is None:
                     self.genome_alignments_dict[genome_id][seqid] = list()
 
@@ -383,13 +416,11 @@ class AlignmentsBundle:  # remove overlaps and concatenate regions?
 
                     alignment: Alignment
                     for alignment in alignments:
-
                         file_handler.write(alignment.as_table_record(data_format=format))
 
 
 def get_genome_seq(genome_id: str,
                    seqid: str) -> (str, str):
-    
     if __genome_id_seqid_seqence_dict[genome_id].get(seqid) is not None:
         return __genome_id_seqid_seqence_dict[genome_id][seqid]
     else:
@@ -400,7 +431,7 @@ def get_genome_seq(genome_id: str,
                 file = f"{genome_directory}/{file}"
                 if os.path.isfile(file) and (fnmatch(file, "*.fna") or fnmatch(file, "*.fasta")):
                     fasta_file = file
-    
+
             if fasta_file is None:
                 raise ValueError(f"fasta file not found in {genome_directory}")
             else:
@@ -409,7 +440,7 @@ def get_genome_seq(genome_id: str,
                         if seqid in headline:
                             __genome_id_seqid_seqence_dict[genome_id][seqid] = (headline, genome_sequence)
                             return headline, genome_sequence
-    
+
                 raise EOFError(f"Genome Sequence for {seqid} not found in {fasta_file}")
 
 
@@ -430,44 +461,45 @@ def __sequence_record_to_tmp_fasta(sequence_record: SequenceRecord):
         f"gene_id: {_gene_id}, type: {sequence_record.gff_record.type}, "
         f"reference_seqid: {sequence_record.gff_record.seqid}, "
         f"start: {sequence_record.gff_record.start}, end: {sequence_record.gff_record.end}"),
-                        sequence=sequence_record.sequence)
+        sequence=sequence_record.sequence)
 
 
 def gene_alignment(sequence_record: SequenceRecord) -> list[SimpleBlastReport]:
     query_input_file = __sequence_record_to_tmp_fasta(sequence_record)
-    return blast(query_fasta_file=query_input_file.name)  
+    return blast(query_fasta_file=query_input_file.name)
     #           strand=sequence_record.gff_record.strand
 
 
 # I might have to create multiple temporary db_tables
 def exon_alignment_to_regions(genome_id: str, region_width: int,
-                              sequence_record: SequenceRecord, 
+                              sequence_record: SequenceRecord,
                               alignments_bundle: AlignmentsBundle) -> list[SimpleBlastReport]:
-
     # using tmp files in fasta format instead of using stdin
     query_input_file = __sequence_record_to_tmp_fasta(sequence_record)
-    
-    tmp_blast_db_dir: TemporaryDirectory = TemporaryDirectory()
-    
-    for genome_region_fasta_file in alignments_bundle.regions_as_fasta(region_width=region_width):
 
+    tmp_blast_db_dir: TemporaryDirectory = TemporaryDirectory()
+
+    for genome_region_fasta_file in alignments_bundle.regions_as_fasta(region_width=region_width):
         create_blast_db(genome_id=genome_id,
                         fasta_file=genome_region_fasta_file.name,
                         other_folder=tmp_blast_db_dir.name)
 
-    return blast(query_fasta_file=query_input_file.name, other_blast_db_directory=tmp_blast_db_dir.name) 
+    return blast(query_fasta_file=query_input_file.name, other_blast_db_directory=tmp_blast_db_dir.name)
     #            strand=sequence_record.gff_record.strand
 
 
 if __name__ == '__main__':
 
-    _alignments_bundle_output: AlignmentsBundle = AlignmentsBundle()  # this can be my memory killer...
+    with open(alignments_bundle_output_file, 'w') as _output_file_handler:
+        _output_file_handler.write(_data_format)  # overwriting with header
+
+    # _alignments_bundle_output: AlignmentsBundle = AlignmentsBundle()  # this can be my memory killer...
 
     _genome_id: str
-    _gene_id: int
-    _sequence_records_bundle_list: list[SequenceRecordsBundle]  # ↓ parsed before main
-    for _genome_id, _gene_id, _sequence_records_bundle_list in __per_genome_sequence_records_bundle:
-        #                                                       when there are many different reference genomes
+    _gene_id: int  # when there are many different reference genomes
+    _sequence_records_bundle_list: list[SequenceRecordsBundle]
+    for _taxonomy_id, _genome_id, _gene_id, _sequence_records_bundle_list \
+            in read_from_dir_to_sequence_records(directory="./ncbi_search_conservative"):
 
         _sequence_records_bundle: SequenceRecordsBundle
         for _sequence_records_bundle in _sequence_records_bundle_list:
@@ -476,14 +508,14 @@ if __name__ == '__main__':
             # Getting the AlignmentsBundle just for type == "gene"
             _alignments_bundle: AlignmentsBundle = None  # ignore
             _sequence_record: SequenceRecord
-            for _sequence_record in _sequence_records_bundle.sequence_records:
+            for _sequence_record in _sequence_records_bundle:
                 if _sequence_record.gff_record.type == "gene":
                     _alignments_bundle = (AlignmentsBundle  # finding the region where the gene exists
                                           .from_simple_blast_reports(sequence_record=_sequence_record,
                                                                      simple_blast_reports=gene_alignment(_sequence_record)))
-                    break
+                    break                                                               # ^ alignment is done here
             if _alignments_bundle is None: raise ValueError("No gene annotation found in sequence_records")
-            _alignments_bundle_output.append(_alignments_bundle)
+            # _alignments_bundle_output.append(_alignments_bundle)
 
             for _sequence_record in _sequence_records_bundle.sequence_records:
 
@@ -496,7 +528,13 @@ if __name__ == '__main__':
 
                     _simple_blast_report: SimpleBlastReport
                     for _simple_blast_report in _simple_blast_reports:
-                        # transforming regional blast hits to global 
+                        # transforming regional blast hits to global
+
+                        # print("before")
+                        # print(f"_seqid: {_simple_blast_report.seqid}")
+                        # print(f"hit_from: {_simple_blast_report.hit_from}")
+                        # print(f"hit_to: {_simple_blast_report.hit_to}")
+
                         _seqid = _simple_blast_report.seqid
                         # parsing
                         _seqid = _seqid.split(sep=" ", maxsplit=1)[0]  # just in case
@@ -504,31 +542,113 @@ if __name__ == '__main__':
                         _regional_hit_from, _regional_hit_to = _range.split(sep=":", maxsplit=1)
                         # updating values
                         _simple_blast_report.seqid = _seqid
-                        _simple_blast_report.hit_from -= int(_regional_hit_from)
-                        _simple_blast_report.hit_to -= int(_regional_hit_to)  # needs check if valid?
+                        _simple_blast_report.hit_from += int(_regional_hit_from)
+                        _simple_blast_report.hit_to += int(_regional_hit_from)
 
-                    _alignments_bundle_output.append(AlignmentsBundle
-                                                     .from_simple_blast_reports(sequence_record=_sequence_record,
-                                                                                simple_blast_reports=_simple_blast_reports))
+                        # print("after")
+                        # print(f"_seqid: {_seqid}")
+                        # print(f"hit_from: {_simple_blast_report.hit_from}")
+                        # print(f"hit_to: {_simple_blast_report.hit_to}")
+                        # _headline, _sequence = get_genome_seq(_genome_id, _seqid)
+                        # print(f"{_simple_blast_report.hit_strand}")
+                        # print(f"{_simple_blast_report.hit_sequence.replace('-', '')}")
+                        # print(f"{_sequence[_simple_blast_report.hit_from-1:_simple_blast_report.hit_to]}")
+                        # print()
 
-    with open(f"{alignments_bundle_output_file}.txt", 'w') as _output_file_handler:
-        _output_file_handler.write(str(_alignments_bundle_output))
+                    # with open(f"{alignments_bundle_output_file}.txt", 'w') as _output_file_handler:
+                    #     _output_file_handler.write(str(_out_alignment_bundle))
 
-    _data_format = (
-        # "hit_from,hit_to,query_from,query_to,hit_gaps,query_gaps,align_from,align_to,"
-        # "query_sequence,hit_sequence,mid_line,align_len,identity,query_strand,hit_strand,"
-        # "bit_score,evalue,hit_seqid,hit_genome_id,query_genome_id"
-        # "gff_seqid,gff_source,gff_type,gff_start,gff_end,gff_score,gff_strand,gff_phase,gff_attributes"
-
-        "hit_from,hit_to,query_from,query_to,hit_gaps,query_gaps,align_from,align_to,"
-        "align_len,identity,query_strand,hit_strand,"
-        "bit_score,evalue,hit_seqid,hit_genome_id,query_genome_id,"
-        "gff_seqid,gff_source,gff_type,gff_start,gff_end,gff_score,gff_strand,gff_phase\n"
-    )
-    _output_table_file = f"{alignments_bundle_output_file}.csv"
-    with open(_output_table_file, 'w') as _output_file_handler:
-        _output_file_handler.write(_data_format)
-    _alignments_bundle_output.write_table_to_file(_output_table_file, _data_format)
+                    (AlignmentsBundle.from_simple_blast_reports(sequence_record=_sequence_record,
+                                                                simple_blast_reports=_simple_blast_reports)
+                     .write_table_to_file(alignments_bundle_output_file, _data_format))
 
 # TODO use this to find gene region.
 #  visualize in R (alpha or colour gradient of exon arrow should be score)
+
+# TODO: create code to parse exons and genes to a handy table.
+
+# TODO:
+
+
+# for taxonomy_id, gene_ids in taxonomy_to_gene_ids_dict.items():
+#     print(f"processing taxonomy_id:[gene_ids]| {taxonomy_id}:{gene_ids}")
+#
+#     # # # # # # # downloading genomes # # # # # # #
+#     scrape_genome.display_summery(taxonomy_id)  # Download species genomes (ignores if file already exist)
+#     data_directory = scrape_genome.download_genome(taxonomy_id, include=['genome', 'gff3'])
+#     #                   ./genomes/<taxonomy_id>
+#     data_directory = f"{data_directory}/ncbi_dataset/data"
+#     print(f"genome data for {taxonomy_id} in {data_directory}")
+#
+#     # Could have multiple genomes downloaded (if taxonomy id is not specific)
+#     for _genome_id in os.listdir(data_directory):
+#         genome_directory = f"{data_directory}/{_genome_id}"
+#
+#         # ignoring also files like:
+#         # .../<data_directory>/assembly_data_report.jsonl
+#         # .../<data_directory>/dataset_catalog.json
+#         if os.path.isdir(genome_directory):
+#
+#             fasta_file: str = None  # ignore
+#             gff_file: str = None  # ignore
+#             for file in os.listdir(genome_directory):  # iterating trough fasta file(s) in .../genome_directory/*
+#                 file = f"{genome_directory}/{file}"
+#                 # print(file)
+#                 if os.path.isfile(file) and (fnmatch(file, "*.fna") or fnmatch(file, "*.fasta")):
+#                     fasta_file = file
+#                 if os.path.isfile(file) and fnmatch(file, "*.gff"):
+#                     gff_file = file
+#
+#             if fasta_file is None:
+#                 raise ValueError(f"fasta file not found in {genome_directory}")
+#             else:
+#                 print(f"for {_genome_id} found {fasta_file}")
+#
+#                 # # # # # # # building blast db # # # # # # #
+#                 create_blast_db(_genome_id, fasta_file, taxonomy_id)
+#
+#             # # # # # # # parsing genome_sequence_records # # # # # # #
+#             if gff_file is None:
+#                 sys.stderr.write(f"gff file not found in {genome_directory}")
+#                 sys.stderr.write("skipping parsing of gff file")
+#             else:
+#                 print(f"parsing {gff_file} with gene_ids: {gene_ids}")  # optional?
+#                 for _gene_id in gene_ids:
+#                     print(f"parsing for {_gene_id}")
+#                     genome_sequence_records = (
+#                         os.path.basename(_genome_id),
+#                         _gene_id,
+#                         SequenceRecordsBundle.of_genes(
+#                             genome_id=os.path.basename(_genome_id),
+#                             gff_file=gff_file,
+#                             genome_fasta_file=fasta_file,
+#                             filter_types=["gene", "exon"],
+#                             gene_id=_gene_id)
+#                     )
+#                     __per_genome_sequence_records_bundle.append(genome_sequence_records)
+
+
+# taxonomy_to_gene_ids_dict: dict[int,list[int]] = {
+#     7227: [  # Drosophila melanogaster (fruit fly)
+#         41615  # timout  https://www.ncbi.nlm.nih.gov/gene/41615
+#     ],
+#
+#     7460: [  # Apis mellifera (honey bee)   or (Apis mellifera Linnaeus, 1758)?
+#         550811  # timout  https://www.ncbi.nlm.nih.gov/gene/550811
+#
+#     ],
+#
+#     7070: [  # Tribolium castaneum (red flour beetle)
+#         659838  # timeout  https://www.ncbi.nlm.nih.gov/gene/659838
+#     ],
+#
+#     454923: [  # Diachasma alloeum (wasps, ants & bees)
+#         107037605  # timeout  https://www.ncbi.nlm.nih.gov/gene/107037605
+#     ],
+#
+#     7425: [  # Nasonia vitripennis (jewel wasp)
+#         100121375  # timeout homolog https://www.ncbi.nlm.nih.gov/gene/100121375
+#     ],
+#
+# }
+# using gene_id as they are easier for handling. NCBI prefers those.

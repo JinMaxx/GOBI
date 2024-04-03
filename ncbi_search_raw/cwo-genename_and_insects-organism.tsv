@@ -1,0 +1,4 @@
+tax_id	Org_name	GeneID	CurrentID	Status	Symbol	Aliases	description	other_designations	map_location	chromosome	genomic_nucleotide_accession.version	start_position_on_the_genomic_accession	end_position_on_the_genomic_accession	orientation	exon_count	OMIM
+7227	Drosophila melanogaster	44669	0	live	cwo	Dmel_CG17100, AAF24476.1, CG17100, CWO, Cwo, Dmel\CG17100, GM05287, bHLHe49, dcwo, mel_cwo	clockwork orange	clockwork orange|CG17100-PA|CG17100-PB|CG17100-PC|CLOCKWORK ORANGE|clockworkorange|cwo-PA|cwo-PB|cwo-PC|stich	3-49 cM	3R	NT_033777.3	10388258	10400752	plus	4
+29058	Helicoverpa armigera	110370431	0	live	Cwo	B5X24_HaOG206644, HaOG206644	clockwork orange	transcription factor cwo		4	NC_087123.1	2029181	2060117	plus	11
+2755281	Zophobas morio	135137847	0	live	Cwo		clockwork orange	transcription factor cwo		Un	NW_026972109.1	3957840	3983957	minus	6

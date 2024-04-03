@@ -1,0 +1,13 @@
+tax_id	Org_name	GeneID	CurrentID	Status	Symbol	Aliases	description	other_designations	map_location	chromosome	genomic_nucleotide_accession.version	start_position_on_the_genomic_accession	end_position_on_the_genomic_accession	orientation	exon_count	OMIM
+7460	Apis mellifera	410197	0	live	Cry2	Cry, GB10211, GB51095	cryptochrome 2	cryptochrome 2		LG10	NC_037647.1	9884663	9893215	plus	12
+7070	Tribolium castaneum	661402	0	live	Cry2	TcasGA2_TC010454	cryptochrome 2	cryptochrome 2|AUGUSTUS-3.0.2_10454|GLEAN_10454		LG5	NC_007420.3	7515788	7519975	plus	6
+132113	Bombus impatiens	100607970	0	live	CRY2		cryptochrome 2	cryptochrome 2		Un	NT_177094.1	127810	131373	plus	10
+7165	Anopheles gambiae	1274104	0	live	LOC1274104	Cry2	cryptochrome-1	cryptochrome-1|cryptochrome 2		2	NC_064601.1	52005364	52016430	plus	6
+7091	Bombyx mori	100500922	0	live	cry2		cryptochrome 2	cryptochrome 2		15	NC_085121.1	9188869	9210018	minus	11
+7159	Aedes aegypti	5575633	0	live	LOC5575633	AAEL011967, cry2	cryptochrome-1	cryptochrome-1|DNA photolyase		3	NC_035109.1	45387666	45491801	plus	6
+29058	Helicoverpa armigera	110384315	0	live	LOC110384315	B5X24_HaOG201315, CRY2, HaOG201315	cryptochrome-1	cryptochrome-1|cryptochrome 2|cryptochrome CRY2-1|cryptochrome CRY2-2|cryptochrome CRY2-3|cryptochrome CRY2-4|cryptochrome CRY2-5|cryptochrome CRY2-6|cryptochrome CRY2-7		5	NC_087124.1	7042246	7067292	plus	11
+108931	Nilaparvata lugens	111059678	0	live	LOC111059678	cry2	cryptochrome-1	cryptochrome-1|cryptochrome 2		13	NC_052516.1	15673677	15704192	minus	14
+28588	Zeugodacus cucurbitae	105216588	0	live	LOC105216588	Cry2	cryptochrome-2	cryptochrome-2		3	NC_071668.1	13994971	14103536	minus	6
+7425	Nasonia vitripennis	100122802	0	live	LOC100122802	cry2	cryptochrome 2	cryptochrome-1		5	NC_045761.1	19249243	19266671	plus	15
+143950	Sipha flava	112693155	0	live	LOC112693155	CRY2	cryptochrome-2	cryptochrome-2		Un	NW_020273623.1	1650383	1652310	minus	2
+7176	Culex quinquefasciatus	6053355	0	live	LOC6053355	CRY2	cryptochrome-1	cryptochrome-1|cryptochrome 2		3	NC_051863.1	18317346	18353601	plus	8

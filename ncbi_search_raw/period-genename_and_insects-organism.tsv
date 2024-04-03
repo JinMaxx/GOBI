@@ -1,0 +1,39 @@
+tax_id	Org_name	GeneID	CurrentID	Status	Symbol	Aliases	description	other_designations	map_location	chromosome	genomic_nucleotide_accession.version	start_position_on_the_genomic_accession	end_position_on_the_genomic_accession	orientation	exon_count	OMIM
+7260	Drosophila willistoni	6641177	0	live	LOC6641177	Dwil_GK19903, Dwil\per, GK19903, GK19903-PB, per, per-PB, period, wil_per	period circadian protein	period circadian protein|Dwil\GK19903|Dwil\GK19903-PB|Dwil\per-PB|dwil_GLEANR_2510		XL	NW_025814052.1	10702371	10706582	minus	8
+7238	Drosophila sechellia	6616175	0	live	LOC6616175	Dsec_GM19238, Dsec\per, GM19238, GM19238-PA, per, per-PA, period	period circadian protein	period circadian protein|Dsec\GM19238|Dsec\GM19238-PA|Dsec\per-PA|dsec_GLEANR_20821		X	NC_045954.1	2565393	2572371	plus	10
+7220	Drosophila erecta	6550757	0	live	LOC6550757	Dere_GG18618, Dere\per, GG18618, GG18618-PB, ere_per, per, per-PB, period	period circadian protein	period circadian protein|Dere\GG18618|Dere\GG18618-PB|Dere\per-PB|dere_GLEANR_3439|putative period		Un	NW_020825209.1	1080025	1086854	plus	10
+7213	Ceratitis capitata	101453268	0	live	LOC101453268	TECPR, per, period	period circadian protein	period circadian protein|Tectonin beta-propeller repeat-containing protein		Un	NW_019376293.1	3120948	3144757	plus	14
+98809	Bactrocera neohumeralis	126760024	0	live	LOC126760024	Per, period	period circadian protein	period circadian protein		5	NC_065922.1	19822210	19844476	minus	14
+59916	Bactrocera tryoni	120775331	0	live	LOC120775331	Per, period	period circadian protein	period circadian protein		4	NC_052502.1	19658212	19680422	minus	14
+7160	Aedes albopictus	109399730	0	live	LOC109399730	period	period circadian protein	period circadian protein		3	NC_085138.1	75429295	75454583	minus	6
+64459	Pieris rapae	111000093	0	live	LOC111000093	PER, period	period circadian protein	period circadian protein		Z	NC_059534.1	3893234	3919748	plus	27
+82600	Cydia pomonella	133516884	0	live	LOC133516884	period	period circadian protein	period circadian protein|putative period protein		1	NC_084703.1	16667724	16719003	minus	27
+58824	Plodia interpunctella	128682921	0	live	LOC128682921	period	period circadian protein	period circadian protein|putative period protein		Un	NW_026525664.1	5219936	5256597	plus	26
+7200	Lutzomyia longipalpis	129793170	0	live	LOC129793170	per, period	period circadian protein	period circadian protein|putative circadian clock protein period		1	NC_074707.1	16231559	16240841	minus	11
+47314	Drosophila novamexicana	115767589	0	live	LOC115767589	period	period circadian protein	period circadian protein		Un	NW_020824856.1	556475	564959	plus	10
+27457	Bactrocera dorsalis	105224342	0	live	LOC105224342	PER, period	period circadian protein	period circadian protein		4	NC_064306.1	57159844	57182219	plus	13
+13686	Solenopsis invicta	105204533	0	live	LOC105204533	SINV_02147, period	period circadian protein	period circadian protein		3	NC_052666.1	29792800	29834524	minus	17
+133901	Frankliniella occidentalis	113206270	0	live	LOC113206270	FOCC_FOCC011538, period	period circadian protein	period circadian protein		Un	NW_026267279.1	213063	220556	minus	24
+110368	Bicyclus anynana	112050002	0	live	LOC112050002	period	period circadian protein	period circadian protein		Z	NC_069110.1	7822005	7873710	plus	28
+29058	Helicoverpa armigera	110374515	0	live	LOC110374515	B5X24_HaOG215851, HaOG215851, period	period circadian protein	period circadian protein		1	NC_087120.1	7018187	7056816	minus	29
+104688	Bactrocera oleae	106625645	0	live	LOC106625645	Per, period	period circadian protein	period circadian protein		Un	NW_021677886.1	72807	90327	minus	15
+51655	Plutella xylostella	105381610	0	live	LOC105381610	PLXY1_LOCUS1980, period	period circadian protein	period circadian protein		Z	NC_064012.1	10895445	10931706	plus	29
+28588	Zeugodacus cucurbitae	105209991	0	live	LOC105209991	per, per_1, period	period circadian protein	period circadian protein		5	NC_071670.1	58449025	58465638	plus	16
+95512	Anastrepha obliqua	129238619	0	live	LOC129238619	PER1, period	period circadian protein	period circadian protein|period protein		2	NC_072893.1	22469245	22521937	plus	14
+28586	Anastrepha ludens	128857133	0	live	LOC128857133	PER1, period	period circadian protein	period circadian protein|period protein		3	NC_071499.1	21649874	21685769	plus	14
+28610	Rhagoletis pomonella	118733327	0	live	LOC118733327	PER, period	period circadian protein	period circadian protein		Un	NW_023458556.1	24482467	24502776	plus	12
+42062	Drosophila nasuta	132798626	0	live	LOC132798626	per, period	dual specificity calcium/calmodulin-dependent 3',5'-cyclic nucleotide phosphodiesterase 1	dual specificity calcium/calmodulin-dependent 3',5'-cyclic nucleotide phosphodiesterase 1		2L	NC_083455.1	11484486	11586961	plus	15
+139649	Teleopsis dalmanni	119668489	0	live	LOC119668489	PER, period	period circadian protein-like	period circadian protein-like		1	NC_051846.1	127129939	127209744	plus	11
+42062	Drosophila nasuta	132795519	0	live	LOC132795519	per, period	period circadian protein	period circadian protein|period protein		X	NC_083459.1	25260233	25266399	minus	9
+286459	Episyrphus balteatus	129911545	0	live	LOC129911545	PER, period	period circadian protein	period circadian protein		2	NC_079135.1	70469072	70485440	minus	11
+13191	Pectinophora gossypiella	126380503	0	live	LOC126380503	period	period circadian protein	period circadian protein		Z	NC_065433.1	8601757	8652416	plus	28
+7113	Helicoverpa zea	124644749	0	live	LOC124644749	period	period circadian protein-like	period circadian protein-like		31	NC_061482.1	10885265	10917373	plus	29
+1518534	Anopheles coluzzii	120948322	0	live	LOC120948322	period	uncharacterized LOC120948322	uncharacterized protein LOC120948322		2	NC_064670.1	11165369	11180789	minus	8
+343691	Hermetia illucens	119653723	0	live	LOC119653723	HERILL_LOCUS914, PER, period	period circadian protein	period circadian protein		1	NC_051849.1	46611987	46680358	plus	14
+7396	Glossina fuscipes	119644641	0	live	LOC119644641	period	period circadian protein	period circadian protein		Un	NW_023998414.1	13724697	13737468	minus	14
+93504	Ostrinia furnacalis	114365005	0	live	LOC114365005	period	period circadian protein	period circadian protein		Un	NW_021137771.1	683597	768500	minus	28
+7137	Galleria mellonella	113516630	0	live	LOC113516630	period	period circadian protein	period circadian protein		Un	NW_026442079.1	7067857	7112994	minus	29
+69820	Spodoptera litura	111360701	0	live	LOC111360701	period	period circadian protein	period circadian protein		Z	NC_036217.1	13175791	13208824	minus	32
+174628	Bactrocera latifrons	108977252	0	live	LOC108977252	Per, per_4, per_6, period	period circadian protein	period circadian protein		Un	NW_017537556.1	232058	250191	minus	13
+7461	Apis cerana	107998360	0	live	LOC107998360	Period, per	period circadian protein	period circadian protein|Period alpha|Period alpha'|Period beta|Period beta'|Period delta|Period gamma		LG12	NC_083863.1	9800567	9822762	minus	17
+7176	Culex quinquefasciatus	6039750	0	live	LOC6039750	period	period circadian protein	period circadian protein		3	NC_051863.1	36554796	36576049	plus	7

@@ -1,0 +1,12 @@
+tax_id	Org_name	GeneID	CurrentID	Status	Symbol	Aliases	description	other_designations	map_location	chromosome	genomic_nucleotide_accession.version	start_position_on_the_genomic_accession	end_position_on_the_genomic_accession	orientation	exon_count	OMIM
+7227	Drosophila melanogaster	42305	0	live	cry	Dmel_CG3772, CG3772, CRY, CRYPTOCHROME, Cry, DCry, Dm-CRY1, DmCRY, DmCRY1, DmCry, DmCry1, Dmcry, Dmel\CG3772, anon-WO0140519.17, anon-WO0140519.19, anon-WO0140519.20, anon-WO0172774.151, cryb, dCRY, dCry, dcry, cry	cryptochrome	cryptochrome|Blue-light receptor|CG3772-PA|cry-PA|crybaby|crypochrome	3-66 cM	3R	NT_033777.3	19212154	19215442	plus	4
+7165	Anopheles gambiae	1281165	0	live	LOC1281165	Cry1, agCRY1	cryptochrome-1	cryptochrome-1		2	NC_064601.1	12573276	12577087	minus	5
+7091	Bombyx mori	100500923	0	live	cry1		cryptochrome 1	cryptochrome 1		17	NC_085123.1	13766111	13805788	plus	16
+7159	Aedes aegypti	5564182	0	live	cry	AAEL004146, CRY1, CRY1_AEDAE	cryptochrome-1	cryptochrome-1		3	NC_035109.1	153637413	153656059	plus	5
+7029	Acyrthosiphon pisum	100164768	0	live	cry1		chryptochrome 1	chryptochrome 1		A1	NC_042494.1	97564653	97584226	minus	11
+108931	Nilaparvata lugens	111044853	0	live	LOC111044853	cry1	cryptochrome-1	cryptochrome-1		8	NC_052511.1	39439398	39455975	plus	11
+27457	Bactrocera dorsalis	105228516	0	live	LOC105228516	Cry1	cryptochrome-1	cryptochrome-1|cryptochrome circadian clock 1		2	NC_064304.1	84972026	84978241	minus	5
+32391	Cotesia glomerata	123261887	0	live	LOC123261887	KQX54_009185, CRY1	cryptochrome-1	cryptochrome-1		LG3	NC_058160.1	9356107	9369242	plus	11
+7213	Ceratitis capitata	101458403	0	live	LOC101458403	Cry1	cryptochrome-1	cryptochrome-1|cryptochrome circadian clock 1		Un	NW_019378581.1	2197613	2199642	plus	3
+7213	Ceratitis capitata	101455349	0	live	LOC101455349	Cry1	cryptochrome-1	cryptochrome-1|cryptochrome circadian clock 1		Un	NW_019376265.1	1236419	1240192	plus	5
+143950	Sipha flava	112690583	0	live	LOC112690583	Cry1	cryptochrome-1-like	cryptochrome-1-like|Cryptochrome-1		Un	NW_020273428.1	1022104	1039906	plus	11

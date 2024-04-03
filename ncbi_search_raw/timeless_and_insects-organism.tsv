@@ -1,0 +1,644 @@
+tax_id	Org_name	GeneID	CurrentID	Status	Symbol	Aliases	description	other_designations	map_location	chromosome	genomic_nucleotide_accession.version	start_position_on_the_genomic_accession	end_position_on_the_genomic_accession	orientation	exon_count	OMIM
+64838	Fopius arisanus	105267975	0	live	Timeless		timeless circadian clock	protein timeless homolog		Un	NW_011887791.1	113714	218684	plus	25
+7244	Drosophila virilis	6628265	0	live	LOC6628265	Dvir_GJ17601, Dvir\tim, GJ17601, GJ17601-PB, GJ17601-PC, GJ17601-PD, tim, tim-PB, tim-PC, tim-PD, timeless, vtim	protein timeless	protein timeless|Dvir\GJ17601|Dvir\GJ17601-PB|Dvir\GJ17601-PC|Dvir\GJ17601-PD|Dvir\tim-PB|Dvir\tim-PC|Dvir\tim-PD|circadian clock protein|dvir_GLEANR_2182		Un	NW_022587572.1	9416409	9432333	plus	15
+7159	Aedes aegypti	5567962	0	live	LOC5567962	AAEL006411, TIMELESS	protein timeless	protein timeless		2	NC_035108.1	414435531	414637024	minus	17
+7160	Aedes albopictus	109407313	0	live	LOC109407313	timeless	protein timeless	protein timeless		Un	NW_026917621.1	11166	13608	plus	8
+13037	Danaus plexippus	116765334	0	live	LOC116765334	timeless	protein timeless	protein timeless		2	NC_083537.1	5583753	5595839	minus	17
+7176	Culex quinquefasciatus	6038912	0	live	LOC6038912	timeless	protein timeless	protein timeless		2	NC_051862.1	203224342	203261189	plus	14
+143995	Megachile rotundata	100879720	0	live	LOC100879720	Timeless	protein timeless homolog	protein timeless homolog|timeless homolog		Un	NW_003797700.1	387444	701204	plus	28
+76194	Papilio polytes	106099740	0	live	LOC106099740	timeless	protein timeless	protein timeless		Un	NW_013525102.1	3409220	3419826	minus	16
+7370	Musca domestica	101894072	0	live	LOC101894072	timeless	protein timeless	protein timeless|timeless circadian clock		Un	NW_026712299.1	6883438	6982272	minus	16
+43151	Anopheles darlingi	125948249	0	live	LOC125948249	timeless	protein timeless	protein timeless|putative dna topoisomerase i-interacting protein		2	NC_064874.1	94524878	94539661	minus	18
+7010	Schistocerca gregaria	126322318	0	live	LOC126322318	Timeless	protein timeless	protein timeless|timeless protein		2	NC_064921.1	398687340	399070447	plus	30
+7200	Lutzomyia longipalpis	129788660	0	live	LOC129788660	timeless	protein timeless	protein timeless|putative dna topoisomerase i-interacting protein		2	NC_074708.1	3617794	3637044	plus	15
+29058	Helicoverpa armigera	110375458	0	live	LOC110375458	B5X24_HaOG217123, HaOG217123, timeless	protein timeless	protein timeless		6	NC_087125.1	7813393	7828966	minus	18
+28588	Zeugodacus cucurbitae	105214565	0	live	LOC105214565	Timeless	protein timeless homolog	protein timeless homolog		2	NC_071667.1	58140538	58599126	minus	19
+139047	Anopheles bellator	131211278	0	live	LOC131211278	timeless	protein timeless	protein timeless		2	NC_071286.1	74727469	74740183	minus	15
+68878	Anopheles cruzii	128272541	0	live	LOC128272541	tim, timeless	protein timeless	protein timeless		3	NC_069145.1	74124052	74131532	plus	13
+7227	Drosophila melanogaster	33571	0	live	tim	Dmel_CG3234, CG3234, Dmel\CG3234, Ritsu, TIM, Tim, Tim-1, dTIM, dTim, dtim, mel_tim, rit, s-tim1, tim	timeless	timeless|CG3234-PB|CG3234-PL|CG3234-PM|CG3234-PN|CG3234-PO|CG3234-PP|CG3234-PR|CG3234-PS|CG3234-PT|CG3234-PU|TIMELESS|bruchpilot|dtimeless|ritsu|tim-PB|tim-PL|tim-PM|tim-PN|tim-PO|tim-PP|tim-PR|tim-PS|tim-PT|tim-PU|timeless1	2-10 cM	2L	NT_033779.5	3493986	3508119	minus	17
+7227	Drosophila melanogaster	41615	0	live	timeout	Dmel_CG7855, CG14381, CG14382, CG7855, CG8148, Dmel\CG7855, TIM2, Tim-2, dtim2, tim, tim2	timeout	timeout|CG7855-PA|timeless 2|timeless2|timeout-PA	3-53 cM	3R	NT_033777.3	13088651	13163876	plus	18
+7227	Drosophila melanogaster	31251	0	live	per	Dmel_CG2647, CG2647, Clk, Dmel\CG2647, EG:155E2.4, PER, Per, Per-2, clk-6, dPER, dPer, dmper, dper, mel_per	period	period|CG2647-PA|CG2647-PB|PERIOD|clock|clock-6|dperiod|per-PA|per-PB|period clock protein	1-1.5 cM	X	NC_004354.4	2685580	2692780	plus	9
+7070	Tribolium castaneum	657878	0	live	Tim	TcasGA2_TC013997	timeless	timeless|AUGUSTUS-3.0.2_13997|GLEAN_13997		LG5	NC_007420.3	3758759	3772069	plus	12
+7091	Bombyx mori	733065	0	live	LOC733065		timeless	timeless		4	NC_085110.1	8684167	8712695	plus	17
+7165	Anopheles gambiae	5668288	0	live	LOC5668288		protein timeless	protein timeless		3	NC_064602.1	8534438	8552143	plus	15
+7230	Drosophila mojavensis	6577215	0	live	LOC6577215	Dmoj_GI17777, GI17777, GI17777-PB, GI17777-PC, GI17777-PD, GI17777-PE	protein timeless	protein timeless|Dmoj\GI17777|Dmoj\GI17777-PB|Dmoj\GI17777-PC|Dmoj\GI17777-PD|Dmoj\GI17777-PE|GLEANR_2576|dmoj_GLEANR_2576		Un	NW_025318858.1	18309286	18326661	plus	16
+7460	Apis mellifera	550811	0	live	LOC550811	GB41002, Tim2	protein timeless homolog	protein timeless homolog|timeout		LG4	NC_037641.1	9333383	9513878	minus	28
+7425	Nasonia vitripennis	100121375	0	live	LOC100121375	Tim2	protein timeless homolog	protein timeless homolog|timeout		3	NC_045759.1	20565568	20661347	plus	30
+7091	Bombyx mori	101740051	0	live	LOC101740051		protein timeless homolog	protein timeless homolog		9	NC_085115.1	6748868	6782171	minus	22
+7070	Tribolium castaneum	659838	0	live	LOC659838	TcasGA2_TC000593, tim2, timeout	protein timeless homolog	protein timeless homolog|GLEAN_00593		LG2	NC_007417.3	9239533	9272282	minus	19
+133901	Frankliniella occidentalis	113208238	0	live	LOC113208238	FOCC_FOCC012024	protein timeless	protein timeless		Un	NW_026267292.1	534990	554995	plus	27
+307658	Monomorium pharaonis	105836196	0	live	LOC105836196		protein timeless homolog	protein timeless homolog		8	NC_050474.1	6999509	7115256	minus	27
+7237	Drosophila pseudoobscura	4816795	0	live	LOC4816795		protein timeless	protein timeless		4	NC_046681.1	23095248	23108316	plus	16
+161013	Thrips palmi	117639213	0	live	LOC117639213		protein timeless	protein timeless		Un	NW_023144622.1	1463961	1480718	minus	27
+7111	Trichoplusia ni	113501470	0	live	LOC113501470		protein timeless	protein timeless		15	NC_039492.1	7020485	7033711	plus	18
+104688	Bactrocera oleae	106627523	0	live	LOC106627523		protein timeless	protein timeless|myb-like protein I		Un	NW_021662286.1	5644653	5683092	plus	18
+2015173	Ooceraea biroi	105277421	0	live	LOC105277421	DMN91_003023	protein timeless homolog	protein timeless homolog|Timeless-like protein		3	NC_039508.1	807683	903537	minus	28
+7213	Ceratitis capitata	101448839	0	live	LOC101448839	TIM	protein timeless	protein timeless		Un	NW_019376418.1	404476	456245	plus	19
+28610	Rhagoletis pomonella	118741257	0	live	LOC118741257		protein timeless	protein timeless		Un	NW_023458560.1	72566377	72603568	minus	19
+7130	Manduca sexta	115446009	0	live	LOC115446009	O3G_MSEX008488	protein timeless	protein timeless		23	NC_051137.1	9167659	9192100	minus	19
+7539	Leptinotarsa decemlineata	111515754	0	live	LOC111515754		protein timeless	protein timeless		Un	NW_019295028.1	689	19537	minus	14
+104421	Camponotus floridanus	105248876	0	live	LOC105248876	EAG_06264	protein timeless homolog	protein timeless homolog|Protein timeless-like protein		Un	NW_020229470.1	1311209	1409630	plus	29
+13686	Solenopsis invicta	105205832	0	live	LOC105205832	SINV_15526	protein timeless homolog	protein timeless homolog		5	NC_052668.1	16287317	16405421	minus	28
+7260	Drosophila willistoni	6642215	0	live	LOC6642215	Dwil_GK14675, GK14675, GK14675-PA	protein timeless	protein timeless|Dwil\GK14675|Dwil\GK14675-PA|dwil_GLEANR_14980		2R	NW_025814050.1	19254103	19273140	minus	16
+7238	Drosophila sechellia	6606569	0	live	LOC6606569	Dsec_GM24087, GM24087, GM24087-PA	protein timeless homolog	protein timeless homolog|uncharacterized protein LOC6606569|Dsec\GM24087|Dsec\GM24087-PA|dsec_GLEANR_7096		3R	NC_045952.1	15409287	15476877	minus	19
+7234	Drosophila persimilis	6588719	0	live	LOC6588719	Dper_GL19475, GL19475, GL19475-PA	protein timeless	protein timeless|Dper\GL19475|Dper\GL19475-PA|dper_GLEANR_21610		Un	NW_020825298.1	7685347	7697393	minus	15
+343691	Hermetia illucens	119655307	0	live	LOC119655307	HERILL_LOCUS2971	protein timeless	protein timeless		1	NC_051849.1	189886522	190017117	minus	19
+7396	Glossina fuscipes	119634221	0	live	LOC119634221		protein timeless	protein timeless		Un	NW_023998416.1	31192424	31221614	minus	16
+13632	Lucilia sericata	119608538	0	live	LOC119608538		protein timeless	protein timeless		Un	NW_023994840.1	51556	104095	minus	17
+30069	Anopheles stephensi	118509183	0	live	LOC118509183		protein timeless	protein timeless		3	NC_050203.1	80280594	80298336	minus	15
+30069	Anopheles stephensi	118508128	0	live	LOC118508128		protein timeless homolog	protein timeless homolog		2	NC_050202.1	4282169	4287467	plus	14
+7167	Anopheles albimanus	118460714	0	live	LOC118460714		protein timeless-like	protein timeless-like		2	NC_050156.1	88625569	88644003	minus	17
+7446	Vespa mandarinia	118451497	0	live	LOC118451497		protein timeless homolog	protein timeless homolog		Un	NW_023395836.1	2297257	2488208	plus	33
+473952	Osmia lignaria	117601653	0	live	LOC117601653		protein timeless homolog	protein timeless homolog		Un	NW_023009253.1	2563707	2704672	minus	28
+7291	Drosophila albomicans	117563334	0	live	LOC117563334		protein timeless	protein timeless		2L	NC_047628.2	22155529	22171077	minus	14
+486640	Odontomachus brunneus	116850256	0	live	LOC116850256		protein timeless homolog	protein timeless homolog		Un	NW_022639590.1	314176	435488	minus	28
+47314	Drosophila novamexicana	115761232	0	live	LOC115761232		protein timeless homolog	protein timeless homolog		Un	NW_020824808.1	1596561	1681250	minus	19
+47314	Drosophila novamexicana	115760251	0	live	LOC115760251	tim	protein timeless	protein timeless|timeless protein		Un	NW_020824800.1	2983914	2999796	plus	15
+7232	Drosophila navojoa	115563616	0	live	LOC115563616	AWZ03_009734	protein timeless	protein timeless		Un	NW_022045989.1	15629	30546	minus	15
+7160	Aedes albopictus	115265592	0	live	LOC115265592		protein timeless	protein timeless		2	NC_085137.1	59033731	59271754	plus	17
+1437191	Osmia bicornis bicornis	114871999	0	live	LOC114871999		protein timeless homolog	protein timeless homolog		3	NC_060218.1	7097272	7238265	plus	28
+7092	Bombyx mandarina	114250978	0	live	LOC114250978		protein timeless	protein timeless		Un	NW_021011648.1	97404	121123	minus	17
+43146	Rhopalosiphum maidis	113555732	0	live	LOC113555732		protein timeless homolog	protein timeless homolog		3	NC_040879.1	42135196	42144465	minus	22
+143950	Sipha flava	112687194	0	live	LOC112687194	Timeless_1	protein timeless homolog	protein timeless homolog		Un	NW_020273025.1	33649	41376	minus	22
+742174	Melanaphis sacchari	112603794	0	live	LOC112603794	TIMELESS_1	protein timeless homolog	protein timeless homolog		Un	NW_020270431.1	900745	908921	minus	22
+69820	Spodoptera litura	111352204	0	live	LOC111352204		protein timeless	protein timeless		15	NC_036201.1	6129354	6145432	plus	18
+13164	Myzus persicae	111040310	0	live	LOC111040310		protein timeless homolog	protein timeless homolog		Un	NW_019100669.1	539017	547154	minus	22
+136037	Zootermopsis nevadensis	110831732	0	live	LOC110831732	L798_08531	protein timeless homolog	protein timeless homolog|Timeless-like protein		Un	NW_019059906.1	33500	110225	minus	30
+219809	Pseudomyrmex gracilis	109858988	0	live	LOC109858988		protein timeless homolog	protein timeless homolog		Un	NW_018020816.1	130057	232136	minus	28
+7229	Drosophila miranda	108162818	0	live	LOC108162818		protein timeless	protein timeless		4	NC_046677.1	23317020	23328814	minus	14
+125945	Drosophila biarmipes	108029148	0	live	LOC108029148		protein timeless	protein timeless		2L	NC_066612.1	2866570	2882381	plus	17
+743375	Polistes dominula	107073939	0	live	LOC107073939		protein timeless homolog	protein timeless homolog		Un	NW_015148973.1	2433966	2599801	minus	29
+454923	Diachasma alloeum	107037605	0	live	LOC107037605	TIM2, timeout	protein timeless homolog	protein timeless homolog		Un	NW_021680401.1	1535373	1775056	minus	26
+91411	Polistes canadensis	106789749	0	live	LOC106789749		protein timeless homolog	protein timeless homolog		Un	NW_014569747.1	35962	198336	plus	29
+79782	Cimex lectularius	106664907	0	live	LOC106664907		protein timeless homolog	protein timeless homolog		Un	NW_019392993.1	24053	42354	minus	28
+680683	Amyelois transitella	106134767	0	live	LOC106134767		protein timeless homolog	protein timeless homolog		9	NC_083512.1	5894584	5909131	plus	22
+66420	Papilio xuthus	106115977	0	live	LOC106115977		protein timeless homolog	protein timeless homolog		Un	NW_013530872.1	4939275	4952859	minus	24
+83485	Linepithema humile	105672163	0	live	LOC105672163		protein timeless homolog	protein timeless homolog		Un	NW_012160693.1	2799981	2898540	minus	29
+411798	Vollenhovia emeryi	105565759	0	live	LOC105565759		protein timeless homolog	protein timeless homolog		Un	NW_011967217.1	1016123	1126130	plus	29
+64793	Wasmannia auropunctata	105451840	0	live	LOC105451840		protein timeless homolog	protein timeless homolog		Un	NW_012026784.1	1468029	1567379	plus	28
+7462	Apis dorsata	102677975	0	live	LOC102677975		protein timeless homolog	protein timeless homolog		Un	NW_006263478.1	2193925	2382308	minus	28
+7029	Acyrthosiphon pisum	100159918	0	live	LOC100159918		protein timeless homolog	protein timeless homolog		A1	NC_042494.1	56292101	56301971	plus	22
+7029	Acyrthosiphon pisum	100328917	0	live	LOC100328917	tim	timeless	protein timeless|timeless|timeless A|timeless B		X	NC_042493.1	28179226	28195875	plus	15
+156304	Ceratina calcarata	108632950	0	live	LOC108632950		protein timeless homolog	protein timeless homolog		Un	NW_017139321.1	36618	178369	plus	28
+680683	Amyelois transitella	106143119	0	live	LOC106143119		protein timeless	protein timeless		2	NC_083505.1	6505271	6524481	plus	18
+7054	Photinus pyralis	116171704	0	live	LOC116171704	PPYR_08567	protein timeless-like	protein timeless-like		Un	NW_022170596.1	17907757	17914036	minus	12
+7054	Photinus pyralis	116170510	0	live	LOC116170510		protein timeless-like	protein timeless-like		Un	NW_022170596.1	28722184	28729043	plus	12
+610380	Harpegnathos saltator	105186222	0	live	LOC105186222	EAI_13105	protein timeless homolog	protein timeless homolog|Protein timeless-like protein		Un	NW_020230531.1	1486406	1599854	minus	28
+460826	Chelonus insularis	118064393	0	live	LOC118064393		protein timeless homolog	protein timeless homolog		Un	NW_023276415.1	1608425	1747205	plus	21
+207650	Bombus vosnesenskii	117233004	0	live	LOC117233004		protein timeless homolog	protein timeless homolog		Un	NW_022882923.1	7641691	7656736	plus	14
+207650	Bombus vosnesenskii	117231951	0	live	LOC117231951		protein timeless homolog	protein timeless homolog		Un	NW_022882934.1	1206087	1233164	minus	14
+103933	Bombus bifarius	117204209	0	live	LOC117204209		protein timeless homolog	protein timeless homolog		Un	NW_022884362.1	3103697	3118674	minus	14
+2705178	Bombus vancouverensis nearcticus	117155892	0	live	LOC117155892		protein timeless homolog	protein timeless homolog		Un	NW_022881780.1	2731283	2746270	plus	14
+265458	Contarinia nasturtii	116337047	0	live	LOC116337047		protein timeless	protein timeless		Un	NW_022197577.1	3517407	3526956	minus	16
+7225	Scaptodrosophila lebanonensis	115631921	0	live	LOC115631921		protein timeless	protein timeless		Un	NW_022060739.1	7390123	7410749	minus	14
+121845	Diaphorina citri	113467732	0	live	LOC113467732		protein timeless homolog	protein timeless homolog		Un	NW_007377973.1	148456	155219	minus	3
+7224	Drosophila hydei	111602356	0	live	LOC111602356		protein timeless	protein timeless		Un	NW_022045827.1	9539386	9550513	minus	13
+166361	Onthophagus taurus	111415721	0	live	LOC111415721		protein timeless	protein timeless		Un	NW_019280561.1	2344	7186	plus	12
+7232	Drosophila navojoa	108660095	0	live	LOC108660095	AWZ03_005134	protein timeless homolog	protein timeless homolog		2	NW_022045892.1	148028	237386	plus	19
+79782	Cimex lectularius	106672818	0	live	LOC106672818		protein timeless	protein timeless		Un	NW_019392714.1	1198181	1227482	minus	24
+103372	Acromyrmex echinatior	105148834	0	live	LOC105148834	G5I_08984	protein timeless homolog	protein timeless homolog|Protein timeless-like protein		Un	NW_011627249.1	410996	511003	minus	28
+7176	Culex quinquefasciatus	6031420	0	live	LOC6031420		protein timeless homolog	protein timeless homolog|timeout/timeless-2		1	NC_051861.1	72242649	72401093	plus	15
+7227	Drosophila melanogaster	31151	0	live	arm	Dmel_CG11579, ARM, Arm, Armadillo, CG11579, Dm Arm, Dmel\CG11579, EG:86E4.6, beta-Cat, beta-Catenin, beta-cat, beta-cat-arm, beta-catenin, betaCatenin, betacat, bgr;-Cat, dmCTNNB1, l(1)2Bv, l(1)G0192, l(1)G0234, l(1)G0410, l(1)arm, t12687 ALR Dm	armadillo	armadillo|Armadillo(Arm)/beta-catenin|Armadillo/beta-catenin|Armadillo/bgr;-catenin|Beta-catenin/Arm|CG11579-PA|CG11579-PB|CG11579-PC|CG11579-PD|CG11579-PE|CG11579-PF|alpha-Catenin|amardillo|arm-PA|arm-PB|arm-PC|arm-PD|arm-PE|arm-PF|b-catenin|beta-Catenin|beta-catenin/Armadillo|betaCatenin|bgr;-catenin|catenin	1-0.2 cM	X	NC_004354.4	1891401	1900646	minus	9
+7240	Drosophila simulans	6730875	0	live	LOC6730875	Dsimw501_GD22753, Dsim\tim, GD22753, GD22753-PB, GD22753-PC, GD22753-PD, GD22753-PE, GD22753-PF, tim, tim-PB, tim-PC, tim-PD, tim-PE, tim-PF	protein timeless	LOW QUALITY PROTEIN: protein timeless|Dsim\GD22753|Dsim\GD22753-PB|Dsim\GD22753-PC|Dsim\GD22753-PD|Dsim\GD22753-PE|Dsim\GD22753-PF|Dsim\tim-PB|Dsim\tim-PC|Dsim\tim-PD|Dsim\tim-PE|Dsim\tim-PF|dsim_GLEANR_6496		2L	NC_052520.2	3487647	3498235	minus	14
+121224	Pediculus humanus corporis	8229851	0	live	Phum_PHUM228150	Phum_PHUM228150	timeless, putative	timeless, putative		Unknown
+7165	Anopheles gambiae	5668064	0	live	LOC5668064		protein timeless homolog	protein timeless homolog		3	NC_064602.1	68342499	68347742	minus	15
+7245	Drosophila yakuba	6526733	0	live	LOC6526733	Dyak_GE14857, Dyak\tim, GE14857, GE14857-PB, tim, tim-PB	protein timeless	protein timeless|Dyak\GE14857|Dyak\GE14857-PB|Dyak\tim-PB|dyak_GLEANR_1559		2L	NC_052527.2	3548674	3562998	minus	16
+7237	Drosophila pseudoobscura	4801392	0	live	LOC4801392		protein timeless homolog	protein timeless homolog		2	NC_046679.1	11458915	11527157	minus	18
+286706	Halyomorpha halys	106683596	0	live	LOC106683596		protein timeless homolog	protein timeless homolog		Un	NW_020111268.1	130424	176244	minus	27
+7245	Drosophila yakuba	6536916	0	live	LOC6536916	Dyak_GE26249, GE26249, GE26249-PB	protein timeless homolog	protein timeless homolog|Dyak\GE26249|Dyak\GE26249-PB|dyak_GLEANR_9807		3R	NC_052530.2	14994720	15062867	plus	18
+161013	Thrips palmi	117650020	0	live	LOC117650020		protein timeless homolog	protein timeless homolog		Un	NW_023144631.1	146949	286092	plus	26
+108931	Nilaparvata lugens	111059901	0	live	LOC111059901		protein timeless	protein timeless		3	NC_052506.1	19254256	19310697	minus	24
+108931	Nilaparvata lugens	111049358	0	live	LOC111049358		protein timeless homolog	protein timeless homolog		8	NC_052511.1	40360790	40610494	plus	29
+222816	Orussus abietinus	105699289	0	live	LOC105699289		protein timeless homolog	protein timeless homolog		Un	NW_019395997.1	984246	993885	minus	13
+28610	Rhagoletis pomonella	118741256	0	live	LOC118741256		protein timeless-like	protein timeless-like		Un	NW_023458560.1	72412509	72436587	minus	16
+66420	Papilio xuthus	106127626	0	live	LOC106127626		protein timeless	protein timeless		Un	NW_013533994.1	1074833	1087282	minus	17
+115081	Megalopta genalis	117220556	0	live	LOC117220556		protein timeless homolog	protein timeless homolog		Un	NW_022888694.1	5804853	6288161	plus	28
+7160	Aedes albopictus	109431463	0	live	LOC109431463		protein timeless homolog	protein timeless homolog		1	NC_085136.1	164633633	164893033	plus	15
+104688	Bactrocera oleae	106621896	0	live	LOC106621896		protein timeless homolog	LOW QUALITY PROTEIN: protein timeless homolog		Un	NW_021654636.1	451036	883700	minus	18
+69319	Microplitis demolitor	103574560	0	live	LOC103574560		protein timeless homolog	protein timeless homolog		3	NC_068547.1	19564248	19656335	plus	24
+7054	Photinus pyralis	116162890	0	live	LOC116162890	PPYR_04378	protein timeless homolog	protein timeless homolog		Un	NW_022170403.1	22903730	22949892	minus	17
+7130	Manduca sexta	115445973	0	live	LOC115445973	O3G_MSEX001806	protein timeless homolog	protein timeless homolog		20	NC_051134.1	1483603	1500885	plus	22
+7539	Leptinotarsa decemlineata	111505435	0	live	LOC111505435		protein timeless homolog	protein timeless homolog		Un	NW_019290034.1	23474	32574	plus	4
+7159	Aedes aegypti	5572105	0	live	LOC5572105	AAEL009518, AAEL012142	protein timeless homolog	protein timeless homolog		1	NC_035107.1	141733371	141966587	plus	15
+7515	Ctenocephalides felis	113385974	0	live	LOC113385974		protein timeless homolog	protein timeless homolog		Un	NW_020539725.1	35572158	35933514	minus	20
+7240	Drosophila simulans	6728259	0	live	LOC6728259	Dsimw501_GD18885, GD18885, GD18885-PB	protein timeless homolog	protein timeless homolog|Dsim\GD18885|Dsim\GD18885-PB|dsim_GLEANR_2694		3R	NC_052523.2	13021466	13089053	minus	18
+7260	Drosophila willistoni	6649629	0	live	LOC6649629	Dwil_GK22409, GK22409, GK22409-PB	protein timeless homolog	protein timeless homolog|Dwil\GK22409|Dwil\GK22409-PB|dwil_GLEANR_5626		3R	NC_061086.1	32582843	32649705	minus	18
+7244	Drosophila virilis	6632474	0	live	LOC6632474	Dvir_GJ10366, GJ10366, GJ10366-PA	protein timeless homolog	protein timeless homolog|Dvir\GJ10366|Dvir\GJ10366-PA|dvir_GLEANR_10294		Un	NW_022587552.1	2637630	2720841	minus	18
+7238	Drosophila sechellia	6613246	0	live	LOC6613246	Dsec_GM18146, GM18146, GM18146-PA	protein timeless	LOW QUALITY PROTEIN: protein timeless|Dsec\GM18146|Dsec\GM18146-PA|dsec_GLEANR_19638		2L	NC_045949.1	3436371	3450561	minus	16
+7234	Drosophila persimilis	6587622	0	live	LOC6587622	Dper_GL24394, GL24394, GL24394-PA	protein timeless homolog	protein timeless homolog|Dper\GL24394|Dper\GL24394-PA|dper_GLEANR_6688		Un	NW_020825288.1	15990779	16058728	plus	18
+7222	Drosophila grimshawi	6566725	0	live	LOC6566725	Dgri_GH13197, GH13197, GH13197-PA	protein timeless	protein timeless|Dgri\GH13197|Dgri\GH13197-PA|dgri_GLEANR_13136		Un	NW_025062900.1	22244176	22255888	minus	13
+7222	Drosophila grimshawi	6563724	0	live	LOC6563724	Dgri_GH18380, GH18380, GH18380-PA	protein timeless homolog	LOW QUALITY PROTEIN: protein timeless homolog|Dgri\GH18380|Dgri\GH18380-PA|dgri_GLEANR_2762		Un	NW_025063098.1	6651828	6722090	plus	18
+7220	Drosophila erecta	6553629	0	live	LOC6553629	Dere_GG19468, GG19468, GG19468-PA	protein timeless homolog	protein timeless homolog|Dere\GG19468|Dere\GG19468-PA|dere_GLEANR_421		Un	NW_020825194.1	15798163	15865401	plus	18
+7217	Drosophila ananassae	6497491	0	live	LOC6497491	Dana_GF14670, GF14670, GF14670-PA	protein timeless	LOW QUALITY PROTEIN: protein timeless|Dana\GF14670|Dana\GF14670-PA|dana_GLEANR_15433		3R	NC_057930.1	23216727	23226791	plus	13
+334116	Vanessa tameamea	113392197	0	live	LOC113392197		protein timeless homolog	protein timeless homolog		Un	NW_020663022.1	1522711	1567451	minus	23
+33412	Zerene cesonia	119840488	0	live	LOC119840488		protein timeless homolog	protein timeless homolog		6	NC_052107.1	1190718	1220184	plus	23
+33412	Zerene cesonia	119831819	0	live	LOC119831819		protein timeless	protein timeless		1	NC_052102.1	6251274	6262819	minus	17
+139649	Teleopsis dalmanni	119687167	0	live	LOC119687167		protein timeless	protein timeless		X	NC_051848.1	43341329	43393866	minus	17
+139649	Teleopsis dalmanni	119677436	0	live	LOC119677436		protein timeless homolog	protein timeless homolog		2	NC_051847.1	161744387	161854921	minus	18
+343691	Hermetia illucens	119651054	0	live	LOC119651054	HERILL_LOCUS7725	protein timeless homolog	protein timeless homolog		3	NC_051851.1	72375457	72919449	plus	18
+7396	Glossina fuscipes	119638707	0	live	LOC119638707		protein timeless homolog	protein timeless homolog		Un	NW_023998452.1	644956	889314	minus	16
+1486046	Drosophila subpulchrella	119547514	0	live	LOC119547514		protein timeless homolog	protein timeless homolog		3R	NC_050609.1	3975667	4049361	minus	18
+1486046	Drosophila subpulchrella	119546137	0	live	LOC119546137		protein timeless	LOW QUALITY PROTEIN: protein timeless		2L	NC_050610.1	23032948	23045964	minus	14
+38358	Bradysia coprophila	119072913	0	live	LOC119072913		protein timeless	protein timeless		IV	NW_023503376.1	3969108	4005341	minus	18
+38358	Bradysia coprophila	119069857	0	live	LOC119069857		protein timeless homolog	protein timeless homolog		X	NW_023503329.1	3622728	3863917	plus	19
+2795564	Maniola hyperantus	117986868	0	live	LOC117986868		protein timeless homolog	protein timeless homolog		12	NC_048547.1	3656747	3694293	minus	22
+2795564	Maniola hyperantus	117986024	0	live	LOC117986024		protein timeless	protein timeless		1	NC_048536.1	8575942	8603722	plus	17
+7266	Drosophila guanche	117589569	0	live	LOC117589569	DGUA_6G015699	protein timeless homolog	protein timeless homolog		Un	NW_022995755.1	1679106	1743297	minus	18
+7266	Drosophila guanche	117582428	0	live	LOC117582428	DGUA_6G011981	protein timeless	protein timeless		Un	NW_022995746.1	2934565	2946817	minus	15
+2817044	Belonocnema kinseyi	117181567	0	live	LOC117181567		protein timeless homolog	protein timeless homolog		10	NC_046666.1	68109484	68494203	plus	31
+7226	Drosophila mauritiana	117149239	0	live	LOC117149239		protein timeless	LOW QUALITY PROTEIN: protein timeless		2L	NC_046667.1	3429035	3443108	minus	15
+7226	Drosophila mauritiana	117142521	0	live	LOC117142521		protein timeless homolog	protein timeless homolog		3R	NC_046670.1	13783979	13851252	minus	18
+13037	Danaus plexippus	116766764	0	live	LOC116766764		protein timeless homolog	protein timeless homolog		10	NC_083543.1	6435158	6448893	minus	22
+2448451	Nomia melanderi	116427786	0	live	LOC116427786		protein timeless homolog	protein timeless homolog		Un	NW_022339980.1	1806951	2013844	minus	28
+265458	Contarinia nasturtii	116345992	0	live	LOC116345992		protein timeless homolog	protein timeless homolog		Un	NW_022198708.1	3343820	3361531	minus	20
+7048	Sitophilus oryzae	115878283	0	live	LOC115878283		protein timeless homolog	protein timeless homolog		Un	NW_022146178.1	1843810	2313273	plus	20
+7225	Scaptodrosophila lebanonensis	115620998	0	live	LOC115620998		protein timeless homolog	protein timeless homolog		Un	NW_022060538.1	20670829	20779721	minus	18
+72781	Formica exsecta	115238207	0	live	LOC115238207		protein timeless homolog	LOW QUALITY PROTEIN: protein timeless homolog		Un	NW_021850553.1	1445913	1560891	plus	28
+613905	Nylanderia fulva	114931419	0	live	LOC114931419		protein timeless homolog	protein timeless homolog		Un	NW_021694766.1	476897	572777	minus	28
+93504	Ostrinia furnacalis	114360973	0	live	LOC114360973		protein timeless	protein timeless		Un	NW_021135593.1	42584	67394	plus	17
+93504	Ostrinia furnacalis	114360934	0	live	LOC114360934		protein timeless homolog	protein timeless homolog		Un	NW_021135560.1	152566	163791	minus	22
+50390	Diabrotica virgifera virgifera	114334795	0	live	LOC114334795		protein timeless homolog	protein timeless homolog		6	NC_065448.1	165258651	165302401	plus	2
+7092	Bombyx mandarina	114243667	0	live	LOC114243667		protein timeless homolog	protein timeless homolog		Un	NW_021011516.1	193379	226650	minus	22
+7111	Trichoplusia ni	113500526	0	live	LOC113500526		protein timeless homolog	protein timeless homolog		14	NC_039491.1	6943592	6966269	plus	22
+300111	Temnothorax curvispinosus	112454538	0	live	LOC112454538		protein timeless homolog	protein timeless homolog		Un	NW_020214913.1	730873	830015	plus	28
+166361	Onthophagus taurus	111428280	0	live	LOC111428280		protein timeless homolog	protein timeless homolog		Un	NW_019286136.1	1567956	1593801	minus	16
+69820	Spodoptera litura	111355558	0	live	LOC111355558		protein timeless homolog	protein timeless homolog		21	NC_036207.1	5581534	5598972	plus	22
+7274	Drosophila serrata	110186435	0	live	LOC110186435		protein timeless homolog	protein timeless homolog		Un	NW_018366252.1	1865089	1939944	minus	18
+116153	Aethina tumida	109600720	0	live	LOC109600720		protein timeless	protein timeless		4	NC_065438.1	1466338	1477303	plus	14
+28584	Drosophila suzukii	108019388	0	live	LOC108019388		protein timeless	LOW QUALITY PROTEIN: protein timeless		2L	NW_023496800.1	22573869	22587154	minus	14
+28584	Drosophila suzukii	108018464	0	live	LOC108018464		protein timeless homolog	protein timeless homolog		3R	NW_023496832.1	1099528	1173865	plus	18
+211228	Cephus cinctus	107272959	0	live	LOC107272959		protein timeless homolog	protein timeless homolog		Un	NW_014333751.1	352725	451390	plus	28
+441921	Neodiprion lecontei	107228056	0	live	LOC107228056		protein timeless homolog	protein timeless homolog		1	NC_060260.1	687410	775399	plus	27
+143948	Diuraphis noxia	107162320	0	live	LOC107162320		protein timeless homolog	protein timeless homolog		Un	NW_015368343.1	298627	305080	minus	22
+609295	Dinoponera quadriceps	106744884	0	live	LOC106744884		protein timeless homolog	protein timeless homolog		Un	NW_014555613.1	1778859	1891971	plus	28
+7493	Trichogramma pretiosum	106657598	0	live	LOC106657598		protein timeless homolog	protein timeless homolog		Un	NW_019641703.1	5569249	5694899	plus	26
+29053	Copidosoma floridanum	106644455	0	live	LOC106644455		protein timeless homolog	protein timeless homolog		Un	NW_019379576.1	1009537	1135298	minus	29
+76194	Papilio polytes	106103740	0	live	LOC106103740		protein timeless homolog	protein timeless homolog		Un	NW_013525473.1	1832789	1843833	plus	22
+35570	Stomoxys calcitrans	106082285	0	live	LOC106082285		protein timeless homolog	protein timeless homolog		2	NC_081553.1	134982471	135942557	minus	18
+12957	Atta cephalotes	105625884	0	live	LOC105625884		protein timeless homolog	protein timeless homolog		Un	NW_012130068.1	1081473	1192085	plus	27
+144034	Pogonomyrmex barbatus	105431561	0	live	LOC105431561		protein timeless homolog	protein timeless homolog		Un	NW_011933745.1	400081	502926	plus	28
+326594	Ceratosolen solmsi marchali	105363852	0	live	LOC105363852		protein timeless homolog	protein timeless homolog		Un	NW_011948429.1	1223901	1471615	minus	29
+121845	Diaphorina citri	103518711	0	live	LOC103518711		protein timeless homolog	protein timeless homolog		Un	NW_007379753.1	30231	40077	minus	5
+7463	Apis florea	100868727	0	live	LOC100868727		protein timeless homolog	protein timeless homolog		Un	NW_003790664.1	3114264	3297357	minus	28
+7445	Vespa crabro	124432774	0	live	LOC124432774		protein timeless homolog	protein timeless homolog		1	NC_060955.1	4141807	4331197	plus	35
+197161	Ischnura elegans	124168471	0	live	LOC124168471		protein timeless	protein timeless		11	NC_060256.1	29835062	29905005	plus	26
+58002	Daktulosphaira vitifoliae	126898779	0	live	LOC126898779		protein timeless	protein timeless		Un	NW_026099573.1	3327225	3384727	plus	20
+329112	Toxorhynchites rutilus septentrionalis	129775282	0	live	LOC129775282		protein timeless	protein timeless		3	NC_073746.1	75422685	75457635	plus	17
+190385	Uranotaenia lowii	129742207	0	live	LOC129742207		protein timeless	protein timeless		2	NC_073692.1	69521617	69571749	plus	16
+263140	Sitodiplosis mosellana	129564890	0	live	LOC129564890		protein timeless	protein timeless		Un	NW_022595245.1	6878561	6888650	minus	16
+58824	Plodia interpunctella	128683777	0	live	LOC128683777		protein timeless	protein timeless		1	NC_071294.1	5788128	5805899	plus	19
+7108	Spodoptera frugiperda	126911278	0	live	LOC126911278		protein timeless	protein timeless		1	NC_064212.1	6904521	6920390	plus	18
+42839	Anopheles aquasalis	126573235	0	live	LOC126573235		protein timeless	protein timeless		2	NC_064877.1	89730478	89744998	minus	16
+202808	Vespa velutina	124946645	0	live	LOC124946645		protein timeless homolog	protein timeless homolog		2	NC_062189.1	15490012	15667798	minus	33
+30066	Anopheles merus	121597895	0	live	LOC121597895		protein timeless	protein timeless		3R	NC_054084.1	8562601	8579882	plus	15
+42434	Culex pipiens pallens	120422390	0	live	LOC120422390		protein timeless	protein timeless		2	NC_068938.1	22998851	23025861	minus	16
+178035	Dufourea novaeangliae	107189540	0	live	LOC107189540	WN55_03093	protein timeless homolog	protein timeless homolog|Protein timeless like protein		Un	NW_015374042.1	153836	186596	plus	15
+62324	Anopheles funestus	125775156	0	live	LOC125775156		protein timeless	protein timeless		2RL	NC_064598.1	87019658	87036339	minus	16
+1163345	Diorhabda carinulata	130891658	0	live	LOC130891658		protein timeless	protein timeless		3	NC_079462.1	16730388	16745579	plus	17
+290404	Eupeodes corollae	129948812	0	live	LOC129948812		protein timeless	protein timeless		3	NC_079149.1	124013930	124033004	plus	18
+121224	Pediculus humanus corporis	8232513	0	live	Phum_PHUM583070	Phum_PHUM583070	timeless protein, putative	timeless protein, putative		Unknown
+7370	Musca domestica	101888435	0	live	LOC101888435		protein timeless homolog	protein timeless homolog		Un	NW_026712344.1	3749839	4447302	plus	18
+28610	Rhagoletis pomonella	118737833	0	live	LOC118737833		protein timeless homolog	protein timeless homolog		Un	NW_023458558.1	55744101	56276177	plus	11
+7213	Ceratitis capitata	111591532	0	live	LOC111591532	TIM	protein timeless homolog	protein timeless homolog		Un	NW_019376334.1	102031	139476	plus	8
+7213	Ceratitis capitata	101449182	0	live	LOC101449182	TIM	protein timeless homolog	protein timeless homolog		Un	NW_019376404.1	230584	411281	plus	12
+286706	Halyomorpha halys	106682064	0	live	LOC106682064		protein timeless	protein timeless		Un	NW_020110376.1	26335	96353	plus	23
+132113	Bombus impatiens	100742359	0	live	LOC100742359		protein timeless homolog	protein timeless homolog		Un	NT_178085.1	616391	631969	plus	15
+7220	Drosophila erecta	6541612	0	live	LOC6541612	Dere_GG24435, GG24435, GG24435-PB	protein timeless	protein timeless|Dere\GG24435|Dere\GG24435-PB|dere_GLEANR_9162		Un	NW_020825200.1	3675280	3688896	minus	16
+7396	Glossina fuscipes	119643466	0	live	LOC119643466		protein timeless homolog	protein timeless homolog		Un	NW_024003243.1	1131	1944	plus	2
+13632	Lucilia sericata	119608376	0	live	LOC119608376		protein timeless homolog	protein timeless homolog		Un	NW_023994817.1	29316	102568	minus	8
+13632	Lucilia sericata	119602655	0	live	LOC119602655		protein timeless homolog	protein timeless homolog		Un	NW_023994274.1	15471	96664	minus	10
+28610	Rhagoletis pomonella	118738271	0	live	LOC118738271		protein timeless homolog	protein timeless homolog		Un	NW_023458558.1	55597584	55681509	plus	6
+28610	Rhagoletis pomonella	118738270	0	live	LOC118738270		protein timeless homolog	protein timeless homolog		Un	NW_023458558.1	55507720	55533841	minus	5
+7167	Anopheles albimanus	118457151	0	live	LOC118457151		protein timeless homolog	protein timeless homolog		2	NC_050156.1	67689608	67694226	plus	14
+103933	Bombus bifarius	117204677	0	live	LOC117204677		protein timeless homolog	protein timeless homolog		Un	NW_022884364.1	71037	98182	plus	14
+2705178	Bombus vancouverensis nearcticus	117162745	0	live	LOC117162745		protein timeless homolog	protein timeless homolog		Un	NW_022882286.1	2919110	2946263	minus	14
+7224	Drosophila hydei	115483332	0	live	LOC115483332		protein timeless homolog	protein timeless homolog		Un	NW_022045830.1	1577031	1584730	plus	8
+43146	Rhopalosiphum maidis	113559884	0	live	LOC113559884		protein timeless	protein timeless		3	NC_040879.1	12712290	12729206	plus	16
+334116	Vanessa tameamea	113394569	0	live	LOC113394569		protein timeless	protein timeless		Un	NW_020663126.1	3750919	3762720	plus	17
+7515	Ctenocephalides felis	113385984	0	live	LOC113385984		protein timeless homolog	protein timeless homolog		Un	NW_020539725.1	36255523	36260466	plus	14
+1477025	Hyposmocoma kahamanoa	113237606	0	live	LOC113237606		protein timeless	protein timeless		Un	NW_020653337.1	12504067	12518436	plus	16
+143950	Sipha flava	112691757	0	live	LOC112691757	tim_0	protein timeless	protein timeless		Un	NW_020273606.1	135429	167037	plus	16
+742174	Melanaphis sacchari	112595347	0	live	LOC112595347		protein timeless	protein timeless		Un	NW_020271143.1	1740480	1757322	minus	16
+105785	Cryptotermes secundus	111871641	0	live	LOC111871641		protein timeless homolog	protein timeless homolog		Un	NW_019739208.1	544795	561212	plus	9
+7224	Drosophila hydei	111594627	0	live	LOC111594627		protein timeless homolog	protein timeless homolog		Un	NW_022045830.1	1502637	1553942	plus	12
+13164	Myzus persicae	111033437	0	live	LOC111033437		protein timeless-like	protein timeless-like		Un	NW_019102926.1	304513	311907	plus	8
+13164	Myzus persicae	111027135	0	live	LOC111027135		protein timeless-like	protein timeless-like		Un	NW_019100980.1	429292	448211	minus	16
+7274	Drosophila serrata	110177096	0	live	LOC110177096		protein timeless	protein timeless		Un	NW_018366329.1	1497629	1514429	minus	16
+30019	Drosophila busckii	108601565	0	live	LOC108601565	timeout	protein timeless homolog	protein timeless homolog		3R	NC_046607.1	7120150	7142053	plus	10
+143948	Diuraphis noxia	107170488	0	live	LOC107170488		protein timeless-like	protein timeless-like		Un	NW_015369214.1	40500	86034	plus	11
+35570	Stomoxys calcitrans	106081665	0	live	LOC106081665		protein timeless	protein timeless		3	NC_081554.1	39457130	39546016	minus	16
+121845	Diaphorina citri	103518793	0	live	LOC103518793		protein timeless homolog	protein timeless homolog		Un	NW_007379783.1	58	37400	plus	12
+121845	Diaphorina citri	103511610	0	live	LOC103511610		protein timeless	protein timeless		Un	NW_007378164.1	58180	79374	minus	16
+132113	Bombus impatiens	100748305	0	live	LOC100748305		protein timeless homolog	protein timeless homolog		Un	NT_177084.1	59515	87020	plus	14
+105785	Cryptotermes secundus	111873662	0	live	LOC111873662		protein timeless homolog	protein timeless homolog		Un	NW_019742980.1	42053	46733	minus	4
+51655	Plutella xylostella	105388386	0	live	LOC105388386	PLXY1_LOCUS16456	protein timeless	protein timeless		4	NC_063984.1	6934832	6955552	plus	21
+136037	Zootermopsis nevadensis	110835950	0	live	LOC110835950	L798_13057	TIMELESS-interacting protein	TIMELESS-interacting protein|TIPIN-like protein		Un	NW_019060226.1	132163	264199	minus	10
+2498891	Topomyia yanbarensis	131684196	0	live	LOC131684196		protein timeless	protein timeless		2	NC_080671.1	46069830	46084777	minus	13
+1163345	Diorhabda carinulata	130896511	0	live	LOC130896511		protein timeless homolog	protein timeless homolog		7	NC_079466.1	18439753	18458217	plus	5
+53552	Sabethes cyaneus	128744364	0	live	LOC128744364		protein timeless	protein timeless|putative dna topoisomerase i-interacting protein		3	NC_071355.1	227490180	227504316	minus	12
+1518534	Anopheles coluzzii	120958414	0	live	LOC120958414		protein timeless	protein timeless		3	NC_064671.1	8545572	8562792	plus	15
+7173	Anopheles arabiensis	120899734	0	live	LOC120899734		protein timeless	protein timeless		3	NC_053518.1	8567184	8584246	plus	15
+93214	Bacillus rossius redtenbacheri	134539034	0	live	LOC134539034		protein timeless	protein timeless		14	NC_086341.1	3771665	3836460	plus	27
+286459	Episyrphus balteatus	129906717	0	live	LOC129906717		protein timeless	protein timeless		1	NC_079134.1	14997896	15028703	minus	19
+59916	Bactrocera tryoni	120767247	0	live	LOC120767247		protein timeless	protein timeless		2	NC_052500.1	21231707	21280021	minus	19
+80765	Aphis gossypii	114122745	0	live	LOC114122745		protein timeless homolog	protein timeless homolog		Un	NW_026083391.1	13765	21783	plus	22
+174621	Wyeomyia smithii	129727747	0	live	LOC129727747		protein timeless	protein timeless|circadian clock protein timeless		3	NC_073696.1	10572657	10632201	minus	15
+124917	Armigeres subalbatus	134213370	0	live	LOC134213370		protein timeless	protein timeless		2	NC_085140.1	409777422	409862612	minus	17
+89887	Drosophila sulfurigaster albostrigata	133850323	0	live	LOC133850323		protein timeless	protein timeless		2L	NC_084881.1	14090922	14106214	plus	14
+82600	Cydia pomonella	133518255	0	live	LOC133518255		protein timeless-like	protein timeless-like		5	NC_084707.1	10439545	10478210	minus	19
+1163346	Diorhabda sublineata	130443984	0	live	LOC130443984		protein timeless	protein timeless		5	NC_079478.1	20060266	20090569	minus	19
+74068	Macrosteles quadrilineatus	128999699	0	live	LOC128999699		protein timeless-like	protein timeless-like		Un	NW_026542601.1	102877670	102925528	minus	25
+1086592	Cataglyphis hispanica	126851224	0	live	LOC126851224		protein timeless homolog	protein timeless homolog		7	NC_065960.1	8287183	8379233	plus	28
+98809	Bactrocera neohumeralis	126753956	0	live	LOC126753956		protein timeless	protein timeless		3	NC_065920.1	21097624	21147797	minus	19
+7009	Schistocerca americana	124592677	0	live	LOC124592677		protein timeless	protein timeless		2	NC_060120.1	687176370	687572536	minus	30
+561572	Frieseomelitta varia	122539020	0	live	LOC122539020	E2986_13297	protein timeless homolog	protein timeless homolog		Un	NW_025109616.1	303592	546127	minus	28
+80765	Aphis gossypii	114122746	0	live	LOC114122746		protein timeless homolog	protein timeless homolog		1	NC_065530.1	72064	79976	plus	22
+174628	Bactrocera latifrons	108970322	0	live	LOC108970322	tim_4	protein timeless	protein timeless		Un	NW_017536618.1	71283	113545	plus	19
+7263	Drosophila arizonae	108610845	0	live	LOC108610845		protein timeless	protein timeless		3	NW_017127683.1	17081494	17097220	plus	15
+30025	Drosophila ficusphila	108092495	0	live	LOC108092495		protein timeless	protein timeless		Un	NW_025064326.1	1876676	1891562	plus	19
+7461	Apis cerana	107996069	0	live	LOC107996069		protein timeless homolog	protein timeless homolog		LG4	NC_083855.1	9219603	9398071	minus	28
+2755281	Zophobas morio	135146657	0	live	LOC135146657		TIMELESS-interacting protein-like	TIMELESS-interacting protein-like		Un	NW_026972359.1	229666	231383	plus	9
+469753	Culicoides brevitarsis	134831542	0	live	LOC134831542		protein timeless	protein timeless		2	NC_087086.1	898206	906925	minus	13
+7227	Drosophila melanogaster	42305	0	live	cry	Dmel_CG3772, CG3772, CRY, CRYPTOCHROME, Cry, DCry, Dm-CRY1, DmCRY, DmCRY1, DmCry, DmCry1, Dmcry, Dmel\CG3772, anon-WO0140519.17, anon-WO0140519.19, anon-WO0140519.20, anon-WO0172774.151, cryb, dCRY, dCry, dcry, cry	cryptochrome	cryptochrome|Blue-light receptor|CG3772-PA|cry-PA|crybaby|crypochrome	3-66 cM	3R	NT_033777.3	19212154	19215442	plus	4
+77166	Dendroctonus ponderosae	109533970	0	live	LOC109533970	HUJ05_001931	protein timeless homolog	protein timeless homolog		Un	NW_026017110.1	40651283	41013714	minus	27
+64459	Pieris rapae	110998642	0	live	LOC110998642		protein timeless	protein timeless		16	NC_059524.1	6748246	6765839	plus	19
+27457	Bactrocera dorsalis	105233653	0	live	LOC105233653	TIM	protein timeless	protein timeless		1	NC_064303.1	94740975	94789468	plus	19
+197161	Ischnura elegans	124168099	0	live	LOC124168099		TIMELESS-interacting protein	TIMELESS-interacting protein		11	NC_060256.1	47038565	47056909	minus	6
+197043	Homalodisca vitripennis	124365055	0	live	LOC124365055		protein timeless-like	protein timeless-like		6	NC_060212.1	156892049	156990931	plus	24
+29058	Helicoverpa armigera	110374643	0	live	LOC110374643	B5X24_HaOG206238, HaOG206238	protein timeless homolog	protein timeless homolog		12	NC_087131.1	4930006	4947835	plus	22
+65598	Bombus pascuorum	132910170	0	live	LOC132910170		protein timeless homolog	protein timeless homolog		8	NC_083495.1	9313433	9562902	plus	27
+28586	Anastrepha ludens	128864548	0	live	LOC128864548		protein timeless	protein timeless		5	NC_071501.1	115004925	115072505	plus	19
+7070	Tribolium castaneum	662160	0	live	LOC662160	TcasGA2_TC008670	TIMELESS-interacting protein	TIMELESS-interacting protein|AUGUSTUS-3.0.2_08670|GLEAN_08670|TIMELESS-interacting protein-like Protein		LG7	NC_007422.5	13818480	13856184	plus	3
+1100963	Cydia splendana	134790782	0	live	LOC134790782		protein timeless-like	protein timeless-like		5	NC_085964.1	13567368	13608750	minus	18
+1458189	Cydia fagiglandana	134663678	0	live	LOC134663678		protein timeless-like	protein timeless-like		4	NC_085935.1	10799705	10833906	plus	19
+93214	Bacillus rossius redtenbacheri	134535226	0	live	LOC134535226		protein timeless homolog	protein timeless homolog		8	NC_086336.1	69412741	69478330	plus	27
+124917	Armigeres subalbatus	134205421	0	live	LOC134205421		protein timeless homolog	protein timeless homolog		1	NC_085139.1	159315986	159585287	minus	15
+44670	Metopolophium dirhodum	132934881	0	live	LOC132934881		protein timeless	protein timeless		1	NC_083560.1	108153016	108174100	minus	16
+42062	Drosophila nasuta	132796971	0	live	LOC132796971		protein timeless	protein timeless		2L	NC_083455.1	20504279	20519889	minus	14
+94469	Phlebotomus argentipes	132262621	0	live	LOC132262621		protein timeless	protein timeless		Un	NW_026776181.1	4438089	4448231	plus	15
+2078957	Neocloeon triangulifer	132200229	0	live	LOC132200229		protein timeless	protein timeless		Un	NW_026775556.1	21384657	21412843	minus	25
+688607	Achroia grisella	131844097	0	live	LOC131844097		protein timeless	protein timeless		Un	NW_026712838.1	319557	345538	minus	17
+1163346	Diorhabda sublineata	130449160	0	live	LOC130449160		protein timeless homolog	protein timeless homolog		10	NC_079483.1	13382744	13401198	plus	4
+133065	Adelges cooleyi	126836705	0	live	LOC126836705		protein timeless	protein timeless		Un	NW_026095912.1	12726407	12742737	minus	17
+2023355	Schistocerca serialis cubense	126457362	0	live	LOC126457362		protein timeless	protein timeless		2	NC_064639.1	462234330	462609239	plus	29
+7011	Schistocerca nitens	126236892	0	live	LOC126236892		protein timeless	protein timeless		2	NC_064615.1	716913084	717312183	minus	30
+42275	Vanessa atalanta	125076358	0	live	LOC125076358		protein timeless	protein timeless		3	NC_061873.1	7776160	7788724	minus	18
+7113	Helicoverpa zea	124645719	0	live	LOC124645719		protein timeless	protein timeless		3	NC_061454.1	7057884	7071202	plus	19
+72248	Colias croceus	123705782	0	live	LOC123705782		protein timeless	protein timeless		3	NC_059539.1	6053051	6075718	plus	18
+41895	Tribolium madens	123013845	0	live	LOC123013845		protein timeless	protein timeless		Un	NW_025401068.1	10909064	10918579	plus	13
+91739	Aricia agestis	121732903	0	live	LOC121732903		protein timeless	protein timeless		1	NC_056406.1	21815142	21848217	plus	19
+198719	Drosophila innubila	117780585	0	live	LOC117780585		protein timeless	protein timeless		2L	NW_022995372.1	6027486	6043990	plus	14
+50390	Diabrotica virgifera virgifera	114336526	0	live	LOC114336526		protein timeless	protein timeless		6	NC_065448.1	244273396	244326004	plus	15
+7137	Galleria mellonella	113517070	0	live	LOC113517070		protein timeless	protein timeless		Un	NW_026442144.1	1660608	1681798	plus	18
+7137	Galleria mellonella	113515375	0	live	LOC113515375		protein timeless homolog	protein timeless homolog		Un	NW_026442016.1	7093886	7137275	plus	23
+174628	Bactrocera latifrons	108977689	0	live	LOC108977689	TIMELESS_2, TIMELESS_3	protein timeless homolog	protein timeless homolog		Un	NW_017537645.1	883555	1048379	plus	12
+217634	Anoplophora glabripennis	108907980	0	live	LOC108907980		protein timeless	protein timeless		Un	NW_019416358.1	2410	23200	minus	14
+30025	Drosophila ficusphila	108087208	0	live	LOC108087208		protein timeless homolog	protein timeless homolog		Un	NW_025064737.1	13589707	13663186	minus	20
+76193	Papilio machaon	106717412	0	live	LOC106717412	RR48_00074	protein timeless homolog	protein timeless homolog|Protein timeless-like		8	NC_059993.1	5454651	5466805	minus	22
+2755281	Zophobas morio	135137139	0	live	LOC135137139		protein timeless	protein timeless		Un	NW_026972133.1	5873420	5905678	plus	12
+116150	Pararge aegeria	120626175	0	live	LOC120626175		protein timeless homolog	protein timeless homolog|Protein timeless-like protein		9	NC_053188.1	4849408	4914666	minus	23
+197043	Homalodisca vitripennis	124372903	0	live	LOC124372903		protein timeless homolog	protein timeless homolog		Un	NW_025780438.1	985	12996	plus	4
+32391	Cotesia glomerata	123275409	0	live	LOC123275409	KQX54_008199	protein timeless homolog	protein timeless homolog		LG1	NC_058158.1	7950816	8087335	plus	24
+197179	Cylas formicarius	132700724	0	live	LOC132700724		protein timeless homolog	protein timeless homolog		Un	NW_026844334.1	27832740	28110541	plus	21
+95512	Anastrepha obliqua	129248550	0	live	LOC129248550		protein timeless	protein timeless		5	NC_072896.1	116816310	116894718	plus	18
+274614	Schistocerca cancellata	126191394	0	live	LOC126191394		TIMELESS-interacting protein	TIMELESS-interacting protein		6	NC_064631.1	211021984	211096643	minus	6
+41895	Tribolium madens	123011079	0	live	LOC123011079		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_025401063.1	6074297	6083884	plus	3
+684658	Aphidius gifuensis	122853474	0	live	LOC122853474	HCN44_001351	TIMELESS-interacting protein	TIMELESS-interacting protein		LG3	NC_057790.1	27402802	27405408	minus	3
+2817044	Belonocnema kinseyi	117174163	0	live	LOC117174163		TIMELESS-interacting protein	TIMELESS-interacting protein		6	NC_046662.1	44426243	44455468	minus	3
+29057	Ostrinia nubilalis	135073910	0	live	LOC135073910		protein timeless homolog	protein timeless homolog		8	NC_087095.1	10399774	10410540	plus	22
+1100964	Cydia strobilella	134740587	0	live	LOC134740587		protein timeless-like	protein timeless-like		4	NC_086044.1	10678558	10714998	plus	17
+1869771	Cydia amplana	134648030	0	live	LOC134648030		protein timeless-like	protein timeless-like		5	NC_086073.1	11388292	11412068	minus	17
+40932	Rhopalosiphum padi	132923727	0	live	LOC132923727		protein timeless homolog	protein timeless homolog		3	NC_083599.1	45606981	45616528	minus	23
+108790	Phymastichus coffea	131668469	0	live	LOC131668469		protein timeless homolog	protein timeless homolog		Un	NW_026706889.1	421666	499818	plus	31
+375433	Microplitis mediator	130668461	0	live	LOC130668461		protein timeless homolog	protein timeless homolog		5	NC_079973.1	22946692	23054304	minus	25
+29031	Phlebotomus papatasi	129806993	0	live	LOC129806993		protein timeless	protein timeless		3	NC_077224.1	57726143	57761261	minus	15
+174621	Wyeomyia smithii	129717836	0	live	LOC129717836		protein timeless homolog	protein timeless homolog		1	NC_073694.1	84366128	84645595	plus	15
+74068	Macrosteles quadrilineatus	128999962	0	live	LOC128999962		protein timeless-like	protein timeless-like		Un	NW_026542601.1	96778696	96817329	plus	25
+313031	Hylaeus anthracinus	128889698	0	live	LOC128889698		protein timeless homolog	protein timeless homolog		Un	NW_026534344.1	7054043	7241977	plus	28
+313075	Hylaeus volcanicus	128876335	0	live	LOC128876335		protein timeless homolog	protein timeless homolog		5	NC_071980.1	23377310	23571035	minus	28
+53552	Sabethes cyaneus	128746018	0	live	LOC128746018		protein timeless homolog	protein timeless homolog		1	NC_071353.1	97169706	97324985	minus	15
+186751	Anopheles moucheti	128305187	0	live	LOC128305187		protein timeless	protein timeless		3	NC_069141.1	4653051	4669064	minus	15
+103775	Drosophila gunungcola	128252825	0	live	LOC128252825	M5D96_001522	protein timeless homolog	protein timeless homolog		3R	NC_069139.1	23624816	23701060	plus	19
+309941	Bombus affinis	126914142	0	live	LOC126914142		protein timeless homolog	protein timeless homolog		3	NC_066346.1	7491605	7741428	plus	28
+85661	Bombus huntii	126867987	0	live	LOC126867987		protein timeless homolog	protein timeless homolog		7	NC_066244.1	11069547	11333590	plus	28
+13191	Pectinophora gossypiella	126366703	0	live	LOC126366703		protein timeless	protein timeless		1	NC_065404.1	9926353	9942354	minus	18
+274614	Schistocerca cancellata	126162191	0	live	LOC126162191		protein timeless	protein timeless		2	NC_064627.1	581624690	582033311	minus	29
+1035111	Leguminivora glycinivorella	125224614	0	live	LOC125224614		protein timeless homolog	protein timeless homolog		3	NC_062973.1	16269612	16308894	plus	22
+78633	Pieris napi	125056469	0	live	LOC125056469		protein timeless	protein timeless		15	NC_062248.1	8345472	8362097	plus	18
+274613	Schistocerca piceifrons	124775108	0	live	LOC124775108		protein timeless	protein timeless		2	NC_060139.1	692912433	693296789	minus	29
+7113	Helicoverpa zea	124631914	0	live	LOC124631914		protein timeless homolog	protein timeless homolog		7	NC_061458.1	5199580	5215855	plus	22
+7009	Schistocerca americana	124552467	0	live	LOC124552467		protein timeless homolog	protein timeless homolog		10	NC_060128.1	151314194	151794596	minus	29
+191418	Maniola jurtina	123867340	0	live	LOC123867340		protein timeless homolog	protein timeless homolog		8	NC_060036.1	3564586	3628010	minus	23
+7116	Pieris brassicae	123712641	0	live	LOC123712641		protein timeless	protein timeless		7	NC_059671.1	14384805	14402540	minus	18
+7116	Pieris brassicae	123708138	0	live	LOC123708138		protein timeless homolog	protein timeless homolog		1	NC_059665.1	914843	943551	plus	22
+115357	Harmonia axyridis	123671595	0	live	LOC123671595		protein timeless homolog	protein timeless homolog		1	NC_059501.1	2030204	2262977	minus	20
+183418	Apis laboriosa	122719827	0	live	LOC122719827		protein timeless homolog	protein timeless homolog		Un	NW_025224966.1	3953021	4136933	plus	28
+30213	Vespula pensylvanica	122627202	0	live	LOC122627202	H0235_003780	protein timeless homolog	protein timeless homolog		2	NC_057686.1	14708383	14887445	minus	30
+129105	Drosophila santomea	120449314	0	live	LOC120449314		protein timeless	protein timeless		2L	NC_053016.2	3498709	3513063	minus	17
+7375	Lucilia cuprina	111686423	0	live	LOC111686423		protein timeless	protein timeless		2	NC_060950.1	25675563	25720297	plus	16
+7282	Drosophila obscura	111074121	0	live	LOC111074121		protein timeless	protein timeless		Un	NW_024542824.1	1352317	1365383	minus	15
+456900	Cyphomyrmex costatus	108772101	0	live	LOC108772101	ALC62_04223	protein timeless homolog	protein timeless homolog|Protein timeless like protein		Un	NW_017275824.1	660777	761206	plus	28
+471704	Trachymyrmex cornetzi	108769157	0	live	LOC108769157	ALC57_17675	protein timeless homolog	protein timeless homolog|Protein timeless like protein		Un	NW_017300210.1	9693	51933	plus	14
+34720	Trachymyrmex septentrionalis	108751315	0	live	LOC108751315	ALC56_09734	protein timeless homolog	protein timeless homolog|Protein timeless like protein		Un	NW_017305611.1	2366296	2423903	minus	14
+520822	Atta colombica	108692001	0	live	LOC108692001	ALC53_12267	protein timeless homolog	protein timeless homolog|Protein timeless like protein		Un	NW_017259545.1	967710	1067306	plus	27
+597456	Habropoda laboriosa	108575483	0	live	LOC108575483	WH47_05400	protein timeless homolog	protein timeless homolog|Protein timeless like protein		Un	NW_017100417.1	177567	200486	minus	13
+516756	Eufriesea mexicana	108548352	0	live	LOC108548352	WN48_02192	protein timeless homolog	protein timeless homolog|Protein timeless like protein		Un	NW_016909689.1	50163	102970	plus	15
+516756	Eufriesea mexicana	108545775	0	live	LOC108545775	WN48_08616	protein timeless homolog	protein timeless homolog|Protein timeless like protein		Un	NW_016908714.1	280337	309555	minus	14
+42026	Drosophila bipectinata	108130545	0	live	LOC108130545		protein timeless homolog	protein timeless homolog		Un	NW_025063921.1	18902249	18968481	minus	18
+1041015	Drosophila rhopaloa	108047224	0	live	LOC108047224		protein timeless	protein timeless		Un	NW_025335083.1	24702760	24719802	minus	18
+76193	Papilio machaon	106710792	0	live	LOC106710792	RR48_09184	protein timeless	protein timeless		1	NC_059986.1	4759545	4773968	plus	17
+37344	Athalia rosae	105688574	0	live	LOC105688574		protein timeless homolog	protein timeless homolog		6	NC_064031.1	17119280	17199206	minus	26
+30195	Bombus terrestris	100646408	0	live	LOC100646408		protein timeless homolog	protein timeless homolog		4	NC_063272.1	10861896	11110626	minus	28
+7029	Acyrthosiphon pisum	100167234	0	live	Tipin		TIMELESS-interacting protein	TIMELESS-interacting protein		A1	NC_042494.1	105063911	105066221	minus	2
+77166	Dendroctonus ponderosae	109540641	0	live	LOC109540641	HUJ05_012719	TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_026018814.1	4386919	4389852	minus	3
+286706	Halyomorpha halys	106692501	0	live	LOC106692501		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_020110263.1	1062577	1063797	plus	1
+64459	Pieris rapae	111001923	0	live	LOC111001923		TIMELESS-interacting protein	TIMELESS-interacting protein		7	NC_059515.1	4863527	4866743	minus	5
+7091	Bombyx mori	101745309	0	live	LOC101745309		TIMELESS-interacting protein	TIMELESS-interacting protein		28	NC_085134.1	1832477	1838049	minus	5
+29053	Copidosoma floridanum	106647958	0	live	LOC106647958		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_019379489.1	2190650	2191494	plus	1
+161013	Thrips palmi	117647220	0	live	LOC117647220		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_023144629.1	640173	642589	plus	5
+64459	Pieris rapae	111004093	0	live	LOC111004093		protein timeless homolog	protein timeless homolog		2	NC_059510.1	822159	846886	plus	22
+27457	Bactrocera dorsalis	105231878	0	live	LOC105231878		protein timeless homolog	protein timeless homolog		2	NC_064304.1	30592996	31048348	plus	18
+133901	Frankliniella occidentalis	113214157	0	live	LOC113214157	FOCC_FOCC010700	protein timeless homolog	protein timeless homolog		Un	NW_026267250.1	119734	135980	plus	12
+108931	Nilaparvata lugens	111056553	0	live	LOC111056553		TIMELESS-interacting protein	TIMELESS-interacting protein		2	NC_052505.1	81541424	81554731	minus	5
+7054	Photinus pyralis	116177910	0	live	LOC116177910	PPYR_00466	TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_022170249.1	11700063	11701285	minus	2
+7130	Manduca sexta	115455952	0	live	LOC115455952	O3G_MSEX002849	TIMELESS-interacting protein	TIMELESS-interacting protein		5	NC_051119.1	8700135	8703887	plus	5
+7539	Leptinotarsa decemlineata	111508996	0	live	LOC111508996		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_019290776.1	38236	40664	minus	2
+58002	Daktulosphaira vitifoliae	126896444	0	live	LOC126896444		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_026099572.1	66171648	66173845	minus	3
+63436	Leptopilina heterotoma	122504090	0	live	LOC122504090		protein timeless homolog	protein timeless homolog		Un	NW_025110986.1	322058	1032761	plus	32
+7038	Bemisia tabaci	109037572	0	live	LOC109037572		protein timeless homolog	protein timeless homolog		Un	NW_017549085.1	1321835	1619302	minus	24
+7038	Bemisia tabaci	109035505	0	live	LOC109035505		protein timeless	protein timeless		Un	NW_017547498.1	159970	267997	plus	20
+110368	Bicyclus anynana	112058572	0	live	LOC112058572		protein timeless	protein timeless		3	NC_069085.1	10727097	10764847	minus	17
+110368	Bicyclus anynana	112055811	0	live	LOC112055811		protein timeless homolog	protein timeless homolog		12	NC_069094.1	13540054	13579295	plus	22
+51655	Plutella xylostella	105387918	0	live	LOC105387918	PLXY1_LOCUS100	protein timeless homolog	protein timeless homolog		9	NC_063989.1	10269132	10302092	plus	22
+28588	Zeugodacus cucurbitae	105215085	0	live	LOC105215085	tim	protein timeless	protein timeless		3	NC_071668.1	18408405	18454598	minus	18
+95512	Anastrepha obliqua	129237507	0	live	LOC129237507		protein timeless homolog	protein timeless homolog		1	NC_072892.1	140003713	140065265	minus	8
+95512	Anastrepha obliqua	129236331	0	live	LOC129236331		protein timeless homolog	protein timeless homolog		1	NC_072892.1	140674798	140828604	minus	10
+28586	Anastrepha ludens	128855461	0	live	LOC128855461		protein timeless homolog	protein timeless homolog		2	NC_071498.1	141366005	141529469	plus	10
+197161	Ischnura elegans	124171935	0	live	LOC124171935		protein timeless homolog	protein timeless homolog		1	NC_060246.1	147589920	148167652	plus	29
+116150	Pararge aegeria	120635901	0	live	LOC120635901		protein timeless	protein timeless		3	NC_053182.1	11802043	11828907	minus	17
+58002	Daktulosphaira vitifoliae	126904119	0	live	LOC126904119		protein timeless homolog	protein timeless homolog		Un	NW_026099575.1	26541990	26551464	minus	21
+7230	Drosophila mojavensis	6572799	0	live	LOC6572799	Dmoj_GI23372, GI23372, GI23372-PB	protein timeless homolog	protein timeless homolog|Dmoj\GI23372|Dmoj\GI23372-PB|dmoj_GLEANR_8511		Un	NW_025318693.1	10317458	10408977	plus	18
+7217	Drosophila ananassae	6500366	0	live	LOC6500366	Dana_GF17582, GF17582, GF17582-PB, GF17582-PC	protein timeless homolog	protein timeless homolog|Dana\GF17582|Dana\GF17582-PB|Dana\GF17582-PC|dana_GLEANR_18845		2L	NC_057927.1	1486659	1559358	plus	18
+1458189	Cydia fagiglandana	134678634	0	live	LOC134678634		TIMELESS-interacting protein	TIMELESS-interacting protein		2	NC_085933.1	21622416	21629097	minus	6
+1869771	Cydia amplana	134659946	0	live	LOC134659946		TIMELESS-interacting protein	TIMELESS-interacting protein		2	NC_086070.1	21300187	21303054	minus	5
+93214	Bacillus rossius redtenbacheri	134530535	0	live	LOC134530535		TIMELESS-interacting protein	TIMELESS-interacting protein		3	NC_086332.1	37306133	37324496	plus	6
+44670	Metopolophium dirhodum	132945210	0	live	LOC132945210		TIMELESS-interacting protein	TIMELESS-interacting protein		5	NC_083564.1	26154655	26157112	minus	2
+40932	Rhopalosiphum padi	132921131	0	live	LOC132921131		TIMELESS-interacting protein	TIMELESS-interacting protein		2	NC_083598.1	26589672	26592025	plus	2
+2078957	Neocloeon triangulifer	132196403	0	live	LOC132196403		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_026775554.1	7386962	7388072	minus	4
+688607	Achroia grisella	131855436	0	live	LOC131855436		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_026712630.1	350970	357101	minus	7
+1163345	Diorhabda carinulata	130897918	0	live	LOC130897918		TIMELESS-interacting protein	TIMELESS-interacting protein		1	NC_079460.1	32742238	32748027	minus	2
+375433	Microplitis mediator	130663511	0	live	LOC130663511		TIMELESS-interacting protein	TIMELESS-interacting protein		2	NC_079970.1	16634659	16635943	plus	1
+1163346	Diorhabda sublineata	130450675	0	live	LOC130450675		TIMELESS-interacting protein	TIMELESS-interacting protein		X	NC_079485.1	40235484	40239144	minus	2
+74068	Macrosteles quadrilineatus	128992673	0	live	LOC128992673		TIMELESS-interacting protein-like	TIMELESS-interacting protein-like		Un	NW_026542597.1	72016407	72035903	minus	5
+133065	Adelges cooleyi	126833933	0	live	LOC126833933		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_026095751.1	7983184	7984979	plus	3
+171585	Nymphalis io	126777661	0	live	LOC126777661		TIMELESS-interacting protein	TIMELESS-interacting protein		23	NC_065910.1	1635356	1640773	minus	5
+2023355	Schistocerca serialis cubense	126484271	0	live	LOC126484271		TIMELESS-interacting protein	TIMELESS-interacting protein		6	NC_064643.1	255830670	255890908	minus	6
+7011	Schistocerca nitens	126262569	0	live	LOC126262569		TIMELESS-interacting protein	TIMELESS-interacting protein		6	NC_064619.1	529329814	529390554	plus	6
+78633	Pieris napi	125052913	0	live	LOC125052913		TIMELESS-interacting protein	TIMELESS-interacting protein		10	NC_062243.1	7781185	7784446	plus	6
+7009	Schistocerca americana	124616059	0	live	LOC124616059		TIMELESS-interacting protein	TIMELESS-interacting protein		5	NC_060123.1	519533307	519596409	plus	6
+7116	Pieris brassicae	123710730	0	live	LOC123710730		TIMELESS-interacting protein	TIMELESS-interacting protein		6	NC_059670.1	6751065	6757735	plus	6
+115357	Harmonia axyridis	123688759	0	live	LOC123688759		TIMELESS-interacting protein	TIMELESS-interacting protein		1	NC_059501.1	22037391	22039465	minus	2
+41139	Coccinella septempunctata	123306872	0	live	LOC123306872		TIMELESS-interacting protein	TIMELESS-interacting protein		2	NC_058190.1	24740729	24742837	minus	2
+189513	Chrysoperla carnea	123299041	0	live	LOC123299041		TIMELESS-interacting protein	TIMELESS-interacting protein		4	NC_058340.1	3649721	3650751	minus	1
+63436	Leptopilina heterotoma	122506077	0	live	LOC122506077		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_025111060.1	91823	93438	plus	2
+33412	Zerene cesonia	119836771	0	live	LOC119836771		TIMELESS-interacting protein	TIMELESS-interacting protein		25	NC_052126.1	1092070	1094918	minus	5
+13037	Danaus plexippus	116773656	0	live	LOC116773656		TIMELESS-interacting protein	TIMELESS-interacting protein|protein TIPIN homolog		22	NW_026869856.1	921819	925457	minus	5
+7425	Nasonia vitripennis	116738451	0	live	LOC116738451		TIMELESS-interacting protein	TIMELESS-interacting protein		2	NC_045758.1	30857027	30860162	minus	2
+7048	Sitophilus oryzae	115874803	0	live	LOC115874803		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_022145945.1	12159601	12167457	plus	3
+7092	Bombyx mandarina	114240905	0	live	LOC114240905		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_021011495.1	2399893	2406153	minus	5
+80765	Aphis gossypii	114123406	0	live	LOC114123406		TIMELESS-interacting protein	TIMELESS-interacting protein		1	NC_065530.1	33954130	33957022	minus	3
+43146	Rhopalosiphum maidis	113551639	0	live	LOC113551639		TIMELESS-interacting protein	LOW QUALITY PROTEIN: TIMELESS-interacting protein		2	NC_040878.1	43979875	43981464	plus	2
+334116	Vanessa tameamea	113397719	0	live	LOC113397719		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_020663278.1	1675386	1679105	plus	6
+1477025	Hyposmocoma kahamanoa	113227465	0	live	LOC113227465		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_020653731.1	92302	96536	minus	5
+143950	Sipha flava	112685912	0	live	LOC112685912		TIMELESS-interacting protein	TIMELESS-interacting protein|Protein TIPIN		Un	NW_020272970.1	163888	170004	plus	2
+742174	Melanaphis sacchari	112598523	0	live	LOC112598523		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_020271327.1	3566865	3568326	minus	2
+166361	Onthophagus taurus	111424483	0	live	LOC111424483		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_019286117.1	580083	581360	minus	2
+13164	Myzus persicae	111030214	0	live	LOC111030214		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_019101707.1	279507	280753	plus	2
+7038	Bemisia tabaci	109042969	0	live	LOC109042969		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_017566682.1	2774940	2786172	plus	6
+217634	Anoplophora glabripennis	108913174	0	live	LOC108913174	TIPIN	TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_019416819.1	24921	32260	plus	2
+597456	Habropoda laboriosa	108579917	0	live	LOC108579917	WH47_03564	TIMELESS-interacting protein	TIMELESS-interacting protein|Protein TIPIN like protein		Un	NW_017100190.1	5946479	5947497	plus	1
+110193	Nicrophorus vespilloides	108562866	0	live	LOC108562866		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_017098599.1	438252	439250	plus	2
+454923	Diachasma alloeum	107038222	0	live	LOC107038222		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_021680418.1	177956	180867	minus	1
+79782	Cimex lectularius	106664405	0	live	LOC106664405		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_019392716.1	898395	902359	minus	2
+66420	Papilio xuthus	106115349	0	live	LOC106115349		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_013528989.1	961957	964747	minus	5
+76194	Papilio polytes	106103267	0	live	LOC106103267		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_013525369.1	1222711	1227121	plus	5
+222816	Orussus abietinus	105697859	0	live	LOC105697859		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_019394385.1	141951	143651	plus	2
+326594	Ceratosolen solmsi marchali	105363917	0	live	LOC105363917		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_011948430.1	242341	243020	minus	1
+64838	Fopius arisanus	105264643	0	live	LOC105264643		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_011887763.1	842156	844252	plus	1
+121845	Diaphorina citri	103523876	0	live	LOC103523876		TIMELESS-interacting protein-like	TIMELESS-interacting protein-like		Un	NW_007427442.1	7	1090	plus	3
+29057	Ostrinia nubilalis	135087922	0	live	LOC135087922		protein timeless	protein timeless		3	NC_087090.1	11490981	11518928	plus	17
+1100963	Cydia splendana	134806741	0	live	LOC134806741		protein timeless-like	protein timeless-like		3	NC_085962.1	20236614	20270475	minus	16
+1100963	Cydia splendana	134792218	0	live	LOC134792218		protein timeless homolog	protein timeless homolog		7	NC_085966.1	14275050	14301043	plus	22
+1100964	Cydia strobilella	134743656	0	live	LOC134743656		protein timeless homolog	protein timeless homolog		8	NC_086048.1	12430746	12459714	plus	22
+1100964	Cydia strobilella	134741792	0	live	LOC134741792		protein timeless-like	protein timeless-like		5	NC_086045.1	19333716	19351797	minus	19
+1458189	Cydia fagiglandana	134666905	0	live	LOC134666905		protein timeless-like	protein timeless-like		8	NC_085939.1	3351526	3383850	plus	17
+1458189	Cydia fagiglandana	134664565	0	live	LOC134664565		protein timeless homolog	protein timeless homolog		5	NC_085936.1	13462443	13486422	plus	22
+1869771	Cydia amplana	134662651	0	live	LOC134662651		protein timeless-like	protein timeless-like		3	NC_086071.1	5240702	5264772	minus	17
+1869771	Cydia amplana	134649652	0	live	LOC134649652		protein timeless homolog	protein timeless homolog		7	NC_086075.1	12323377	12350056	plus	22
+89887	Drosophila sulfurigaster albostrigata	133839641	0	live	LOC133839641		protein timeless homolog	LOW QUALITY PROTEIN: protein timeless homolog		2R	NC_084882.1	16668386	16731746	plus	18
+82600	Cydia pomonella	133520521	0	live	LOC133520521		protein timeless homolog	protein timeless homolog		8	NC_084710.1	9824752	9860742	minus	22
+82600	Cydia pomonella	133517429	0	live	LOC133517429		protein timeless-like	protein timeless-like		4	NC_084706.1	4495323	4528435	plus	16
+27455	Musca vetustissima	133335791	0	live	LOC133335791		protein timeless	protein timeless		Un	NW_026887936.1	80306	92728	plus	10
+27455	Musca vetustissima	133331492	0	live	LOC133331492		protein timeless homolog	protein timeless homolog		Un	NW_026884522.1	381759	421414	plus	8
+27455	Musca vetustissima	133328336	0	live	LOC133328336		protein timeless-like	protein timeless-like		Un	NW_026882124.1	30224	34373	minus	6
+27455	Musca vetustissima	133328033	0	live	LOC133328033		protein timeless-like	protein timeless-like		Un	NW_026881928.1	35820	37745	plus	3
+27455	Musca vetustissima	133322191	0	live	LOC133322191		protein timeless homolog	protein timeless homolog		Un	NW_026877572.1	41396	219956	plus	10
+27455	Musca vetustissima	133321590	0	live	LOC133321590		protein timeless-like	protein timeless-like		Un	NW_026877059.1	12654	17362	minus	6
+44670	Metopolophium dirhodum	132943900	0	live	LOC132943900		protein timeless homolog	protein timeless homolog		4	NC_083563.1	9028871	9037684	minus	22
+40932	Rhopalosiphum padi	132927788	0	live	LOC132927788		protein timeless	LOW QUALITY PROTEIN: protein timeless		3	NC_083599.1	64043518	64063159	minus	16
+42062	Drosophila nasuta	132784330	0	live	LOC132784330		protein timeless homolog	protein timeless homolog		2R	NC_083456.1	14640601	14704972	minus	18
+94469	Phlebotomus argentipes	132265171	0	live	LOC132265171		protein timeless homolog	protein timeless homolog		Un	NW_026776145.1	2559595	2563620	minus	11
+2078957	Neocloeon triangulifer	132203102	0	live	LOC132203102		protein timeless homolog	protein timeless homolog		Un	NW_026775559.1	7925049	7957951	plus	28
+688607	Achroia grisella	131841770	0	live	LOC131841770		protein timeless homolog	protein timeless homolog		Un	NW_026712695.1	1432655	1445856	minus	22
+2498891	Topomyia yanbarensis	131676224	0	live	LOC131676224		protein timeless homolog	protein timeless homolog		1	NC_080670.1	144286846	144516196	minus	15
+325434	Malaya genurostris	131431171	0	live	LOC131431171		protein timeless	protein timeless		2	NC_080571.1	314507065	314529153	minus	12
+325434	Malaya genurostris	131425145	0	live	LOC131425145		protein timeless homolog	protein timeless homolog		1	NC_080570.1	95733133	95898428	plus	15
+345580	Anopheles ziemanni	131282627	0	live	LOC131282627		protein timeless homolog	protein timeless homolog		2	NC_080705.1	19299991	19303756	minus	1
+345580	Anopheles ziemanni	131281295	0	live	LOC131281295		protein timeless	protein timeless		2	NC_080705.1	34856683	34864551	plus	14
+139045	Anopheles coustani	131266157	0	live	LOC131266157		protein timeless	protein timeless		2	NC_071289.1	34856683	34866185	plus	14
+139045	Anopheles coustani	131263566	0	live	LOC131263566		protein timeless homolog	protein timeless homolog		2	NC_071289.1	19299929	19303775	minus	1
+139047	Anopheles bellator	131215221	0	live	LOC131215221		protein timeless homolog	protein timeless homolog		1	NC_071285.1	21892483	21896938	plus	15
+290404	Eupeodes corollae	129938416	0	live	LOC129938416		protein timeless homolog	protein timeless homolog		1	NC_079147.1	66568199	66572402	plus	1
+286459	Episyrphus balteatus	129915486	0	live	LOC129915486		protein timeless homolog	protein timeless homolog		3	NC_079136.1	44007394	44011572	minus	2
+29031	Phlebotomus papatasi	129807587	0	live	LOC129807587		protein timeless homolog	protein timeless homolog		1	NC_077222.1	55735831	55749840	plus	11
+7200	Lutzomyia longipalpis	129786412	0	live	LOC129786412		protein timeless homolog	protein timeless homolog|putative dna topoisomerase i-interacting protein		1	NC_074707.1	3383759	3390816	plus	10
+329112	Toxorhynchites rutilus septentrionalis	129762449	0	live	LOC129762449		protein timeless homolog	protein timeless homolog		1	NC_073744.1	112687759	112910870	minus	15
+190385	Uranotaenia lowii	129759220	0	live	LOC129759220		protein timeless-like	protein timeless-like		Un	NW_026597218.1	5888	9940	minus	5
+190385	Uranotaenia lowii	129753099	0	live	LOC129753099		protein timeless homolog	protein timeless homolog		1	NC_073691.1	96122597	96347692	minus	15
+190385	Uranotaenia lowii	129745645	0	live	LOC129745645		protein timeless-like	protein timeless-like		2	NC_073692.1	69472039	69495227	plus	3
+190385	Uranotaenia lowii	129741532	0	live	LOC129741532		protein timeless-like	protein timeless-like		2	NC_073692.1	69399637	69408589	minus	10
+2530218	Condylostylus longicornis	129615416	0	live	LOC129615416		protein timeless	LOW QUALITY PROTEIN: protein timeless		Un	NW_026578103.1	15851929	15869970	minus	16
+2530218	Condylostylus longicornis	129612766	0	live	LOC129612766		protein timeless homolog	protein timeless homolog		Un	NW_026577973.1	7697232	7765116	plus	12
+263140	Sitodiplosis mosellana	129579023	0	live	LOC129579023		protein timeless homolog	protein timeless homolog		Un	NW_022601467.1	764097	781117	plus	19
+74068	Macrosteles quadrilineatus	128999074	0	live	LOC128999074		protein timeless homolog	protein timeless homolog		Un	NW_026542600.1	71121978	71196892	minus	28
+74068	Macrosteles quadrilineatus	128997824	0	live	LOC128997824		protein timeless homolog	protein timeless homolog		Un	NW_026542600.1	72681457	72778069	plus	28
+28586	Anastrepha ludens	128855168	0	live	LOC128855168		protein timeless homolog	protein timeless homolog		2	NC_071498.1	142181425	142237185	plus	7
+185578	Anopheles nili	128728516	0	live	LOC128728516		protein timeless homolog	protein timeless homolog		X	NC_071293.1	5104966	5109450	minus	16
+185578	Anopheles nili	128728514	0	live	LOC128728514		protein timeless homolog	protein timeless homolog		X	NC_071293.1	5097560	5102006	minus	16
+185578	Anopheles nili	128723516	0	live	LOC128723516		protein timeless	protein timeless		3	NC_071292.1	27090145	27098457	minus	14
+1521116	Anopheles marshallii	128711306	0	live	LOC128711306		protein timeless	protein timeless		3	NC_071327.1	15230861	15238290	minus	14
+1521116	Anopheles marshallii	128710174	0	live	LOC128710174		protein timeless homolog	protein timeless homolog		2	NC_071326.1	75683450	75688458	minus	15
+58824	Plodia interpunctella	128671370	0	live	LOC128671370		protein timeless homolog	protein timeless homolog		7	NC_071300.1	4300469	4314866	plus	22
+186751	Anopheles moucheti	128310262	0	live	LOC128310262		protein timeless homolog	protein timeless homolog		2	NC_069140.1	86706617	86711928	plus	15
+68878	Anopheles cruzii	128278713	0	live	LOC128278713		protein timeless homolog	protein timeless homolog		2	NC_069144.1	24052993	24058273	minus	13
+68878	Anopheles cruzii	128278712	0	live	LOC128278712		protein timeless homolog	LOW QUALITY PROTEIN: protein timeless homolog		2	NC_069144.1	24042746	24051043	minus	22
+68878	Anopheles cruzii	128276433	0	live	LOC128276433		protein timeless homolog	protein timeless homolog		Un	NW_026454752.1	6	2137	plus	8
+103775	Drosophila gunungcola	128263112	0	live	LOC128263112	M5D96_003276	protein timeless	LOW QUALITY PROTEIN: protein timeless		Un	NW_026453197.1	19928399	19947122	minus	17
+63433	Leptopilina boulardi	127287626	0	live	LOC127287626		protein timeless homolog	protein timeless homolog		Un	NW_026137943.1	3402278	3462304	minus	17
+63433	Leptopilina boulardi	127278550	0	live	LOC127278550		protein timeless homolog	protein timeless homolog		Un	NW_026137760.1	62067	87702	minus	16
+7454	Vespula vulgaris	127061355	0	live	LOC127061355		protein timeless homolog	protein timeless homolog		2	NC_066587.1	15151857	15310726	minus	29
+189913	Leptidea sinapis	126976742	0	live	LOC126976742		protein timeless homolog	protein timeless homolog		42	NC_066306.1	1974845	2037381	plus	22
+189913	Leptidea sinapis	126972865	0	live	LOC126972865		protein timeless-like	protein timeless-like		27	NC_066291.1	7754572	7775591	plus	3
+189913	Leptidea sinapis	126972757	0	live	LOC126972757		protein timeless-like	protein timeless-like		27	NC_066291.1	7777278	7807359	plus	14
+133065	Adelges cooleyi	126840645	0	live	LOC126840645		protein timeless homolog	LOW QUALITY PROTEIN: protein timeless homolog		Un	NW_026096053.1	1856210	1862276	minus	21
+171585	Nymphalis io	126780877	0	live	LOC126780877		protein timeless	protein timeless		3	NC_065890.1	6873666	6890413	plus	17
+171585	Nymphalis io	126768871	0	live	LOC126768871		protein timeless homolog	protein timeless homolog		6	NC_065893.1	14247818	14292559	minus	22
+98809	Bactrocera neohumeralis	126751768	0	live	LOC126751768		protein timeless homolog	protein timeless homolog		2	NC_065919.1	57461084	58032636	minus	19
+2921223	Anthonomus grandis grandis	126745138	0	live	LOC126745138		protein timeless homolog	protein timeless homolog		15	NC_065560.1	18907319	19724525	minus	21
+42839	Anopheles aquasalis	126572492	0	live	LOC126572492		protein timeless homolog	protein timeless homolog		2	NC_064877.1	80655900	80660526	minus	14
+1496333	Anopheles maculipalpis	126567792	0	live	LOC126567792		protein timeless homolog	LOW QUALITY PROTEIN: protein timeless homolog		2RL	NC_064871.1	94949722	94954754	minus	14
+1496333	Anopheles maculipalpis	126563879	0	live	LOC126563879		protein timeless	LOW QUALITY PROTEIN: protein timeless		3RL	NC_064872.1	8578166	8585930	plus	13
+2023355	Schistocerca serialis cubense	126428133	0	live	LOC126428133		protein timeless homolog	protein timeless homolog		12	NC_064649.1	87995256	88478658	minus	28
+13191	Pectinophora gossypiella	126369490	0	live	LOC126369490		protein timeless homolog	protein timeless homolog		9	NC_065412.1	6634293	6649832	minus	22
+7010	Schistocerca gregaria	126318626	0	live	LOC126318626		protein timeless homolog	protein timeless homolog		Un	NW_026062056.1	83533	86398	plus	3
+7010	Schistocerca gregaria	126293367	0	live	LOC126293367		protein timeless homolog	protein timeless homolog		10	NC_064929.1	144402478	144824903	plus	28
+7011	Schistocerca nitens	126215067	0	live	LOC126215067		protein timeless homolog	protein timeless homolog		12	NC_064625.1	105631803	106138412	minus	28
+274614	Schistocerca cancellata	126109472	0	live	LOC126109472		protein timeless homolog	protein timeless homolog		12	NC_064637.1	78092365	78597625	plus	28
+43151	Anopheles darlingi	125960193	0	live	LOC125960193		protein timeless homolog	protein timeless homolog|putative secreted protein		2	NC_064874.1	83182353	83187137	plus	15
+62324	Anopheles funestus	125766865	0	live	LOC125766865		protein timeless homolog	protein timeless homolog		3RL	NC_064599.1	67315924	67321457	minus	15
+42275	Vanessa atalanta	125065389	0	live	LOC125065389		protein timeless homolog	protein timeless homolog		7	NC_061877.1	337727	374603	plus	22
+78633	Pieris napi	125063636	0	live	LOC125063636		protein timeless homolog	protein timeless homolog		3	NC_062236.1	1131078	1161849	plus	22
+274613	Schistocerca piceifrons	124718819	0	live	LOC124718819		protein timeless homolog	protein timeless homolog		10	NC_060147.1	92348470	92838616	minus	28
+171605	Vanessa cardui	124532349	0	live	LOC124532349		protein timeless homolog	protein timeless homolog		9	NC_061131.1	387252	441198	plus	22
+171605	Vanessa cardui	124531451	0	live	LOC124531451		protein timeless	protein timeless		7	NC_061129.1	7366007	7379642	plus	17
+7375	Lucilia cuprina	124419223	0	live	LOC124419223		protein timeless-like	protein timeless-like		4	NC_060952.1	57674424	57722098	plus	3
+362088	Diprion similis	124405745	0	live	LOC124405745		protein timeless homolog	protein timeless homolog		1	NC_060105.1	713061	792423	plus	27
+197043	Homalodisca vitripennis	124355745	0	live	LOC124355745		protein timeless homolog	protein timeless homolog		2	NC_060208.1	99807101	99866803	plus	23
+2961670	Neodiprion virginianus	124301345	0	live	LOC124301345		protein timeless homolog	protein timeless homolog		1	NC_060877.1	657367	746215	plus	27
+441929	Neodiprion pinetum	124216277	0	live	LOC124216277		protein timeless homolog	protein timeless homolog		1	NC_060232.1	687521	775703	plus	27
+2872261	Neodiprion fabricii	124178445	0	live	LOC124178445		protein timeless homolog	protein timeless homolog		1	NC_060239.1	654177	741743	plus	27
+191418	Maniola jurtina	123865815	0	live	LOC123865815		protein timeless	protein timeless		1	NC_060029.1	9406890	9425925	minus	17
+72248	Colias croceus	123693191	0	live	LOC123693191		protein timeless homolog	protein timeless homolog		7	NC_059543.1	1365997	1404105	plus	23
+115357	Harmonia axyridis	123678192	0	live	LOC123678192		protein timeless	protein timeless		4	NC_059504.1	21025903	21058406	plus	14
+113334	Melitaea cinxia	123669425	0	live	LOC123669425		protein timeless	protein timeless		3	NC_059396.1	9513525	9529176	plus	15
+113334	Melitaea cinxia	123655019	0	live	LOC123655019		protein timeless homolog	protein timeless homolog		7	NC_059400.1	13646785	13694714	plus	22
+41139	Coccinella septempunctata	123319598	0	live	LOC123319598		protein timeless homolog	protein timeless homolog		8	NC_058196.1	21064773	21423478	minus	20
+41139	Coccinella septempunctata	123312617	0	live	LOC123312617		protein timeless	protein timeless		4	NC_058192.1	17658000	17673562	minus	14
+189513	Chrysoperla carnea	123305050	0	live	LOC123305050		protein timeless homolog	protein timeless homolog		1	NC_058337.1	136836802	137410773	minus	17
+189513	Chrysoperla carnea	123292921	0	live	LOC123292921		protein timeless	protein timeless		1	NC_058337.1	102566629	102589944	plus	13
+41895	Tribolium madens	123007572	0	live	LOC123007572		protein timeless homolog	protein timeless homolog		Un	NW_025401006.1	5408107	5457014	minus	19
+29030	Drosophila takahashii	123003037	0	live	LOC123003037		protein timeless homolog	protein timeless homolog		Un	NW_025323477.1	9226388	9233145	minus	8
+684658	Aphidius gifuensis	122855336	0	live	LOC122855336	HCN44_000094	protein timeless homolog	protein timeless homolog		LG4	NC_057791.1	16925550	17009843	minus	24
+7243	Drosophila teissieri	122626771	0	live	LOC122626771		protein timeless	LOW QUALITY PROTEIN: protein timeless		2L	NC_053029.1	3587734	3598496	minus	14
+7243	Drosophila teissieri	122618967	0	live	LOC122618967		protein timeless homolog	protein timeless homolog		3R	NC_053032.1	14078529	14153622	plus	18
+396416	Bombus pyrosoma	122566444	0	live	LOC122566444		protein timeless homolog	protein timeless homolog		LG4	NC_057773.1	7328975	7576333	minus	28
+30207	Polistes fuscatus	122522624	0	live	LOC122522624		protein timeless homolog	protein timeless homolog		Un	NW_025113129.1	8166562	8326224	minus	27
+32260	Venturia canescens	122406990	0	live	LOC122406990		protein timeless homolog	protein timeless homolog		2	NC_057422.1	2677191	2688295	minus	18
+935657	Colletes gigas	122396127	0	live	LOC122396127		protein timeless homolog	protein timeless homolog		Un	NW_025106630.1	886853	1122664	minus	22
+91739	Aricia agestis	121727489	0	live	LOC121727489		protein timeless homolog	protein timeless homolog		5	NC_056410.1	13430565	13482984	plus	23
+30066	Anopheles merus	121603218	0	live	LOC121603218		protein timeless homolog	protein timeless homolog		Un	NW_024428508.1	10792	11696	minus	3
+30066	Anopheles merus	121599652	0	live	LOC121599652		protein timeless homolog	protein timeless homolog		3L	NC_054085.1	9357351	9362553	minus	15
+1518534	Anopheles coluzzii	120958164	0	live	LOC120958164		protein timeless homolog	protein timeless homolog		3	NC_064671.1	64541538	64546775	minus	15
+7173	Anopheles arabiensis	120903608	0	live	LOC120903608		protein timeless homolog	protein timeless homolog		3	NC_053518.1	64803796	64809034	minus	15
+59916	Bactrocera tryoni	120782568	0	live	LOC120782568		protein timeless homolog	protein timeless homolog		1	NC_052499.1	56224854	56720530	minus	18
+129105	Drosophila santomea	120451191	0	live	LOC120451191		protein timeless homolog	protein timeless homolog		3R	NC_053019.2	13195342	13264813	plus	18
+42434	Culex pipiens pallens	120424135	0	live	LOC120424135		protein timeless homolog	protein timeless homolog		1	NC_068937.1	60216247	60367130	minus	15
+7108	Spodoptera frugiperda	118268375	0	live	LOC118268375		protein timeless homolog	protein timeless homolog		29	NC_064240.1	8313611	8329721	minus	22
+7241	Drosophila subobscura	117902710	0	live	LOC117902710		protein timeless	protein timeless		U	NC_048534.1	22928084	22940534	plus	15
+7241	Drosophila subobscura	117896500	0	live	LOC117896500		protein timeless homolog	protein timeless homolog		O	NC_048533.1	14510365	14578905	plus	18
+198719	Drosophila innubila	117790110	0	live	LOC117790110		protein timeless homolog	protein timeless homolog		3R	NW_022995380.1	28113842	28187183	minus	18
+7291	Drosophila albomicans	117573681	0	live	LOC117573681		protein timeless homolog	protein timeless homolog		2R	NC_047631.2	15763833	15827286	minus	18
+80765	Aphis gossypii	114119016	0	live	LOC114119016		protein timeless	protein timeless		X	NC_065533.1	12418979	12433558	plus	16
+121845	Diaphorina citri	113465360	0	live	LOC113465360		protein timeless homolog	protein timeless homolog		Un	NW_007379753.1	31439	35701	minus	4
+1477025	Hyposmocoma kahamanoa	113231819	0	live	LOC113231819		protein timeless homolog	protein timeless homolog		Un	NW_020653854.1	399597	412716	plus	16
+105785	Cryptotermes secundus	111871645	0	live	LOC111871645	B7P43_G00605	protein timeless homolog	protein timeless homolog		Un	NW_019739208.1	562201	651670	plus	20
+7375	Lucilia cuprina	111684763	0	live	LOC111684763		protein timeless homolog	protein timeless homolog		4	NC_060952.1	20672511	20946772	plus	18
+7282	Drosophila obscura	111066881	0	live	LOC111066881		protein timeless homolog	LOW QUALITY PROTEIN: protein timeless homolog		Un	NW_024542736.1	7740411	7810108	plus	18
+13164	Myzus persicae	111033438	0	live	LOC111033438		protein timeless-like	protein timeless-like		Un	NW_019102926.1	312025	316138	plus	5
+116153	Aethina tumida	109595664	0	live	LOC109595664		protein timeless homolog	protein timeless homolog		3	NC_065437.1	27041160	27162936	minus	19
+174628	Bactrocera latifrons	108967610	0	live	LOC108967610		protein timeless homolog	protein timeless homolog		Un	NW_017535430.1	57797	91225	plus	7
+217634	Anoplophora glabripennis	108904053	0	live	LOC108904053		protein timeless homolog	protein timeless homolog		Un	NW_019416481.1	1416561	1723593	plus	19
+471704	Trachymyrmex cornetzi	108759633	0	live	LOC108759633		protein timeless homolog	LOW QUALITY PROTEIN: protein timeless homolog		Un	NW_017296636.1	35110	48534	minus	15
+34720	Trachymyrmex septentrionalis	108751445	0	live	LOC108751445		protein timeless homolog	LOW QUALITY PROTEIN: protein timeless homolog		Un	NW_017305611.1	2454161	2467526	minus	15
+224129	Agrilus planipennis	108745019	0	live	LOC108745019		protein timeless	protein timeless		Un	NW_020439074.1	1797295	1807204	plus	12
+224129	Agrilus planipennis	108738658	0	live	LOC108738658		protein timeless homolog	protein timeless homolog		Un	NW_020438876.1	612371	725212	plus	18
+64791	Trachymyrmex zeteki	108729974	0	live	LOC108729974		protein timeless homolog	LOW QUALITY PROTEIN: protein timeless homolog		Un	NW_017257853.1	471503	515529	plus	14
+64791	Trachymyrmex zeteki	108729973	0	live	LOC108729973		protein timeless homolog	LOW QUALITY PROTEIN: protein timeless homolog		Un	NW_017257853.1	415340	427056	plus	12
+7263	Drosophila arizonae	108608709	0	live	LOC108608709		protein timeless homolog	protein timeless homolog		2	NW_017127682.1	6548172	6641462	minus	18
+30019	Drosophila busckii	108607917	0	live	LOC108607917		protein timeless	protein timeless		2L	NC_046604.1	16119154	16132552	minus	14
+30019	Drosophila busckii	108601566	0	live	LOC108601566	timeout	protein timeless homolog	protein timeless homolog		3R	NC_046607.1	7177780	7186660	plus	9
+597456	Habropoda laboriosa	108575503	0	live	LOC108575503		protein timeless homolog	LOW QUALITY PROTEIN: protein timeless homolog		Un	NW_017100417.1	457606	472766	minus	13
+110193	Nicrophorus vespilloides	108567601	0	live	LOC108567601		protein timeless homolog	protein timeless homolog		Un	NW_017095891.1	7046	16035	minus	9
+110193	Nicrophorus vespilloides	108558671	0	live	LOC108558671		protein timeless homolog	protein timeless homolog		Un	NW_017096992.1	20228	33013	minus	9
+110193	Nicrophorus vespilloides	108557741	0	live	LOC108557741		protein timeless	protein timeless		Un	NW_017096643.1	287658	292272	minus	12
+28612	Rhagoletis zephyria	108382676	0	live	LOC108382676		protein timeless	protein timeless		Un	NW_016185194.1	72	4473	minus	11
+28612	Rhagoletis zephyria	108380856	0	live	LOC108380856		protein timeless homolog	protein timeless homolog		Un	NW_016177683.1	299	3970	plus	3
+28612	Rhagoletis zephyria	108375995	0	live	LOC108375995		protein timeless homolog	protein timeless homolog		Un	NW_016166812.1	9392	17237	plus	3
+28612	Rhagoletis zephyria	108371566	0	live	LOC108371566		protein timeless homolog	protein timeless homolog		Un	NW_016162158.1	5354	27397	minus	4
+28612	Rhagoletis zephyria	108370568	0	live	LOC108370568		protein timeless homolog	protein timeless homolog		Un	NW_016161404.1	5044	31973	minus	4
+28612	Rhagoletis zephyria	108365666	0	live	LOC108365666		protein timeless homolog	protein timeless homolog		Un	NW_016159036.1	65048	72802	minus	5
+7229	Drosophila miranda	108156183	0	live	LOC108156183		protein timeless homolog	protein timeless homolog		2	NC_046675.1	14304560	14373170	plus	18
+30023	Drosophila elegans	108134741	0	live	LOC108134741		protein timeless	LOW QUALITY PROTEIN: protein timeless		Un	NW_024546167.1	19702316	19719265	minus	16
+30023	Drosophila elegans	108134607	0	live	LOC108134607		protein timeless homolog	protein timeless homolog		Un	NW_024545863.1	15782166	15860308	minus	18
+42026	Drosophila bipectinata	108126026	0	live	LOC108126026		protein timeless	LOW QUALITY PROTEIN: protein timeless		Un	NW_025063983.1	9063556	9075690	minus	15
+29029	Drosophila eugracilis	108116869	0	live	LOC108116869		protein timeless homolog	LOW QUALITY PROTEIN: protein timeless homolog		Un	NW_024573278.1	1886652	1957811	plus	18
+29029	Drosophila eugracilis	108110922	0	live	LOC108110922		protein timeless	LOW QUALITY PROTEIN: protein timeless		Un	NW_024573036.1	1292699	1303090	minus	14
+30033	Drosophila kikkawai	108086133	0	live	LOC108086133		protein timeless	LOW QUALITY PROTEIN: protein timeless		Un	NW_024571435.1	25840637	25859166	plus	15
+30033	Drosophila kikkawai	108073232	0	live	LOC108073232		protein timeless homolog	protein timeless homolog		Un	NW_024571315.1	26309643	26381908	minus	18
+29030	Drosophila takahashii	108062066	0	live	LOC108062066		protein timeless	LOW QUALITY PROTEIN: protein timeless		Un	NW_025323500.1	3465108	3479820	plus	14
+29030	Drosophila takahashii	108059826	0	live	LOC108059826		protein timeless homolog	protein timeless homolog		Un	NW_025323477.1	9269262	9297360	minus	13
+1041015	Drosophila rhopaloa	108037692	0	live	LOC108037692		protein timeless homolog	protein timeless homolog		Un	NW_025335034.1	92850	168057	minus	18
+125945	Drosophila biarmipes	108024344	0	live	LOC108024344		protein timeless homolog	protein timeless homolog		3R	NC_066616.1	19026968	19099595	minus	18
+143948	Diuraphis noxia	107163283	0	live	LOC107163283		protein timeless-like	protein timeless-like		Un	NW_015368382.1	195134	197812	plus	4
+104688	Bactrocera oleae	106624771	0	live	LOC106624771		protein timeless homolog	protein timeless homolog		Un	NW_021660415.1	322	9461	plus	3
+2755281	Zophobas morio	135134554	0	live	LOC135134554		TIMELESS-interacting protein	TIMELESS-interacting protein		Un	NW_026972128.1	15229057	15230285	minus	3
+2755281	Zophobas morio	135126715	0	live	LOC135126715		protein timeless homolog	protein timeless homolog		Un	NW_026972116.1	5903799	6033806	minus	19
+469753	Culicoides brevitarsis	134834278	0	live	LOC134834278		protein timeless homolog	protein timeless homolog		3	NC_087087.1	14074587	14151912	minus	14
+197043	Homalodisca vitripennis	124365611	0	live	LOC124365611		protein timeless-like	protein timeless-like		6	NC_060212.1	156988893	157009158	plus	5
+13632	Lucilia sericata	119612143	0	live	LOC119612143		protein timeless homolog	protein timeless homolog		Un	NW_023995530.1	60683	110082	minus	4
+28612	Rhagoletis zephyria	108375216	0	live	LOC108375216		protein timeless-like	protein timeless-like		Un	NW_016165712.1	745	17556	plus	5
+28612	Rhagoletis zephyria	108374937	0	live	LOC108374937		protein timeless homolog	protein timeless homolog		Un	NW_016165366.1	20224	26816	minus	2
+28612	Rhagoletis zephyria	108368611	0	live	LOC108368611		protein timeless homolog	protein timeless homolog		Un	NW_016160302.1	22693	37096	plus	3
+7227	Drosophila melanogaster	38872	0	live	Clk	Dmel_CG7391, CG7391, CLK, CLOCK, Dmel\CG7391, Jerk, Jrk, PAS1, bHLHe10, clk, clock, dCLK, dCLK/JRK, dCLOCK, dClck, dClk, dClock, dclk, jrk	Clock	clock|CG7391-PA|CG7391-PD|CG7391-PF|CG7391-PG|CG7391-PH|CLOCK|Clk-PA|Clk-PD|Clk-PF|Clk-PG|Clk-PH|dClock	3-21 cM	3L	NT_037436.4	7763233	7775603	minus	9
+64838	Fopius arisanus	105264644	0	live	Tipin_1		U6 snRNA-associated Sm-like protein LSm6	U6 snRNA-associated Sm-like protein LSm6|TIMELESS-interacting protein		Un	NW_011887763.1	844286	845108	minus	3
+110368	Bicyclus anynana	112053594	0	live	LOC112053594		myb-like protein X	myb-like protein X|TIMELESS-interacting protein		2	NC_069084.1	1669717	1673430	minus	5
+7213	Ceratitis capitata	101458216	0	live	LOC101458216	Tipin	protein TIPIN homolog	protein TIPIN homolog|TIMELESS interacting protein		Un	NW_019378567.1	2659578	2661089	minus	1
+1518534	Anopheles coluzzii	120957615	0	live	LOC120957615		protein TIPIN homolog	protein TIPIN homolog|TIMELESS-interacting protein		3	NC_064671.1	21465165	21466218	minus	1
+224129	Agrilus planipennis	108735322	0	live	LOC108735322		uncharacterized LOC108735322	uncharacterized protein LOC108735322|TIMELESS-interacting protein		Un	NW_020438890.1	947510	949356	plus	2
+30066	Anopheles merus	121603250	0	live	LOC121603250		protein timeless homolog			Un	NW_024428554.1	917	4869	minus	0
+7130	Manduca sexta	119192848	0	live	LOC119192848		protein timeless-like			Un	NW_023594319.1	11215	15776	minus	0
+7227	Drosophila melanogaster	33916	0	live	eya	Dmel_CG9554, 24582246, BcDNA:LD16029, CG9554, CLI, CLIFT, Clift, Dmel\CG9554, EY2-1, EYA, Eya, Eyes absent, cli, cli/eya, cli[eya], dEYA, del1, eay, ey-2	eyes absent	eyes absent|CG9554-PA|CG9554-PB|CG9554-PC|Eye absent|Eyes-absent|clift|delayed gonad formation 1|eya-PA|eya-PB|eya-PC|eyeless 2	2-21 cM	2L	NT_033779.5	6527447	6546976	minus	7
+7227	Drosophila melanogaster	40162	0	live	cyc	Dmel_CG8727, BMAL1, Bmal1, CG8727, CYC, CYCLE, Cyc, Cycle, Dmel\CG8727, MOP3, Mop3, TGO_CYC, bHLHe7, bMAL1, dBMAL, dBMAL1, dBma1, dBmal, dCYC, dbmal, dbmal1	cycle	cycle|CG8727-PA|brain and muscle ARNT-like 1|cyc-PA	3-46 cM	3L	NT_037436.4	19813770	19815938	minus	5
+7227	Drosophila melanogaster	39744	0	live	brm	Dmel_CG5942, BRD, BRM, Brahma, Brg, Brm, Brm @ Kto, CG18438, CG5942, Dmel\CG5942, E(E2F)3A, dBRM, dSMARCA4, dSNF2, l(3)72Aa	brahma	brahma|CG5942-PA|CG5942-PB|CG5942-PC|CG5942-PD|CG5942-PE|CG5942-PF|brm-PA|brm-PB|brm-PC|brm-PD|brm-PE|brm-PF|complementation group 3.5	3-43 cM	3L	NT_037436.4	15970082	15982869	minus	7
+7227	Drosophila melanogaster	42504	0	live	slmb	Dmel_CG3412, BcDNA:GM02031, CG3412, Dmel\CG3412, FBXW1, MENE (3R)-B, MENE(3R)-B, SLIMB, SLMB, Slimb, Slimb/Beta-TRCP1, Slimb/beta-TRCP, Slimb/beta-TrCP, Slimb/betaTrCP, Slmb, beta-TrCP, betaTrCP, crd, ica, l(3)00295, shv, slimb, wel	supernumerary limbs	supernumerary limbs|CG3412-PA|CG3412-PB|CG3412-PC|SCF-betaTrCP complex|SLIMB|centrosome replication defective|icare|pingiel|shiva|slmb-PA|slmb-PB|slmb-PC|wellman	3-70 cM	3R	NT_033777.3	21119252	21127485	minus	8
+7227	Drosophila melanogaster	32132	0	live	CkIIbeta	Dmel_CG15224, And, CCK2, CG15224, CK II, CK-2, CK-II beta, CK-IIbeta, CK2, CK2-beta, CK2beta, CKII, CKII beta, CKII-beta1, CKIIb, CKIIbeta, Cask-II-b, Ck-IIbeta, Ck2beta, CkII, CkII-beta1, Ckiibeta, Dm-CK2-beta, DmCK2beta, DmCKIIbeta, DmCkIIbeta, Dmel\CG15224, Ds cas kin, KC2B_DROME, betaCK2, ck2beta, dCK2beta, dCKII, dCKII beta, mbu, CkIIbeta	Casein kinase II beta subunit	casein kinase II beta subunit|CG15224-PB|CG15224-PC|CG15224-PD|CG15224-PE|CG15224-PF|CG15224-PG|CG15224-PH|CG15224-PI|CG15224-PJ|CG15224-PK|CK2 (beta subunit)|CkIIbeta-PB|CkIIbeta-PC|CkIIbeta-PD|CkIIbeta-PE|CkIIbeta-PF|CkIIbeta-PG|CkIIbeta-PH|CkIIbeta-PI|CkIIbeta-PJ|CkIIbeta-PK|andante|casein kinase 2|casein kinase 2 regulatory subunit|casein kinase II|casein kinase II beta|mushroom bodies undersized	1-36 cM	X	NC_004354.4	11792533	11801587	plus	11
+7227	Drosophila melanogaster	12798171	0	live	mir-276a	Dmel_CR43001, 276a, CR33584, CR33585, CR43001, Dmel\CR43001, Dmel_CR33584, Dmel_CR33585, MIR-276, MiR-276a, dme-miR-276a, dme-miR-276a-3p, dme-mir-276, dme-mir-276a, miR-276, miR-276a, miR-276a-3p, miR-276a-5p, miR-276aS, mir-276S, rosa, mir-276a	mir-276a stem loop		3-33 cM	3L	NT_037436.4	10365228	10365325	plus	1
+7227	Drosophila melanogaster	33705	0	live	jet	Dmel_CG8873, CG8873, Dmel\CG8873, FBXL15, JET, JETLAG, Jet	jetlag	jetlag|CG8873-PA|CG8873-PB|jet-PA|jet-PB	2-14 cM	2L	NT_033779.5	4948206	4949784	minus	2
+7227	Drosophila melanogaster	34952	0	live	PRL-1	Dmel_CG4993, BG:DS07473.3, BcDNA:RE40268, CG4993, Dmel\CG4993, PRL, PRL1, PrL-1, Prl-1, dPRL-1, prl-1, prl1	PRL-1 phosphatase	PRL-1 phosphatase|CG4993-PA|CG4993-PB|CG4993-PC|CG4993-PD|PRL-1-PA|PRL-1-PB|PRL-1-PC|PRL-1-PD	2-52 cM	2L	NT_033779.5	16245835	16257606	minus	8
+7227	Drosophila melanogaster	12798170	0	live	mir-276b	Dmel_CR42904, CR33586, CR33587, CR42904, Dmel\CR42904, Dmel_CR33586, Dmel_CR33587, MIR-276, MiR-276b, Mir-276b, dme-miR-276b, dme-mir-276, dme-mir-276b, miR-276, miR-276bS, mir-276b	mir-276b stem loop		3-33 cM	3L	NT_037436.4	10319785	10319883	plus	1
+158441	Folsomia candida	110856215	0	live	LOC110856215	Fcan01_18693	protein timeless homolog	protein timeless homolog		Un	NW_019091207.1	1624672	1642140	minus	13
+609295	Dinoponera quadriceps	106740603	0	live	LOC106740603		four and a half LIM domains protein 2	four and a half LIM domains protein 2|testin|uncharacterized protein LOC106740603|zinc finger CCCH domain-containing protein 13		Un	NW_014554664.1	427207	641497	minus	20
+132113	Bombus impatiens	100742374	0	live	LOC100742374		protein ELYS	protein ELYS		Un	NT_176526.1	591788	600011	minus	7
+121845	Diaphorina citri	103517829	0	live	LOC103517829		mucin-12	mucin-12		Un	NW_007377494.1	249100	262279	plus	10
+454923	Diachasma alloeum	107037599	0	live	LOC107037599		basic proline-rich protein	basic proline-rich protein		Un	NW_021680401.1	1479998	1497327	minus	6
+121224	Pediculus humanus corporis	8237126	0	live	Phum_PHUM607810	Phum_PHUM607810	myosin-18A, putative	myosin-18A, putative		Unknown
+121224	Pediculus humanus corporis	8230577	0	live	Phum_PHUM436580	Phum_PHUM436580	uncharacterized protein	uncharacterized protein		Unknown
+7244	Drosophila virilis	6635969	0	live	LOC6635969	Dvir_GJ18392, GJ18392, GJ18392-PA	midasin	midasin|Dvir\GJ18392|Dvir\GJ18392-PA|dvir_GLEANR_296		Un	NW_022587567.1	542748	560134	plus	13
+7425	Nasonia vitripennis	100122103	0	live	LOC100122103		RNA-binding protein 28	RNA-binding protein 28		3	NC_045759.1	24106287	24109898	minus	10
+7222	Drosophila grimshawi	6566579	0	live	LOC6566579	Dgri_GH13668, GH13668, GH13668-PA	THO complex subunit 2	THO complex subunit 2|Dgri\GH13668|Dgri\GH13668-PA|dgri_GLEANR_13563		Un	NW_025062900.1	21863068	21871198	plus	16
+7229	Drosophila miranda	108161924	0	live	LOC108161924		pre-mRNA-splicing factor ATP-dependent RNA helicase DHX16	pre-mRNA-splicing factor ATP-dependent RNA helicase DHX16		4	NC_046677.1	3961233	3964164	minus	4
+178035	Dufourea novaeangliae	107185609	0	live	LOC107185609	WN55_07624	midasin	LOW QUALITY PROTEIN: midasin		Un	NW_015373938.1	65751	162186	minus	26
+680683	Amyelois transitella	106142363	0	live	LOC106142363		serine/threonine-protein kinase VRK1	serine/threonine-protein kinase VRK1		17	NC_083520.1	9889505	9894076	minus	6
+680683	Amyelois transitella	106132653	0	live	LOC106132653		midasin	midasin		19	NC_083522.1	4318998	4350422	minus	41
+76194	Papilio polytes	106102118	0	live	LOC106102118		midasin-like	LOW QUALITY PROTEIN: midasin-like		Un	NW_013525281.1	4477436	4507184	plus	42
+35570	Stomoxys calcitrans	106086519	0	live	LOC106086519		serine/arginine repetitive matrix protein 2	serine/arginine repetitive matrix protein 2|protein PRRC2C		1	NC_081552.1	211349584	211368027	plus	4
+83485	Linepithema humile	105672374	0	live	LOC105672374		DNA ligase 3	LOW QUALITY PROTEIN: DNA ligase 3		Un	NW_012160698.1	333311	357359	plus	19
+411798	Vollenhovia emeryi	105565044	0	live	LOC105565044		unconventional myosin-Va	unconventional myosin-Va		Un	NW_011967210.1	76642	99600	plus	15
+411798	Vollenhovia emeryi	105562113	0	live	LOC105562113		uncharacterized LOC105562113	uncharacterized protein LOC105562113		Un	NW_011967171.1	416945	451919	plus	10
+7515	Ctenocephalides felis	113385973	0	live	LOC113385973		WD repeat-containing protein 63	LOW QUALITY PROTEIN: WD repeat-containing protein 63		Un	NW_020539725.1	35555499	35571977	plus	18
+91411	Polistes canadensis	106785615	0	live	LOC106785615		DNA repair protein complementing XP-C cells	DNA repair protein complementing XP-C cells		Un	NW_014569600.1	121883	125795	plus	5
+609295	Dinoponera quadriceps	106741866	0	live	LOC106741866		cartilage oligomeric matrix protein	cartilage oligomeric matrix protein		Un	NW_014554275.1	1754	14007	minus	15
+76194	Papilio polytes	106103890	0	live	LOC106103890		probable lysine-specific demethylase 4B	probable lysine-specific demethylase 4B		Un	NW_013525511.1	232876	242859	plus	5
+7091	Bombyx mori	692522	0	live	Per		period	period|period protein|putative period protein		1	NC_085107.1	12509020	12568070	minus	28
+7227	Drosophila melanogaster	35122	0	live	CG10336	Dmel_ Dmel\CG10336	uncharacterized protein	uncharacterized protein|CG10336-PA|CG10336-PC	2-54 cM	2L	NT_033779.5	18689528	18690906	plus	1
+47314	Drosophila novamexicana	115767589	0	live	LOC115767589	period	period circadian protein	period circadian protein		Un	NW_020824856.1	556475	564959	plus	10

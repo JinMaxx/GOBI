@@ -113,7 +113,8 @@ class SimpleBlastReport:
                  score: int,
                  evalue: float,
                  seqid: str,
-                 genome_id: str):
+                 genome_id: str,
+                 taxonomy_id: int):
         self.query_sequence = query_sequence
         self.hit_sequence = hit_sequence
         self.mid_line = mid_line
@@ -131,21 +132,26 @@ class SimpleBlastReport:
         self.evalue = evalue
         self.seqid = seqid
         self.genome_id = genome_id
+        self.taxonomy_id = taxonomy_id
 
     @staticmethod
     def __transform_report_to_simple(report: Report, genome_id: str) -> list['SimpleBlastReport']:
-        print(report)
+        # print(report)
         output_list: list[SimpleBlastReport] = list()
         hit: Hit
         for hit in report['results']['search']['hits']:
             hit_title = hit['description'][0]['title']
+            hit_taxid = int(hit['description'][0]['taxid'])
             for hsps in hit['hsps']:
                 # print("hsps: \n", hsps)
-                output_list.append(SimpleBlastReport.__transform_hsps_to_simple(hsps, hit_title, genome_id))
+                output_list.append(SimpleBlastReport.__transform_hsps_to_simple(hsps, hit_title, genome_id, hit_taxid))
         return output_list
 
     @staticmethod
-    def __transform_hsps_to_simple(hsps: HSPS, hit_title: str, genome_id: str) -> 'SimpleBlastReport':
+    def __transform_hsps_to_simple(hsps: HSPS,
+                                   hit_title: str,
+                                   genome_id: str,
+                                   taxonomy_id: int) -> 'SimpleBlastReport':
         return SimpleBlastReport(
             query_sequence=hsps['qseq'],
             hit_sequence=hsps['hseq'],
@@ -163,7 +169,8 @@ class SimpleBlastReport:
             score=hsps['score'],
             evalue=hsps['evalue'],
             seqid=hit_title.split(' ', maxsplit=1)[0],
-            genome_id=genome_id
+            genome_id=genome_id,
+            taxonomy_id=taxonomy_id
         )
 
     @staticmethod

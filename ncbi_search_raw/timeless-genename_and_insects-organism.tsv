@@ -1,0 +1,17 @@
+tax_id	Org_name	GeneID	CurrentID	Status	Symbol	Aliases	description	other_designations	map_location	chromosome	genomic_nucleotide_accession.version	start_position_on_the_genomic_accession	end_position_on_the_genomic_accession	orientation	exon_count	OMIM
+7244	Drosophila virilis	6628265	0	live	LOC6628265	Dvir_GJ17601, Dvir\tim, GJ17601, GJ17601-PB, GJ17601-PC, GJ17601-PD, tim, tim-PB, tim-PC, tim-PD, timeless, vtim	protein timeless	protein timeless|Dvir\GJ17601|Dvir\GJ17601-PB|Dvir\GJ17601-PC|Dvir\GJ17601-PD|Dvir\tim-PB|Dvir\tim-PC|Dvir\tim-PD|circadian clock protein|dvir_GLEANR_2182		Un	NW_022587572.1	9416409	9432333	plus	15
+7159	Aedes aegypti	5567962	0	live	LOC5567962	AAEL006411, TIMELESS	protein timeless	protein timeless		2	NC_035108.1	414435531	414637024	minus	17
+64838	Fopius arisanus	105267975	0	live	Timeless		timeless circadian clock	protein timeless homolog		Un	NW_011887791.1	113714	218684	plus	25
+7160	Aedes albopictus	109407313	0	live	LOC109407313	timeless	protein timeless	protein timeless		Un	NW_026917621.1	11166	13608	plus	8
+7010	Schistocerca gregaria	126322318	0	live	LOC126322318	Timeless	protein timeless	protein timeless|timeless protein		2	NC_064921.1	398687340	399070447	plus	30
+7200	Lutzomyia longipalpis	129788660	0	live	LOC129788660	timeless	protein timeless	protein timeless|putative dna topoisomerase i-interacting protein		2	NC_074708.1	3617794	3637044	plus	15
+76194	Papilio polytes	106099740	0	live	LOC106099740	timeless	protein timeless	protein timeless		Un	NW_013525102.1	3409220	3419826	minus	16
+29058	Helicoverpa armigera	110375458	0	live	LOC110375458	B5X24_HaOG217123, HaOG217123, timeless	protein timeless	protein timeless		6	NC_087125.1	7813393	7828966	minus	18
+28588	Zeugodacus cucurbitae	105214565	0	live	LOC105214565	Timeless	protein timeless homolog	protein timeless homolog		2	NC_071667.1	58140538	58599126	minus	19
+7370	Musca domestica	101894072	0	live	LOC101894072	timeless	protein timeless	protein timeless|timeless circadian clock		Un	NW_026712299.1	6883438	6982272	minus	16
+139047	Anopheles bellator	131211278	0	live	LOC131211278	timeless	protein timeless	protein timeless		2	NC_071286.1	74727469	74740183	minus	15
+68878	Anopheles cruzii	128272541	0	live	LOC128272541	tim, timeless	protein timeless	protein timeless		3	NC_069145.1	74124052	74131532	plus	13
+43151	Anopheles darlingi	125948249	0	live	LOC125948249	timeless	protein timeless	protein timeless|putative dna topoisomerase i-interacting protein		2	NC_064874.1	94524878	94539661	minus	18
+13037	Danaus plexippus	116765334	0	live	LOC116765334	timeless	protein timeless	protein timeless		2	NC_083537.1	5583753	5595839	minus	17
+143995	Megachile rotundata	100879720	0	live	LOC100879720	Timeless	protein timeless homolog	protein timeless homolog|timeless homolog		Un	NW_003797700.1	387444	701204	plus	28
+7176	Culex quinquefasciatus	6038912	0	live	LOC6038912	timeless	protein timeless	protein timeless		2	NC_051862.1	203224342	203261189	plus	14

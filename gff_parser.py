@@ -51,6 +51,9 @@ class GFFRecord:
             attributes_dict[key.lower()] = value
         return attributes_dict
 
+    def get_attribute(self, attribute_key: str) -> str:
+        return self.attributes.get(attribute_key.lower())
+
     def __repr__(self):
         return self.__str__()
 
