@@ -96,7 +96,7 @@ class SequenceRecordsBundle:
         return seqid_record_dict
 
     @staticmethod
-    def __parse_from_fasta(taxonomy_id: int, genome_id: str, genome_fasta_file: str,
+    def __parse_from_fasta(taxonomy_id: int, genome_id: str, genome_fasta_file: str,  # I forgot why I return a list
                            seqid_record_dict: dict[str, list[GFFRecord]]) -> list['SequenceRecordsBundle']:
         gene_records_full_output: list[SequenceRecordsBundle] = list()
         with open(genome_fasta_file, 'r') as file:

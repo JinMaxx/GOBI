@@ -1,0 +1,4 @@
+tax_id	Org_name	GeneID	CurrentID	Status	Symbol	Aliases	description	other_designations	map_location	chromosome	genomic_nucleotide_accession.version	start_position_on_the_genomic_accession	end_position_on_the_genomic_accession	orientation	exon_count	OMIM
+7244	Drosophila virilis	6628265	0	live	LOC6628265	Dvir_GJ17601, Dvir\tim, GJ17601, GJ17601-PB, GJ17601-PC, GJ17601-PD, tim, tim-PB, tim-PC, tim-PD, timeless, vtim	protein timeless	protein timeless|Dvir\GJ17601|Dvir\GJ17601-PB|Dvir\GJ17601-PC|Dvir\GJ17601-PD|Dvir\tim-PB|Dvir\tim-PC|Dvir\tim-PD|circadian clock protein|dvir_GLEANR_2182		Un	NW_022587572.1	9416409	9432333	plus	15
+7159	Aedes aegypti	5567962	0	live	LOC5567962	AAEL006411, TIMELESS	protein timeless	protein timeless		2	NC_035108.1	414435531	414637024	minus	17
+7160	Aedes albopictus	109407313	0	live	LOC109407313	timeless	protein timeless	protein timeless		Un	NW_026917621.1	11166	13608	plus	8

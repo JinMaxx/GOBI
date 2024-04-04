@@ -4,6 +4,7 @@ import os
 import json
 import tempfile
 import subprocess
+from collections.abc import Generator
 from io import StringIO
 from pathlib import Path
 from typing import TypedDict
@@ -174,11 +175,9 @@ class SimpleBlastReport:
         )
 
     @staticmethod
-    def parse_json(json_string: str, genome_id: str) -> list['SimpleBlastReport']:
+    def parse_json(json_string: str, genome_id: str) -> Generator['SimpleBlastReport']:
 
         json_string = StringIO(json_string.replace('"from"', '"_from"'))
-
-        output_simple_list: list[SimpleBlastReport] = list()
 
         data = json.load(json_string)
         output: dict[str, dict[str: list[Report]]] = data
@@ -191,9 +190,8 @@ class SimpleBlastReport:
         for blast_output_list in output.values():
             for report_dict in blast_output_list:
                 for report in report_dict.values():
-                    output_simple_list.extend(SimpleBlastReport.__transform_report_to_simple(report, genome_id))
-
-        return output_simple_list
+                    for simple_blast_report in SimpleBlastReport.__transform_report_to_simple(report, genome_id):
+                        yield simple_blast_report
 
     def __repr__(self):
         return self.__str__()
@@ -212,7 +210,10 @@ class SimpleBlastReport:
         )
 
 
-def create_blast_db(genome_id: str, fasta_file: str, taxonomy_id: int = None, other_folder: str = None):
+def create_blast_db(genome_id: str,             # using genome id as title and for file names
+                    fasta_file: str,            # sequences
+                    taxonomy_id: int = None,    # taxonomy_id as blast+ argument for tagging db
+                    other_folder: str = None):  # other_folder to use with temporary dictionary.
 
     directory: str
 
@@ -251,12 +252,10 @@ def create_blast_db(genome_id: str, fasta_file: str, taxonomy_id: int = None, ot
         print(f"created blast db: {output_filename}")
 
 
-def blast(query_fasta_file: str, strand: str = 'both', other_blast_db_directory: str = None) -> list[SimpleBlastReport]:
+def blast(query_fasta_file: str, strand: str = 'both', other_blast_db_directory: str = None) -> Generator[SimpleBlastReport]:
 
-    if strand == '+':
-        strand = 'plus'
-    if strand == '-':
-        strand = 'minus'
+    if strand == '+': strand = 'plus'
+    if strand == '-': strand = 'minus'
 
     db_dict: dict[str, str]
 
@@ -280,10 +279,9 @@ def blast(query_fasta_file: str, strand: str = 'both', other_blast_db_directory:
             '-outfmt', '15',  # pairwise 0, BLAST_XML 5, Seqalign (JSON) 12, Single-file BLAST JSON 15
 
         ])
-
         with open(output_file.name, 'r') as output_file_handler:
             # print(output_file_handler.read())
-            return SimpleBlastReport.parse_json(output_file_handler.read(), db_dict[db])
+            yield from SimpleBlastReport.parse_json(output_file_handler.read(), db_dict[db])
 
 
 if __name__ == '__main__':
@@ -291,4 +289,4 @@ if __name__ == '__main__':
     # for testing
     for simple_blast_output in blast("./blast_test.fasta", "+"):
         print(simple_blast_output)
-
+        exit(0)
