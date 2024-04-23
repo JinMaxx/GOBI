@@ -42,7 +42,8 @@ def display_summery(taxonomy_id: int,
 
 def download_genome(taxonomy_id: int,
                     include: list[str] = _include,      # genome_ids downloaded
-                    genomes_dir: str = _genomes_dir) -> list[str]:
+                    genomes_dir: str = _genomes_dir,
+                    assembly_level: str = None) -> list[str]:
 
     dirname = f"{genomes_dir}/{taxonomy_id}"
     zip_filename = f"{dirname}.zip"
@@ -59,7 +60,8 @@ def download_genome(taxonomy_id: int,
         return genome_ids
 
     print(f"downloading genomes {taxonomy_id} to {dirname}")
-    subprocess.run([
+
+    params = [
         _datasets,
         "download",
         "genome",
@@ -68,7 +70,13 @@ def download_genome(taxonomy_id: int,
         "--dehydrated",
         "--filename", zip_filename,
         "--include", ",".join(include)
-    ])
+    ]
+
+    if assembly_level is not None:
+        params.append("--assembly-level")
+        params.append(assembly_level)
+
+    subprocess.run(params)
 
     print("unzipping ", zip_filename)
     subprocess.run([

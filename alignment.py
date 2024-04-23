@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 
-import re
-import sys
 from collections.abc import Generator, Iterable
+from typing import Self
 
 import scrape_genome
 
@@ -22,8 +21,6 @@ class Alignment:
     #                                 0            query_from    query_to     sequence_len
     #   can be negative!   align_from = hit_from - query_from        align_to = hit_to + (sequence_len - query_to)
     #   region_from = align_from - region_width >= 0                           region_to = align_to + region_width <= n
-
-    __gff_attributes_pattern = re.compile(r"gff_attribute:\w+")
 
     def __init__(self,
                  hit_from: int, hit_to: int,
@@ -82,7 +79,11 @@ class Alignment:
                                             genome_id=self.simple_blast_report.genome_id,
                                             seq_id=self.simple_blast_report.seqid)
 
-    def __get_span(self, region_width: int, ref_genome_seq_len: int) -> (int, int):
+    def get_span(self, region_width: int, ref_genome_seq_len: int = None) -> (int, int):
+
+        if ref_genome_seq_len is None:
+            _, ref_genome_seq = self.__get_hit_genome_headline_sequence()
+            ref_genome_seq_len = len(ref_genome_seq)
 
         # applying region_width
         region_from = self.align_from - region_width
@@ -96,14 +97,14 @@ class Alignment:
 
     def __get_region_sequence(self, region_width: int) -> (int, int):
         _, sequence = self.__get_hit_genome_headline_sequence()
-        region_from, region_to = self.__get_span(region_width, len(sequence))
+        region_from, region_to = self.get_span(region_width, len(sequence))
         return sequence[region_from:region_to]
 
     def as_region_fasta_entry(self, region_width: int) -> (str, str):
         headline: str
         sequence: str
         headline, sequence = self.__get_hit_genome_headline_sequence()
-        region_from, region_to = self.__get_span(region_width, len(sequence))
+        region_from, region_to = self.get_span(region_width, len(sequence))
         if headline.startswith(self.simple_blast_report.seqid):
             second_split = headline.split(' ', maxsplit=1)[1]
             headline = f"{self.simple_blast_report.seqid}|{region_from}:{region_to}"
@@ -157,35 +158,15 @@ class Alignment:
 
         # sequence record
         if "query_genome_id" in data_format:
-            data_format = data_format.replace("query_genome_id", str(self.sequence_record.get_genome_id()))
+            data_format = data_format.replace("query_genome_id", "sr_genome_id")
         if "query_taxonomy_id" in data_format:
-            data_format = data_format.replace("query_taxonomy_id", str(self.sequence_record.get_taxonomy_id()))
+            data_format = data_format.replace("query_taxonomy_id", "sr_taxonomy_id")
         if "full_query_sequence" in data_format:
-            data_format = data_format.replace("full_query_sequence", str(self.sequence_record.sequence))
+            data_format = data_format.replace("full_query_sequence", "sr_sequence")
+        if "query_headline" in data_format:
+            data_format = data_format.replace("query_headline", "sr_headline")
 
-        # gff record
-        if "gff_seqid" in data_format:
-            data_format = data_format.replace("seqid", str(self.sequence_record.gff_record.seqid))
-        if "gff_source" in data_format:
-            data_format = data_format.replace("gff_source", str(self.sequence_record.gff_record.source))
-        if "gff_type" in data_format:
-            data_format = data_format.replace("gff_type", str(self.sequence_record.gff_record.type))
-        if "gff_start" in data_format:
-            data_format = data_format.replace("gff_start", str(self.sequence_record.gff_record.start))
-        if "gff_end" in data_format:
-            data_format = data_format.replace("gff_end", str(self.sequence_record.gff_record.end))
-        if "gff_score" in data_format:
-            data_format = data_format.replace("gff_score", str(self.sequence_record.gff_record.score))
-        if "gff_strand" in data_format:
-            data_format = data_format.replace("gff_strand", str(self.sequence_record.gff_record.strand))
-        if "gff_phase" in data_format:
-            data_format = data_format.replace("gff_phase", str(self.sequence_record.gff_record.phase))
-
-        for match in Alignment.__gff_attributes_pattern.finditer(data_format):
-            attribute = match.group(0).split(':', maxsplit=1)[1]
-            attribute_value = self.sequence_record.gff_record.get_attribute(attribute)
-            if attribute_value is None: sys.stderr.write(f"No value found for attribute {attribute}\n")
-            data_format = data_format[:match.start(0)] + str(attribute_value) + data_format[match.end(0):]
+        data_format = self.sequence_record.as_table_record(data_format)
 
         return data_format
 
@@ -196,9 +177,9 @@ class Alignment:
         simple_blast_report_str = str(self.simple_blast_report).replace('\n', '\n\t')
         gff_record_str = str(self.sequence_record.gff_record).replace('\n', '\n\t')
         return (
-            f"alignment: {self.align_from}-{self.align_from}\n"
-            f"query: {self.query_from}-{self.query_to}, gaps: {self.query_gaps}"
-            f"refer: {self.hit_from}-{self.hit_to}, gaps: {self.hit_gaps}"
+            f"alignment: [{self.align_from:10.0f}:{self.align_from:10.0f}]\n"
+            f"query: [{self.query_from:10.0f}:{self.query_to:10.0f}], gaps: {self.query_gaps}\n"
+            f"  hit: [{self.hit_from:10.0f}:{self.hit_to:10.0f}], gaps: {self.hit_gaps}\n"
             "simple_blast_report:\n"
             f"\t{simple_blast_report_str}\n"
             "sequence_record.gff_record:\n"
@@ -209,7 +190,9 @@ class Alignment:
 class AlignmentsBundle:  # remove overlaps and concatenate regions?
 
     def __init__(self):            # hit_genome_id -> hit_seqid -> Alignment
-        self.genome_alignments_dict: dict[str, dict[str, list[Alignment]]] = defaultdict(dict)
+        self.genome_alignments_dict: dict[str, dict[str, list[Alignment]]] = defaultdict(lambda: defaultdict(list))
+        # I somehow forgot to include taxonomy_id, so it is taxonomy_id -> genome_id -> seq_id -> alignment
+        # but rewriting the code is too late at this point...
 
     @staticmethod
     def from_simple_blast_reports(sequence_record: SequenceRecord,
@@ -219,90 +202,101 @@ class AlignmentsBundle:  # remove overlaps and concatenate regions?
 
         for simple_blast_report in simple_blast_reports:
 
-            # because i cant defaultdict(defaultdict(list))
-            if alignment_bundle.genome_alignments_dict[simple_blast_report.genome_id].get(
-                    simple_blast_report.seqid) is None:
-                alignment_bundle.genome_alignments_dict[simple_blast_report.genome_id][
-                    simple_blast_report.seqid] = list()
-
             (alignment_bundle.genome_alignments_dict[simple_blast_report.genome_id][simple_blast_report.seqid].
              append(Alignment.from_simple_blast_report(query_sequence_record=sequence_record,
                                                        simple_blast_report=simple_blast_report)))
 
         return alignment_bundle
 
-    #                                                          [(genome_id, [(headline, sequence)])]
-    def regions_as_fasta_entries(self, region_width: int) -> Generator[(str, list[(str, str)])]:
-        # one file per genome
-        genome_id: str
+    #                                                  # [(taxonomy_id, genome_id, (headline, sequence))]
+    def regions_as_fasta_entries(self, region_width: int) -> Generator[(str, str, list[(str, str)])]:
+        taxonomy_genome_fasta_entries_dict: dict[int, dict[str, list[(str, str)]]] = defaultdict(lambda: defaultdict(list))
+
+        # because I forgot taxonomy as mentioned earlier I will lose some performance by building this dict here.
+        alignment: Alignment
+        for alignment in self.alignments():
+            taxonomy_id: int = alignment.simple_blast_report.taxonomy_id
+            genome_id: str = alignment.simple_blast_report.genome_id
+            taxonomy_genome_fasta_entries_dict[taxonomy_id][genome_id].append(alignment.as_region_fasta_entry(region_width))
+
+        taxonomy_id: int
+        genome_fasta_entries_dict: dict[str, list[(str, str)]]
+        for taxonomy_id, genome_fasta_entries_dict in taxonomy_genome_fasta_entries_dict.items():
+            genome_id: str
+            fasta_entries: list[(str, str)]
+            for genome_id, fasta_entries in genome_fasta_entries_dict.items():
+                yield taxonomy_id, genome_id, fasta_entries
+
+    def alignments(self) -> Generator[Alignment]:
         alignments_dict: dict[str, list[Alignment]]
-        for genome_id, alignments_dict in self.genome_alignments_dict.items():
-
-            entries_list: list[(str, str)] = list()
-
+        for alignments_dict in self.genome_alignments_dict.values():
             alignments: list[Alignment]
             for alignments in alignments_dict.values():
                 alignment: Alignment
                 for alignment in alignments:
-                    entries_list.append(alignment.as_region_fasta_entry(region_width))
+                    yield alignment
 
-            yield genome_id, entries_list
-
-    def append(self, alignments_bundle: 'AlignmentsBundle'):
-        alignments_dict: dict[str, list[Alignment]]
-        for genome_id, alignments_dict in alignments_bundle.genome_alignments_dict.items():
-
+    def append(self, alignments_bundle: 'AlignmentsBundle') -> Self:
+        alignments_seqid_dict: dict[str, list[Alignment]]
+        for genome_id, alignments_seqid_dict in alignments_bundle.genome_alignments_dict.items():
             alignments: list[Alignment]
-            for seqid, alignments in alignments_dict.items():
-
-                if self.genome_alignments_dict[genome_id].get(seqid) is None:
-                    self.genome_alignments_dict[genome_id][seqid] = list()
-
+            for seqid, alignments in alignments_seqid_dict.items():
                 self.genome_alignments_dict[genome_id][seqid].extend(alignments)
+        return self
 
-    def __repr__(self):
-        return self.__str__()
+    def is_empty(self):
+        return len(self.genome_alignments_dict) <= 0
 
-    def __str__(self):
+    # def __repr__(self):
+    #     return self.__str__()
+    #
+    # def __str__(self):  # this can get huge
+    #
+    #     output_string: str = str()
+    #
+    #     alignments_dict: dict[str, list[Alignment]]
+    #     for genome_id, alignments_dict in self.genome_alignments_dict.items():
+    #
+    #         output_string = (
+    #             f"{output_string}\n"
+    #             f"{genome_id}:\n"
+    #         )
+    #
+    #         alignments: list[Alignment]
+    #         for seqid, alignments in alignments_dict.items():
+    #
+    #             output_string = (
+    #                 f"{output_string}\n"
+    #                 f"\n\t{seqid}:\n\n"
+    #             )
+    #
+    #             alignment: Alignment
+    #             for alignment in alignments:
+    #                 alignment_str = str(alignment).replace('\n', '\n\t\t')
+    #                 output_string = (
+    #                     f"{output_string}"
+    #                     f"\t\t{alignment_str}\n\n"
+    #                 )
+    #
+    #     return output_string
 
-        output_string: str = str()
+    def print(self):
 
         alignments_dict: dict[str, list[Alignment]]
         for genome_id, alignments_dict in self.genome_alignments_dict.items():
-
-            output_string = (
-                f"{output_string}\n"
-                f"{genome_id}:\n"
-            )
+            print(f"{genome_id}:")
 
             alignments: list[Alignment]
             for seqid, alignments in alignments_dict.items():
-
-                output_string = (
-                    f"{output_string}\n"
-                    f"\n\t{seqid}:\n\n"
-                )
+                print(f"\n\t{seqid}:\n")
 
                 alignment: Alignment
                 for alignment in alignments:
                     alignment_str = str(alignment).replace('\n', '\n\t\t')
-                    output_string = (
-                        f"{output_string}"
-                        f"\t\t{alignment_str}\n\n"
-                    )
-
-        return output_string
+                    print(f"\t\t{alignment_str}\n")
 
     def write_table_to_file(self, file: str, format: str):
-
         with open(file, 'a') as file_handler:
-
-            alignments_dict: dict[str, list[Alignment]]
-            for _, alignments_dict in self.genome_alignments_dict.items():
-
-                alignments: list[Alignment]
-                for _, alignments in alignments_dict.items():
-
-                    alignment: Alignment
-                    for alignment in alignments:
-                        file_handler.write(alignment.as_table_record(data_format=format))
+            alignment: Alignment
+            for alignment in self.alignments():
+                file_handler.write(alignment.as_table_record(data_format=format))

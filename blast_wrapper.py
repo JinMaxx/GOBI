@@ -11,12 +11,13 @@ from typing import TypedDict
 
 __blastdb_directory = "./blast_db"
 __makeblastdb = "makeblastdb"
-__blastn = "blastn"
 
 # <blastdb_directory>/genome_id -> genome_id
 __genome_db_dict: dict[str, str] = dict()
 # This might look weird but there is one case where I want to get the genome_id.
 # Most of the time I use it as a list of tuples.
+
+debug = True
 
 
 # adding to genome_db_dict databases that where already build (used as a check later)
@@ -136,15 +137,15 @@ class SimpleBlastReport:
         self.taxonomy_id = taxonomy_id
 
     @staticmethod
-    def __transform_report_to_simple(report: Report, genome_id: str) -> list['SimpleBlastReport']:
-        # print(report)
+    def __transform_report_to_simple(report: Report,
+                                     genome_id: str) -> list['SimpleBlastReport']:
+        # if debug: print(report)
         output_list: list[SimpleBlastReport] = list()
         hit: Hit
         for hit in report['results']['search']['hits']:
             hit_title = hit['description'][0]['title']
             hit_taxid = int(hit['description'][0]['taxid'])
             for hsps in hit['hsps']:
-                # print("hsps: \n", hsps)
                 output_list.append(SimpleBlastReport.__transform_hsps_to_simple(hsps, hit_title, genome_id, hit_taxid))
         return output_list
 
@@ -176,6 +177,8 @@ class SimpleBlastReport:
 
     @staticmethod
     def parse_json(json_string: str, genome_id: str) -> Generator['SimpleBlastReport']:
+
+        # if debug: print(f"json_string:\n", json_string)
 
         json_string = StringIO(json_string.replace('"from"', '"_from"'))
 
@@ -212,7 +215,7 @@ class SimpleBlastReport:
 
 def create_blast_db(genome_id: str,             # using genome id as title and for file names
                     fasta_file: str,            # sequences
-                    taxonomy_id: int = None,    # taxonomy_id as blast+ argument for tagging db
+                    taxonomy_id: int,           # taxonomy_id as blast+ argument for tagging db
                     other_folder: str = None):  # other_folder to use with temporary dictionary.
 
     directory: str
@@ -223,6 +226,7 @@ def create_blast_db(genome_id: str,             # using genome id as title and f
         for db_file in os.listdir(other_folder):
             __genome_id = Path(db_file).stem
             db_set.add(f"{other_folder}/{__genome_id}")
+        if debug: print(f"Created db_set from {other_folder}: {db_set}")
     else:
         directory = __blastdb_directory
         db_set = set(__genome_db_dict.keys())  # use default db
@@ -230,10 +234,9 @@ def create_blast_db(genome_id: str,             # using genome id as title and f
     output_filename = f"{directory}/{genome_id}"
 
     if output_filename in db_set:
-        print(f"db already exists {output_filename}. skipping")  # checking if db was already created
+        if debug: print(f"skipping existing db: {output_filename}")  # checking if db was already created
     else:
-        print(f"building blast db: {genome_id}")
-
+        if debug: print(f"building blast db: {genome_id}")
         params: list[str] = [
             __makeblastdb,
             "-in", fasta_file,
@@ -241,18 +244,27 @@ def create_blast_db(genome_id: str,             # using genome id as title and f
             "-title", genome_id,
             "-dbtype", "nucl",
             "-metadata_output_prefix", __blastdb_directory,
-            "-out", output_filename,
+            "-taxid", str(taxonomy_id),
+            "-out", output_filename
         ]
-
-        if taxonomy_id is not None:
-            params.append("-taxid")
-            params.append(str(taxonomy_id))
-
+        if debug: print(f"params: {params}")
         subprocess.run(params)
-        print(f"created blast db: {output_filename}")
+        if debug: print(f"created blast db: {output_filename}")
 
 
-def blast(query_fasta_file: str, strand: str = 'both', other_blast_db_directory: str = None) -> Generator[SimpleBlastReport]:
+def blastn(query_fasta_file: str, strand: str = 'both',
+          other_blast_db_directory: str = None, negative_genome_ids: list[str] = None) -> Generator[SimpleBlastReport]:
+    return blast(blast="blastn", query_fasta_file=query_fasta_file, strand=strand,
+                 other_blast_db_directory=other_blast_db_directory, negative_genome_ids=negative_genome_ids)
+
+def tblastx(query_fasta_file: str, strand: str = 'both',
+          other_blast_db_directory: str = None, negative_genome_ids: list[str] = None) -> Generator[SimpleBlastReport]:
+    return blast(blast="blastn", query_fasta_file=query_fasta_file, strand=strand,
+                 other_blast_db_directory=other_blast_db_directory, negative_genome_ids=negative_genome_ids)
+
+
+def blast(blast: str, query_fasta_file: str, strand: str = 'both',
+          other_blast_db_directory: str = None, negative_genome_ids: list[str] = None) -> Generator[SimpleBlastReport]:
 
     if strand == '+': strand = 'plus'
     if strand == '-': strand = 'minus'
@@ -264,29 +276,38 @@ def blast(query_fasta_file: str, strand: str = 'both', other_blast_db_directory:
         for db_file in os.listdir(other_blast_db_directory):
             __genome_id = Path(db_file).stem
             db_dict[f"{other_blast_db_directory}/{__genome_id}"] = __genome_id
+        if debug: print(f"Created db_dict from {other_blast_db_directory}: {db_dict.keys()}")
     else:
         db_dict = __genome_db_dict  # use default db
 
-    for db in db_dict.keys():
-        output_file = tempfile.NamedTemporaryFile()
-        subprocess.run([
-            __blastn,
-            '-task', 'megablast',
-            '-query', query_fasta_file,
-            '-strand', strand,
-            '-db', db,
-            '-out', output_file.name,
-            '-outfmt', '15',  # pairwise 0, BLAST_XML 5, Seqalign (JSON) 12, Single-file BLAST JSON 15
+    for db in db_dict.keys():        # skipping dbs for aligning with itself (somehow dirty fix)
+        if negative_genome_ids is not None and debug:
+            print(f"{db_dict[db]} not in {negative_genome_ids}: {db_dict[db] not in negative_genome_ids}")
+        if negative_genome_ids is not None and db_dict[db] not in negative_genome_ids:
+            # TODO: check why this does not work or returns somehow empty results...
+            with tempfile.NamedTemporaryFile() as output_file:
+                params = [
+                    blast,
+                    # '-task', 'megablast',
+                    '-query', query_fasta_file,
+                    '-strand', strand,
+                    '-db', db,
+                    '-out', output_file.name,
+                    '-outfmt', '15',  # pairwise 0, BLAST_XML 5, Seqalign (JSON) 12, Single-file BLAST JSON 15
+                ]
+                # if negative_taxonomy_ids is not None:
+                #     params.append('-negative_taxidlist')
+                #     params.append(','.join([str(taxid) for taxid in negative_taxonomy_ids]))
+                # if debug: print(f"params: {params}")
 
-        ])
-        with open(output_file.name, 'r') as output_file_handler:
-            # print(output_file_handler.read())
-            yield from SimpleBlastReport.parse_json(output_file_handler.read(), db_dict[db])
+                subprocess.run(params)
+                with open(output_file.name, 'r') as output_file_handler:
+                    yield from SimpleBlastReport.parse_json(output_file_handler.read(), db_dict[db])
 
 
 if __name__ == '__main__':
 
     # for testing
-    for simple_blast_output in blast("./blast_test.fasta", "+"):
+    for simple_blast_output in blastn("./blast_test.fasta", "+"):
         print(simple_blast_output)
         exit(0)

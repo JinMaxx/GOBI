@@ -54,6 +54,15 @@ class GFFRecord:
     def get_attribute(self, attribute_key: str) -> str:
         return self.attributes.get(attribute_key.lower())
 
+    def get_attribute_dict_value(self, attribute_key: str, attribute_parsed_value_key: str) -> str:
+        parsed_value_dict: dict[str, str] = dict()
+        attribute_value = self.attributes.get(attribute_key.lower())
+        if attribute_value is not None:
+            for attribute in attribute_value.split(','):
+                key, value = attribute.split(':')
+                parsed_value_dict[key.lower()] = value
+            return parsed_value_dict.get(attribute_parsed_value_key.lower())
+
     def __repr__(self):
         return self.__str__()
 
@@ -75,8 +84,17 @@ class GFFParser:
         self.generator = generator
 
     @staticmethod
-    def parse_file(gff_file: str):
+    def parse_file(gff_file: str) -> 'GFFParser':
         return GFFParser(GFFParser.__parse_gff3_iterator(gff_file))
+
+    # @staticmethod
+    # def combine_parser(parsers: list['GFFParser']) -> 'GFFParser':
+    #     return GFFParser(GFFParser.__combine_parser_iterator(parsers))
+
+    # @staticmethod
+    # def __combine_parser_iterator(parsers: list['GFFParser']) -> Generator[GFFRecord]:
+    #     for parser in parsers:
+    #         yield from parser.generator
 
     @staticmethod
     def __parse_gff3_iterator(file_path: str) -> Generator[GFFRecord]:
@@ -106,21 +124,34 @@ class GFFParser:
                  end: int = None,
                  strand: chr = None) -> Generator[GFFRecord]:
         for record in self.generator:
-            if seqid is not None and seqid not in record.seqid: continue
+            if seqid is not None and record.seqid != seqid: continue
             elif source is not None and record.source != source: continue
             elif type is not None and record.type not in type: continue
-            elif start is not None:
-                if record.strand == "+":
-                    if record.start < start: continue
-                elif record.strand == "-":
-                    if record.start > start: continue
-            elif end is not None:
-                if record.strand == "+":
-                    if record.end > end: continue
-                elif record.strand == "-":
-                    if record.end < end: continue
+            elif start is not None and record.start < start: continue
+            # not included < start <= included
+                # if record.strand == "+":
+                #     if record.start < start: continue
+                # elif record.strand == "-":
+                #     if record.start > start: continue
+            elif end is not None and record.end > end: continue
+            # not included <= end < not included
+                # if record.strand == "+":
+                #     if record.end > end: continue
+                # elif record.strand == "-":
+                #     if record.end < end: continue
             elif strand is not None and record.strand != strand: continue
             else: yield record
+
+    def filter_gene_id(self, gene_id: int, exclude: bool = False) -> Self:
+        return GFFParser(self.__filter_gene_id(gene_id, exclude))
+
+    def __filter_gene_id(self, gene_id: int, exclude: bool = False) -> Generator[GFFRecord]:
+        record: GFFRecord
+        for record in self.generator:
+            record_gene_id = int(record.get_attribute_dict_value('dbxref', 'GeneID'))
+            if not exclude and record_gene_id == gene_id: yield record
+            elif exclude and record_gene_id != gene_id: yield record
+            else: continue
 
     def filter_attributes(self,
                           attribute_key: str,

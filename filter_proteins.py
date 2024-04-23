@@ -34,8 +34,6 @@ def filter_proteins(filter_keywords: list[str] = _filter_keywords,
                         print(f"removing: {record.description}")
                         continue  # skips if fasta title contains one keyword
                     else:
-                        # TODO remove signal peptides with SignalP6 here
-                        #  get software with their fucking stupid registration form
                         writer.write_record(record)
 
 

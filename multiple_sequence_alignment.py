@@ -2,6 +2,7 @@
 
 import os
 import subprocess
+from fnmatch import fnmatch
 
 # doas overwrite files!
 
@@ -12,13 +13,19 @@ _input_directory = "./proteins_filtered"  # or ./proteins
 _output_directory = "./proteins_aligned"
 
 
+def __check_file(file: str) -> bool:
+    # print(f"checking {file} => {(os.path.isfile(file) and (fnmatch(file, '*.fasta') or fnmatch(file, '*.fna') or fnmatch(file, '*.faa')))}")
+    return (os.path.isfile(file) and (
+            fnmatch(file, "*.fasta") or
+            fnmatch(file, "*.fna") or
+            fnmatch(file, "*.faa")))
+
+
 def generate_alignments(input_directory: str = _input_directory,
                         output_directory: str = _output_directory):
 
-    output_directory_files = os.listdir(output_directory)
-
-    for input_file in os.listdir(input_directory):
-        if input_file not in output_directory_files:
+    for input_file in os.listdir(input_directory):  # skip already aligned files
+        if input_file not in os.listdir(output_directory) and __check_file(f"{input_directory}/{input_file}"):
 
             output_file = f"{output_directory}/{input_file}"
             input_file = f"{input_directory}/{input_file}"
