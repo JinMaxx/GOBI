@@ -65,16 +65,16 @@ if __name__ == '__main__':
         combined_fasta: str = f"{genes_dir}/{subdir}.fasta"
         protein_fasta_list: list[str] = list()
 
-        gene_id: int
-        for gene_id in gene_ids_list:
-
-            # downloads all proteins from uniprot to ./proteins
-            if gene_id is not None:
-                print(f"scraping {gene_id} to {download_directory}")
-                prefix_directory = scrape_genes.download_gene(gene_id=gene_id, directory=download_directory)
-                protein_fasta = f"{prefix_directory}/ncbi_dataset/data/protein.faa"
-                if os.path.isfile(protein_fasta): protein_fasta_list.append(protein_fasta)
-                else: raise ValueError(f"{protein_fasta} is not a file")
+        # gene_id: int
+        # for gene_id in gene_ids_list:
+        #
+        #     # downloads all proteins from uniprot to ./proteins
+        #     if gene_id is not None:
+        #         print(f"scraping {gene_id} to {download_directory}")
+        #         prefix_directory = scrape_genes.download_gene(gene_id=gene_id, directory=download_directory)
+        #         protein_fasta = f"{prefix_directory}/ncbi_dataset/data/protein.faa"
+        #         if os.path.isfile(protein_fasta): protein_fasta_list.append(protein_fasta)
+        #         else: raise ValueError(f"{protein_fasta} is not a file")
 
         # from pathlib import Path
         # files = list(Path(".").rglob("*.[tT][xX][tT]"))

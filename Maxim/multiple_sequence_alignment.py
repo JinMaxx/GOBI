@@ -38,7 +38,7 @@ def generate_alignments(input_directory: str = _input_directory,
 def display_alignments(alignments_directory: str = _output_directory):
     for output_file in os.listdir(alignments_directory):
         output_file = f"{alignments_directory}/{output_file}"
-        subprocess.run(["bash", aliview, output_file])
+        if __check_file(output_file): subprocess.run(["bash", aliview, output_file])
 
 
 if __name__ == '__main__':

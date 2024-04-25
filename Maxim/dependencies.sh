@@ -2,7 +2,7 @@
 
 
 # creating virtual environment
-venv="./venv"
+venv="./.venv"
 mkdir $venv
 python -m venv $venv
 pip="${venv}/bin/python ${venv}/bin/pip"  # or "pip"
