@@ -1,0 +1,8 @@
+#nexus
+begin sets;
+  charset part1 = 1-2306;
+  charset part2 = 2307-4011;
+  charpartition mymodels =
+    Q.yeast+I+G4: part1,
+    Q.insect+G4: part2;
+end;

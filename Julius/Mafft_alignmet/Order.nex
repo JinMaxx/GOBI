@@ -1,0 +1,5 @@
+begin sets;
+    charset timeout = 1-2306;
+    charset timeless = 2307-4011;
+    charpartition mine = HKY+G:timeout, GTR+I+G:timeless;
+end;

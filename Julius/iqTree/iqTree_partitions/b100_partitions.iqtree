@@ -1,0 +1,197 @@
+IQ-TREE 2.2.2.6 COVID-edition built May 27 2023
+
+Partition file name: /Users/julius/Gobi/Final_results/Mafft_alignmet/example.partitions
+Input file name: /Users/julius/Gobi/Final_results/Mafft_alignmet/combined_alignment.phy
+Type of analysis: ModelFinder + tree reconstruction + non-parametric bootstrap (100 replicates)
+Random seed number: 122935
+
+REFERENCES
+----------
+
+To cite IQ-TREE please use:
+
+Bui Quang Minh, Heiko A. Schmidt, Olga Chernomor, Dominik Schrempf,
+Michael D. Woodhams, Arndt von Haeseler, and Robert Lanfear (2020)
+IQ-TREE 2: New models and efficient methods for phylogenetic inference
+in the genomic era. Mol. Biol. Evol., in press.
+https://doi.org/10.1093/molbev/msaa015
+
+To cite ModelFinder please use: 
+
+Subha Kalyaanamoorthy, Bui Quang Minh, Thomas KF Wong, Arndt von Haeseler,
+and Lars S Jermiin (2017) ModelFinder: Fast model selection for
+accurate phylogenetic estimates. Nature Methods, 14:587–589.
+https://doi.org/10.1038/nmeth.4285
+
+Since you used partition models please also cite:
+
+Olga Chernomor, Arndt von Haeseler, and Bui Quang Minh (2016)
+Terrace aware data structure for phylogenomic inference from
+supermatrices. Syst. Biol., 65:997-1008.
+https://doi.org/10.1093/sysbio/syw037
+
+SEQUENCE ALIGNMENT
+------------------
+
+Input data: 16 taxa with 2 partitions and 4011 total sites (18.5973% missing data)
+
+  ID	Type	Seq	Site	Unique	Infor	Invar	Const	Name
+   1	AA	16	2306	1678	1075	692	692	part1
+   2	AA	9	1705	1407	587	431	431	part2
+
+Column meanings:
+  Unique: Number of unique site patterns
+  Infor:  Number of parsimony-informative sites
+  Invar:  Number of invariant sites
+  Const:  Number of constant sites (can be subset of invariant sites)
+
+ModelFinder
+-----------
+
+Best-fit model according to BIC: Q.yeast+I+G4:part1,Q.insect+G4:part2
+
+List of best-fit models per partition:
+
+  ID  Model                  LogL         AIC      w-AIC        AICc     w-AICc         BIC      w-BIC
+   1  Q.yeast+I+G4     -38192.614   76391.228 + 6.48e-314   76391.238 - 6.95e-310   76408.458 - 6.95e-310
+   2  Q.insect+G4      -20391.985   40787.970 + 6.48e-314   40787.977 - 6.95e-310   40798.853 - 6.95e-310
+
+AIC, w-AIC   : Akaike information criterion scores and weights.
+AICc, w-AICc : Corrected AIC scores and weights.
+BIC, w-BIC   : Bayesian information criterion scores and weights.
+
+Plus signs denote the 95% confidence sets.
+Minus signs denote significant exclusion.
+
+SUBSTITUTION PROCESS
+--------------------
+
+Edge-linked-proportional partition model with separate substitution models and separate rates across sites
+
+  ID  Model           Speed  Parameters
+   1  Q.yeast+I+G4   0.9614  Q.yeast+I{0.0220132}+G4{1.38487}
+   2  Q.insect+G4    1.0522  Q.insect+G4{0.980521}
+
+MAXIMUM LIKELIHOOD TREE
+-----------------------
+
+Log-likelihood of the tree: -58582.7211 (s.e. 699.9595)
+Unconstrained log-likelihood (without tree): -28187.5647
+Number of free parameters (#branches + #model parameters): 33
+Akaike information criterion (AIC) score: 117231.4423
+Corrected Akaike information criterion (AICc) score: 117232.0065
+Bayesian information criterion (BIC) score: 117439.2366
+
+Total tree length (sum of branch lengths): 12.2678
+Sum of internal branch lengths: 3.2868 (26.7919% of tree length)
+
+NOTE: Tree is UNROOTED although outgroup taxon 'Centruroid' is drawn at root
+Numbers in parentheses are  standard bootstrap support (%)
+
++-----------------------Centruroid
+|
+|  +------------------------------------------Parasteato
++--| (49)
+|  |                                         +-----Bombyx
+|  |                                      +--| (99)
+|  |                                      |  +----Trichoplus
+|  |                       +--------------| (100)
+|  |                       |              +------Danaus
+|  |                    +--| (77)
+|  |                    |  |           +------------------Drosophila
+|  |                    |  +-----------| (100)
+|  |                    |              +-------------------Anopheles
+|  |                 +--| (75)
+|  |                 |  |      +-----------Nicrophoru
+|  |                 |  +------| (100)
+|  |                 |         +----------Tribolium
+|  |    +------------| (100)
+|  |    |            |                +--------Apis
+|  |    |            |             +--| (100)
+|  |    |            |             |  +--------Solenopsis
+|  |    |            |          +--| (82)
+|  |    |            |          |  |       +--Cotesia
+|  |    |            |          |  +-------| (100)
+|  |    |            |          |          +--Micropliti
+|  |    |            +----------| (100)
+|  |    |                       +------------Nasonia
+|  +----| (83)
+|       +-----------------------------Homo
+|
++-------------------------------Ixodes
+
+Tree in newick format:
+
+(Centruroid:0.8601210801,(Parasteato:1.5517684248,((((((Bombyx:0.2412641424,Trichoplus:0.1913773593)99:0.0973195924,Danaus:0.2702236873)100:0.5645413381,(Drosophila:0.6978763491,Anopheles:0.7229735804)100:0.4456360203)77:0.1009020041,(Nicrophoru:0.4553135994,Tribolium:0.4010241534)100:0.2708473768)75:0.1051129475,(((Apis:0.3300732969,Solenopsis:0.3427095371)100:0.1127409892,(Cotesia:0.1157648929,Micropliti:0.0835233343)100:0.3027888914)82:0.1091082625,Nasonia:0.4861072595)100:0.4137526054)100:0.4878043767,Homo:1.0833567136)83:0.1985030267)49:0.0777170357,Ixodes:1.1475296906);
+
+CONSENSUS TREE
+--------------
+
+Consensus tree is constructed from 100 bootstrap trees
+Log-likelihood of consensus tree: -58582.721191
+Robinson-Foulds distance between ML tree and consensus tree: 0
+
+Branches with support >0.000000% are kept (extended consensus)
+Branch lengths are optimized by maximum likelihood on original alignment
+Numbers in parentheses are bootstrap supports (%)
+
++-----------------------Centruroid
+|
+|  +------------------------------------------Parasteato
++--| (49)
+|  |                                         +-----Bombyx
+|  |                                      +--| (99)
+|  |                                      |  +----Trichoplus
+|  |                       +--------------| (100)
+|  |                       |              +------Danaus
+|  |                    +--| (77)
+|  |                    |  |           +------------------Drosophila
+|  |                    |  +-----------| (100)
+|  |                    |              +-------------------Anopheles
+|  |                 +--| (75)
+|  |                 |  |      +-----------Nicrophoru
+|  |                 |  +------| (100)
+|  |                 |         +----------Tribolium
+|  |    +------------| (100)
+|  |    |            |                +--------Apis
+|  |    |            |             +--| (100)
+|  |    |            |             |  +--------Solenopsis
+|  |    |            |          +--| (82)
+|  |    |            |          |  |       +--Cotesia
+|  |    |            |          |  +-------| (100)
+|  |    |            |          |          +--Micropliti
+|  |    |            +----------| (100)
+|  |    |                       +------------Nasonia
+|  +----| (83)
+|       +-----------------------------Homo
+|
++-------------------------------Ixodes
+
+
+Consensus tree in newick format: 
+
+(Centruroid:0.8601258224,(Parasteato:1.5517334897,((((((Bombyx:0.2412466271,Trichoplus:0.1913676681)99:0.0974216818,Danaus:0.2701427277)100:0.5644979522,(Drosophila:0.6978669004,Anopheles:0.7229618281)100:0.4456328299)77:0.1009225907,(Nicrophoru:0.4553185416,Tribolium:0.4010234684)100:0.2708617138)75:0.1049580094,(((Apis:0.3300842267,Solenopsis:0.3427066516)100:0.1127664285,(Cotesia:0.1157833458,Micropliti:0.0835196007)100:0.3027833208)82:0.1090902169,Nasonia:0.4861422466)100:0.4137707812)100:0.4882478209,Homo:1.0833184493)83:0.1982678516)49:0.0777972316,Ixodes:1.1474947885);
+
+ALISIM COMMAND
+--------------
+To simulate an alignment of the same length as the original alignment, using the tree and model parameters estimated from this analysis, you can use the following command:
+
+--alisim simulated_MSA -t /Users/julius/Gobi/Final_results/iqTree/iqTree_partitions/b100_partitions.treefile -p /Users/julius/Gobi/Final_results/Mafft_alignmet/example.partitions.best_model.nex
+
+To mimic the alignment used to produce this analysis, i.e. simulate an alignment of the same length as the original alignment, using the tree and model parameters estimated from this analysis *and* copying the same gap positions as the original alignment, you can use the following command:
+
+iqtree -s /Users/julius/Gobi/Final_results/Mafft_alignmet/combined_alignment.phy --alisim mimicked_MSA
+
+To simulate any number of alignments in either of the two commandlines above, use the --num-alignments options, for example mimic 100 alignments you would use the command line:
+
+iqtree -s /Users/julius/Gobi/Final_results/Mafft_alignmet/combined_alignment.phy --alisim mimicked_MSA --num-alignments 100
+
+For more information on using AliSim, please visit: www.iqtree.org/doc/AliSim
+
+TIME STAMP
+----------
+
+Date and time: Mon Apr 22 14:32:47 2024
+Total CPU time used: 124.198333 seconds (0h:2m:4s)
+Total wall-clock time used: 126.1549032 seconds (0h:2m:6s)
+

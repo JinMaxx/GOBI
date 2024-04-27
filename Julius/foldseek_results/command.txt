@@ -1,0 +1,3 @@
+foldseek/bin/foldseek createdb /Users/julius/Gobi/Final_results/Predictions/Best_Predictions_timeout /Users/julius/Gobi/Final_results/foldseek_results/foldseek_db/Timeout
+
+foldseek/bin/foldseek easy-search /Users/julius/Gobi/Final_results/foldseek_results/foldseek_db/Timeout /Users/julius/Gobi/Final_results/foldseek_results/foldseek_db/Timeout /Users/julius/Gobi/Final_results/foldseek_results/Foldseekalingment/aln /Users/julius/Gobi/Final_results/foldseek_results/Tmp/idk
